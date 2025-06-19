@@ -1,9 +1,6 @@
-const Homepage = () => {
-  return (
-    <div className="">
-      
-    </div>
-  );
-};
+// app/page.tsx
+import HomePage from "@/components/HomePage";
 
-export default Homepage;
+export default function MainPage() {
+  return <HomePage />;
+}
