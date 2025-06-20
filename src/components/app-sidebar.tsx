@@ -5,6 +5,8 @@ import {
   AudioWaveform,
   BookOpen,
   Bot,
+  Building,
+  Building2Icon,
   Command,
   Frame,
   GalleryVerticalEnd,
@@ -30,6 +32,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { TeamSwitcher } from "./team-switcher"
+import { IconBuildingBridge } from "@tabler/icons-react"
 
 const data = {
   user: {
@@ -37,22 +40,16 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-   teams: [
+  teams: [
     {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
+      name: "UzBridge",
+      logo: IconBuildingBridge,
       plan: "Enterprise",
+       label: "TechBridge.ai",
+      sublabel: "Admin Panel",
+      route: "/dashboard",
     },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
+ 
   ],
   navMain: [
     {
@@ -174,8 +171,8 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" >
-       <SidebarHeader >
+    <Sidebar >
+      <SidebarHeader >
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>

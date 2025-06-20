@@ -1,6 +1,7 @@
+"use client"
 
 import React from 'react';
-import { Check, ArrowRight, Star, Zap, Users, TrendingUp, MessageSquare, Globe } from 'lucide-react';
+import { Check, ArrowRight, Zap, Users, TrendingUp, MessageSquare, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -139,20 +140,20 @@ const Services = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
 
       {/* Header */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-gray-50 to-white">
+      <section className="pt-24 pb-16 ">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 max-w-4xl mx-auto">
-            <Badge className="bg-primary-50 text-primary-500 border-primary-200">
+            <Badge className="text-primary-500 border-primary-200">
               Professional Services
             </Badge>
             <h1 className="text-4xl lg:text-6xl font-bold">
               Market Entry <span className="gradient-text">Services</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Comprehensive packages designed to help Uzbek tech companies successfully 
+              Comprehensive packages designed to help Uzbek tech companies successfully
               enter and thrive in Middle Eastern and African markets.
             </p>
           </div>
@@ -164,15 +165,24 @@ const Services = () => {
         <div className="container mx-auto px-4">
           <Tabs defaultValue="startups" className="w-full">
             <div className="text-center mb-12">
-              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 bg-gray-100">
-                <TabsTrigger value="startups" className="data-[state=active]:bg-white">
+              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 bg-muted">
+                <TabsTrigger
+                  value="startups"
+                  className="data-[state=active]:bg-primary data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-black text-muted-foreground"
+                >
                   <Users className="w-4 h-4 mr-2" />
                   Startups
                 </TabsTrigger>
-                <TabsTrigger value="business" className="data-[state=active]:bg-white">
+
+                <TabsTrigger
+                  value="business"
+                  className="data-[state=active]:bg-primary data-[state=active]:text-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-black text-muted-foreground"
+                >
                   <TrendingUp className="w-4 h-4 mr-2" />
                   Established Business
                 </TabsTrigger>
+
+
               </TabsList>
             </div>
 
@@ -180,7 +190,7 @@ const Services = () => {
             <TabsContent value="startups" className="space-y-12">
               <div className="text-center space-y-4">
                 <h2 className="text-3xl font-bold">Startup Market Entry Packages</h2>
-                <p className="text-gray-600 max-w-2xl mx-auto">
+                <p className="mx-auto ">
                   Perfect for startups and tech companies looking for visibility and export opportunities in MEA markets.
                 </p>
               </div>
@@ -195,7 +205,7 @@ const Services = () => {
                         </Badge>
                       </div>
                     )}
-                    
+
                     <CardHeader className="text-center space-y-4 p-8">
                       <CardTitle className="text-2xl">{pkg.name}</CardTitle>
                       <p className="text-gray-600">{pkg.description}</p>
@@ -246,7 +256,7 @@ const Services = () => {
                         </Badge>
                       </div>
                     )}
-                    
+
                     <CardHeader className="text-center space-y-4 p-8">
                       <CardTitle className="text-2xl">{pkg.name}</CardTitle>
                       <p className="text-gray-600">{pkg.description}</p>

@@ -75,12 +75,12 @@ const Navbar = () => {
     const { toggleSidebar } = useSidebar();
 
     return (
-        <nav className="flex items-center justify-between px-4 py-2 border-b">
+        <nav className="flex items-center justify-between px-4 py-2 border-b ">
             {/* LEFT */}
             <SidebarTrigger />
 
             {/* CENTER: Navigation Menu */}
-            <NavigationMenu>
+            <NavigationMenu >
                 <NavigationMenuList className="space-x-2">
 
                     {/* Home */}

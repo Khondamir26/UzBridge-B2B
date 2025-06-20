@@ -1,12 +1,35 @@
-"use client";
+'use client';
 
-import { Search, Filter, Star, ArrowRight, Building2, Globe, Users, Clock } from 'lucide-react';
+import {
+  Search,
+  Filter,
+  Star,
+  ArrowRight,
+  Users,
+  Clock,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components/ui/tabs';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import Footer from '@/components/Footer';
 import { useEffect, useState } from 'react';
 
@@ -16,7 +39,6 @@ const Marketplace = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading
     setTimeout(() => setIsLoading(false), 1500);
   }, []);
 
@@ -28,10 +50,10 @@ const Marketplace = () => {
     { id: 'hr', label: 'HR Management', count: 15 },
     { id: 'education', label: 'Education', count: 22 },
     { id: 'logistics', label: 'Logistics', count: 19 },
-    { id: 'healthcare', label: 'Healthcare', count: 16 }
+    { id: 'healthcare', label: 'Healthcare', count: 16 },
   ];
 
-  const products = [
+const products = [
     {
       id: 1,
       name: "UzERP Pro",
@@ -130,24 +152,28 @@ const Marketplace = () => {
     }
   ];
 
-  const filteredProducts = products.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || product.category.toLowerCase().includes(selectedCategory);
-    
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === 'all' ||
+      product.category.toLowerCase().includes(selectedCategory);
     return matchesSearch && matchesCategory;
   });
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-white">
-        
+      <div className="min-h-screen bg-background text-foreground">
         <div className="pt-24 pb-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-80 bg-gray-200 rounded-lg shimmer"></div>
+                <div
+                  key={i}
+                  className="h-80 bg-muted rounded-lg animate-pulse"
+                ></div>
               ))}
             </div>
           </div>
@@ -157,26 +183,23 @@ const Marketplace = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-
-      {/* Header */}
-      <section className="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-white">
+    <div className="min-h-screen bg-background text-foreground">
+      <section className="pt-24 pb-12">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 mb-12">
             <h1 className="text-4xl lg:text-6xl font-bold">
-              Discover <span className="gradient-text">Uzbek Software</span>
+              Discover <span className="text-primary">Uzbek Software</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Explore premium B2B software solutions built by innovative Uzbek companies, 
-              tailored for Middle East and African markets.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Explore premium B2B software solutions built by innovative Uzbek
+              companies, tailored for Middle East and African markets.
             </p>
           </div>
 
-          {/* Search and Filters */}
           <div className="max-w-4xl mx-auto space-y-6">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
                 <Input
                   type="text"
                   placeholder="Search software, companies, or technologies..."
@@ -185,11 +208,14 @@ const Marketplace = () => {
                   className="pl-10 py-3 text-lg"
                 />
               </div>
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <Select
+                value={selectedCategory}
+                onValueChange={setSelectedCategory}
+              >
                 <SelectTrigger className="w-full md:w-48">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
-                <SelectContent className="bg-white border shadow-lg">
+                <SelectContent className="bg-popover text-popover-foreground border-border">
                   {categories.map((category) => (
                     <SelectItem key={category.id} value={category.id}>
                       {category.label} ({category.count})
@@ -203,11 +229,18 @@ const Marketplace = () => {
               </Button>
             </div>
 
-            {/* Category Tabs */}
-            <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-              <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 bg-gray-100">
+            <Tabs
+              value={selectedCategory}
+              onValueChange={setSelectedCategory}
+              className="w-full"
+            >
+              <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 bg-muted text-muted-foreground">
                 {categories.slice(0, 8).map((category) => (
-                  <TabsTrigger key={category.id} value={category.id} className="text-xs lg:text-sm">
+                  <TabsTrigger
+                    key={category.id}
+                    value={category.id}
+                    className="text-xs lg:text-sm"
+                  >
                     {category.label.split(' ')[0]}
                   </TabsTrigger>
                 ))}
@@ -217,23 +250,24 @@ const Marketplace = () => {
         </div>
       </section>
 
-      {/* Products Grid */}
-      <section className="py-16">
+      <section className="py-16 ">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
             <div className="space-y-2">
-              <h2 className="text-2xl font-bold">
+              <h2 className="text-2xl font-bold ">
                 {filteredProducts.length} Software Solutions
               </h2>
-              <p className="text-gray-600">
-                {selectedCategory === 'all' ? 'All categories' : categories.find(c => c.id === selectedCategory)?.label}
+              <p className="text-muted-foreground">
+                {selectedCategory === 'all'
+                  ? 'All categories'
+                  : categories.find((c) => c.id === selectedCategory)?.label}
               </p>
             </div>
             <Select defaultValue="featured">
               <SelectTrigger className="w-48">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-white border shadow-lg">
+              <SelectContent className="bg-popover text-popover-foreground border-border">
                 <SelectItem value="featured">Featured First</SelectItem>
                 <SelectItem value="rating">Highest Rated</SelectItem>
                 <SelectItem value="newest">Newest</SelectItem>
@@ -242,30 +276,33 @@ const Marketplace = () => {
             </Select>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProducts.map((product, index) => (
-              <Card key={product.id} className={`group hover-lift animate-on-scroll ${product.featured ? 'ring-2 ring-accent/20' : ''}`}>
-                {product.featured && (
-                  <div className="absolute -top-2 -right-2 z-10">
-                    <Badge className="bg-accent text-white">Featured</Badge>
-                  </div>
-                )}
-                
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+            {filteredProducts.map((product) => (
+              <Card
+                key={product.id}
+                className={`group hover:shadow-lg transition duration-300 ${
+                  product.featured ? 'ring-2 ring-primary/20' : ''
+                }`}
+              >
                 <CardHeader className="p-0">
                   <div className="relative overflow-hidden rounded-t-lg">
-                    <img 
+                    <img
                       src={`https://images.unsplash.com/${product.image}?w=400&h=250&fit=crop`}
                       alt={product.name}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute top-4 left-4">
-                      <Badge className="bg-white/90 text-gray-700">
+                      <Badge className="bg-background text-foreground">
                         {product.category}
                       </Badge>
                     </div>
                     <div className="absolute top-4 right-4 flex space-x-1">
                       {product.languages.map((lang) => (
-                        <Badge key={lang} variant="outline" className="bg-white/90 text-xs">
+                        <Badge
+                          key={lang}
+                          variant="outline"
+                          className="text-xs bg-background/80"
+                        >
                           {lang}
                         </Badge>
                       ))}
@@ -275,13 +312,15 @@ const Marketplace = () => {
 
                 <CardContent className="p-6 space-y-4">
                   <div className="space-y-2">
-                    <CardTitle className="text-xl group-hover:text-primary-500 transition-colors">
+                    <CardTitle className="text-xl group-hover:text-primary transition-colors">
                       {product.name}
                     </CardTitle>
-                    <p className="text-gray-600 text-sm">{product.company}</p>
+                    <p className="text-muted-foreground text-sm">
+                      {product.company}
+                    </p>
                   </div>
 
-                  <p className="text-gray-700 leading-relaxed line-clamp-2">
+                  <p className="text-sm text-muted-foreground line-clamp-2">
                     {product.description}
                   </p>
 
@@ -293,7 +332,7 @@ const Marketplace = () => {
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between text-sm text-gray-600">
+                  <div className="flex items-center justify-between text-sm text-muted-foreground">
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center space-x-1">
                         <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
@@ -307,13 +346,13 @@ const Marketplace = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t">
+                  <div className="flex items-center justify-between pt-4 border-t border-border">
                     <div className="space-y-1">
-                      <div className="text-lg font-bold text-primary-500">
+                      <div className="text-lg font-bold text-primary">
                         {product.price}
                       </div>
                       {product.demo && (
-                        <div className="flex items-center text-green-600 text-sm">
+                        <div className="flex items-center text-green-600 dark:text-green-400 text-sm">
                           <Clock className="w-3 h-3 mr-1" />
                           Free demo available
                         </div>
@@ -333,7 +372,6 @@ const Marketplace = () => {
             ))}
           </div>
 
-          {/* Load More */}
           <div className="text-center mt-16">
             <Button variant="outline" size="lg" className="px-8">
               Load More Products
@@ -348,3 +386,5 @@ const Marketplace = () => {
 };
 
 export default Marketplace;
+
+  
