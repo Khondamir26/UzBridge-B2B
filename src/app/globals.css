@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -122,4 +121,24 @@
   }
 }
 
+@layer utilities {
+  .bg-uzbek-gradient {
+    background-image: linear-gradient(to right, #1ebbf0, #ffffff, #3ccf4e);
+  }
+
+  .animate-fade-in-up {
+    @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
+  }
+
+  .in-view {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .uzbek-pattern {
+    background-image: url('/uzbek-pattern.svg'); /* Add this image to /public */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
 

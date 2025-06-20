@@ -150,71 +150,9 @@ const AppSidebar = () => {
         </SidebarGroup>
       </Collapsible>
       {/* NESTED */}
-      <SidebarGroup>
-        <SidebarGroupLabel> Nested Items  </SidebarGroupLabel>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <Link href="#">
-                  <Projector /> See All Projects
-                </Link>
-              </SidebarMenuButton>
-              <SidebarMenuSub>
-                <SidebarMenuSubItem>
-                  <SidebarMenuSubButton asChild>
-                    <Link href="">
-                      <Plus /> Add Project
-                    </Link>
-
-                  </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-                <SidebarMenuSubItem>
-                  <SidebarMenuSubButton asChild>
-                    <Link href="">
-                      <Plus /> Edit Project
-                    </Link>
-
-                  </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-              </SidebarMenuSub>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
+      
       {/* Collapsible Nested Items */}
-      <Collapsible className="group/collapsible">
-        <SidebarGroup>
-          <SidebarGroupLabel asChild>
-            <CollapsibleTrigger>
-              Collapsible Nested Items
-              <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-            </CollapsibleTrigger>
-          </SidebarGroupLabel>
-          <CollapsibleContent>
-            <SidebarGroupContent>
-              <SidebarMenuSub>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <Link href="#">
-                      <Projector /> See All Projects
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <Link href="#">
-                      <Plus /> Add Project
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenuSub>
-            </SidebarGroupContent>
-          </CollapsibleContent>
-
-        </SidebarGroup>
-      </Collapsible>
-
+      
 
     </SidebarContent>
 
