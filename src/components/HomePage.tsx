@@ -37,10 +37,10 @@ const Home = () => {
       
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden uzbek-pattern animate-fade-in-up">
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 relative z-10 pt-10 pb-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in-up">
-              <div className="space-y-4">
+              <div className="space-y-4 ">
                 <Badge>Connecting Uzbekistan to Global Markets</Badge>
                 <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight">
                   TechBridge.AI:

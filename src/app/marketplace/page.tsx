@@ -19,7 +19,6 @@ import {
 import { Badge } from '@/components/ui/badge';
 import {
   Tabs,
-  TabsContent,
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs';
@@ -53,7 +52,7 @@ const Marketplace = () => {
     { id: 'healthcare', label: 'Healthcare', count: 16 },
   ];
 
-const products = [
+  const products = [
     {
       id: 1,
       name: "UzERP Pro",
@@ -184,7 +183,7 @@ const products = [
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <section className="pt-24 pb-12">
+      <section className="pt-18 pb-12">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 mb-12">
             <h1 className="text-4xl lg:text-6xl font-bold">
@@ -234,7 +233,7 @@ const products = [
               onValueChange={setSelectedCategory}
               className="w-full"
             >
-              <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 bg-muted text-muted-foreground">
+              <TabsList className="h-full w-full grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-2 bg-muted text-muted-foreground">
                 {categories.slice(0, 8).map((category) => (
                   <TabsTrigger
                     key={category.id}
@@ -245,12 +244,13 @@ const products = [
                   </TabsTrigger>
                 ))}
               </TabsList>
+
             </Tabs>
           </div>
         </div>
       </section>
 
-      <section className="py-16 ">
+      <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
             <div className="space-y-2">
@@ -280,9 +280,8 @@ const products = [
             {filteredProducts.map((product) => (
               <Card
                 key={product.id}
-                className={`group hover:shadow-lg transition duration-300 ${
-                  product.featured ? 'ring-2 ring-primary/20' : ''
-                }`}
+                className={`group hover:shadow-lg transition duration-300 ${product.featured ? 'ring-2 ring-primary/20' : ''
+                  }`}
               >
                 <CardHeader className="p-0">
                   <div className="relative overflow-hidden rounded-t-lg">
@@ -387,4 +386,4 @@ const products = [
 
 export default Marketplace;
 
-  
+
