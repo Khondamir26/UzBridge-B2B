@@ -116,9 +116,10 @@
 }
 
 @layer base {
-  html{
+  html {
     font-family: Poppins;
   }
+
   * {
     @apply border-border outline-ring/50;
   }
@@ -129,9 +130,7 @@
 }
 
 @layer utilities {
-  .bg-uzbek-gradient {
-    background-image: linear-gradient(to right, #1ebbf0, #ffffff, #3ccf4e);
-  }
+
 
   .animate-fade-in-up {
     @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
@@ -141,13 +140,6 @@
     @apply opacity-100 translate-y-0;
   }
 
-  .uzbek-pattern {
-    background-image: url('/uzbek-pattern.svg');
-    /* Add this image to /public */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
 
   .animate-fade-in-up {
     @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
@@ -155,5 +147,11 @@
 
   .in-view {
     @apply opacity-100 translate-y-0;
+  }
+}
+
+@layer components {
+  .hover-lift {
+    @apply transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl;
   }
 }

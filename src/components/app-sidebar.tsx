@@ -2,14 +2,9 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
   BookOpen,
   Bot,
-  Building,
-  Building2Icon,
-  Command,
   Frame,
-  GalleryVerticalEnd,
   LifeBuoy,
   Map,
   PieChart,
@@ -27,9 +22,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { TeamSwitcher } from "./team-switcher"
 import { IconBuildingBridge } from "@tabler/icons-react"

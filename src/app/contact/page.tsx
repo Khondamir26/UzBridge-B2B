@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState } from 'react';
 import {
@@ -20,7 +20,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import {
   Select,
   SelectContent,
@@ -73,14 +72,14 @@ const Contact = () => {
       <section className="pt-24 pb-16 bg-gradient-to-br to-background">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 max-w-4xl mx-auto">
-            <Link href="/contact" passHref legacyBehavior>
-              <a className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap w-fit rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer">
-                Get In Touch
-                <ArrowRight className="w-3 h-3" />
-              </a>
+            <Link className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap
+             w-fit rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer"
+              href="/contact" >
+              Get In Touch
+              <ArrowRight className="w-3 h-3" />
             </Link>
             <h1 className="text-4xl lg:text-6xl font-bold">
-              Let's Start Your{' '}
+              Let&apos;s Start Your{' '}
               <span className="text-primary block">Global Journey</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
@@ -173,7 +172,7 @@ const Contact = () => {
                 <CardHeader>
                   <CardTitle className="text-2xl">Send Us a Message</CardTitle>
                   <p className="text-muted-foreground">
-                    Fill out the form below and we'll get back to you within 24
+                    Fill out the form below and we&apos;ll get back to you within 24
                     hours.
                   </p>
                 </CardHeader>
@@ -363,12 +362,10 @@ const Contact = () => {
                   'Yes, we offer various payment options including monthly subscriptions, quarterly packages, and custom enterprise agreements.',
               },
             ].map((faq, index) => (
-              <Card key={index} className="hover:shadow-lg transition">
+              <Card key={index} className="hover-lift">
                 <CardContent className="p-6 space-y-3">
                   <h3 className="font-semibold text-lg">{faq.question}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {faq.answer}
-                  </p>
+                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
                 </CardContent>
               </Card>
             ))}

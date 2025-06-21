@@ -1,4 +1,9 @@
 "use client";
+import ceo from "@/img/ceo.png";
+import cto from "@/img/cto.png";
+import munir from "@/img/munir.png";
+import tawney from "@/img/tawney.png";
+
 
 import React from "react";
 import {
@@ -10,34 +15,35 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import Footer from "@/components/Footer";
 import AnimatedCounter from "@/components/ui/animated-counter";
+import Image from "next/image";
+import Link from "next/link";
 
 const team = [
   {
-    name: "Akmal Nazarov",
+    name: "Muzaffar Karabaev",
     role: "CEO & Founder",
-    image: "photo-1472099645785-5658abf4ff4e",
-    bio: "15+ years in international business development and tech industry",
+    image: ceo,
+    bio: "Serial entrepreneur, founder of Wing, Zip.24, Le Bazaar, and kpi.com — scaled multiple startups into global successes.",
   },
   {
-    name: "Dilnoza Karimova",
-    role: "Head of Marketing",
-    image: "photo-1494790108755-2616b332e234",
-    bio: "Expert in MEA market dynamics and digital marketing strategies",
+    name: "Tawney Kruger",
+    role: "Chief Growth Officer",
+    image: tawney,
+    bio: "4+ years in media and marketing, driving growth, partnerships, and brand strategy as Head of Growth at kpi.com.",
   },
   {
-    name: "Bobur Tashmatov",
-    role: "Technical Director",
-    image: "photo-1507003211169-0a1dd7228f2d",
-    bio: "Former CTO at leading Uzbek tech companies, platform architect",
+    name: "Fakhriddin Taslimov",
+    role: "Chief Tech Officer",
+    image: cto,
+    bio: "Java expert driving innovation, with 5+ years shaping kpi.com’s tech strategy and leading seamless product development.",
   },
   {
-    name: "Gulnara Al-Rashid",
-    role: "Regional Manager - MEA",
-    image: "photo-1438761681033-6461ffad8d80",
-    bio: "Based in Dubai, 10+ years of experience in regional partnerships",
+    name: "Munir Yam",
+    role: " Product Owner",
+    image: munir,
+    bio: "A key team member at kpi.com, leveraging deep system knowledge to drive product development and align features with user needs for maximum value.",
   },
 ];
 
@@ -94,15 +100,19 @@ const About = () => {
       <section className="pt-24 pb-16">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
-            <Badge>About UzBridge</Badge>
+            <Link className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap w-fit 
+            rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer" href="/about" >
+              About UzBridge
+              <ArrowRight className="w-3 h-3" />
+            </Link>
             <h1 className="text-4xl lg:text-6xl font-bold">
               Bridging Innovation
-              <span className="block bg-uzbek-gradient text-transparent bg-clip-text">
+              <span className="block bg-clip-text">
                 Across Continents
               </span>
             </h1>
             <p className="text-xl text-muted-foreground">
-              We're on a mission to empower Uzbek tech companies to scale globally by providing
+              We&apos;re on a mission to empower Uzbek tech companies to scale globally by providing
               comprehensive market entry solutions for the Middle East and African markets.
             </p>
             <div className="grid grid-cols-3 gap-6">
@@ -112,15 +122,18 @@ const About = () => {
             </div>
           </div>
 
-          <div className="relative">
-            <img
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=500&fit=crop"
+          <div className="relative w-full h-auto">
+            <Image
+              src="https://dissingweitling.com/assets/upload/_landscape1200/DissingWeitling_Longmen-Bridge_render_overview_west.jpg"
               alt="Team collaboration"
-              className="rounded-2xl shadow-2xl"
+              width={600}
+              height={500}
+              className="w-full h-auto rounded-2xl shadow-2xl object-cover"
             />
+
             <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-lg shadow">
               <div className="flex items-center gap-3">
-                <Award className="w-6 h-6 text-accent" />
+                <Award className="w-6 h-6 " />
                 <div>
                   <div className="font-semibold">Regional Excellence</div>
                   <div className="text-sm text-muted-foreground">MEA Business Award 2024</div>
@@ -134,11 +147,11 @@ const About = () => {
       {/* Mission & Vision */}
       <section className="py-16">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-8">
-          <InfoCard icon={<TrendingUp className="text-white w-8 h-8" />} title="Our Mission">
+          <InfoCard icon={<TrendingUp className=" w-8 h-8" />} title="Our Mission">
             To empower Uzbek tech companies to scale globally through a curated marketplace,
             entry support, and enablement services tailored for MEA markets.
           </InfoCard>
-          <InfoCard icon={<Globe className="text-white w-8 h-8" />} title="Our Vision">
+          <InfoCard icon={<Globe className=" w-8 h-8" />} title="Our Vision">
             To become the bridge between Uzbek software providers and MEA regions, fostering innovation and prosperity.
           </InfoCard>
         </div>
@@ -147,20 +160,22 @@ const About = () => {
       {/* Team */}
       <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
-          <SectionHeader title="Meet Our Team" subtitle="Our experts bring deep technical and market knowledge." />
+          <SectionHeader title="Meet Our Team" subtitle="40+ expert team in Tashkent drives innovation, seamless product development, and top-tier global support." />
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((m, i) => (
               <Card key={i} className="text-center shadow-md">
                 <CardContent className="p-6 space-y-4">
-                  <img
-                    src={`https://images.unsplash.com/${m.image}?w=150&h=150&fit=crop&crop=face`}
+                  <Image
+                    src={m.image}
                     alt={m.name}
+                    width={96}
+                    height={96}
                     className="w-24 h-24 rounded-full mx-auto object-cover"
                   />
                   <div className="space-y-1">
-                    <h3 className="font-semibold text-lg">{m.name}</h3>
-                    <p className="text-primary text-sm font-medium">{m.role}</p>
-                    <p className="text-muted-foreground text-sm">{m.bio}</p>
+                    <h3 className="font-semibold text-lg tracking-wide">{m.name}</h3>
+                    <p className="p-2 text-primary text-sm font-medium">{m.role}</p>
+                    <p className="text-muted-foreground text-medium italic ">{m.bio}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -211,8 +226,8 @@ const About = () => {
         <div className="container mx-auto px-4 text-center space-y-6 max-w-2xl">
           <h2 className="text-4xl font-bold">Ready to Join Our Success Story?</h2>
           <p className="text-lg">
-            Whether you're a Uzbek tech company looking to expand or a MEA business seeking innovative solutions,
-            let's build something amazing together.
+            Whether you&apos;re a Uzbek tech company looking to expand or a MEA business seeking innovative solutions,
+            let&apos;s build something amazing together.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <Button className="bg-white text-primary hover:bg-gray-100">

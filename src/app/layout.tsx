@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Homepage from "@/components/HomePage";
 import { AppSidebar } from "@/components/app-sidebar";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
-import Link from 'next/link'
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,7 +44,7 @@ export default async function RootLayout({
           <AppSidebar />
           <main className="w-full">
             <Navbar/>
-            <div className="px-4">{children}</div>
+            <div>{children}</div>
           </main>
 
           </SidebarProvider>

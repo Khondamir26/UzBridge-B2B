@@ -2,29 +2,25 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ReactNode, ElementType } from "react";
 import {
-    LogOut,
     Moon,
-    Settings,
     Sun,
-    User,
-    CircleHelpIcon,
-    CircleIcon,
-    CircleCheckIcon,
     BarChart3,
     Building2,
     Users,
     MessageSquare,
+    Globe,
+    ChevronDown,
+    Check,
+    Languages,
+    Laptop2,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -39,10 +35,11 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
-import { useTheme } from "next-themes";
-import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
+import {useTheme } from "next-themes";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 // Optional demo content:
+
 const components = [
     {
         title: "CRM Platform",
@@ -71,118 +68,192 @@ const components = [
 ];
 
 const Navbar = () => {
-    const { theme, setTheme } = useTheme();
-    const { toggleSidebar } = useSidebar();
+    const { resolvedTheme , setTheme } = useTheme();
+    const [language, setLanguage] = React.useState("EN");
+
+    const languages = [
+        { code: "EN", label: "English", icon: "🇺🇸" },
+        { code: "RU", label: "Русский", icon: "🇷🇺" },
+        { code: "AR", label: "العربية", icon: "🇸🇦" },
+    ];
 
     return (
-        <nav className="flex items-center justify-between px-4 py-2 border-b ">
-            {/* LEFT */}
-            <SidebarTrigger />
+        <nav className=" relative flex items-center justify-between px-4 py-2 border-b ">
+
+            {/* LEFT: Logo and Sidebar Trigger */}
+            <div className="container mx-auto flex items-center justify-between px-4 py-2 relative">
+                {/* LEFT */}
+                <SidebarTrigger />
+            </div>
 
             {/* CENTER: Navigation Menu */}
-            <NavigationMenu >
-                <NavigationMenuList className="space-x-2">
+            <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex flex-1 justify-center">
 
-                    {/* Home */}
-                    <NavigationMenuItem>
-                        <NavigationMenuLink asChild>
-                            <Link href="/" className={navigationMenuTriggerStyle()}>Home</Link>
-                        </NavigationMenuLink>
-                    </NavigationMenuItem>
+                <NavigationMenu >
+                    <NavigationMenuList className="space-x-2 ">
 
-                    {/* Marketplace */}
-                    <NavigationMenuItem>
-                        <NavigationMenuLink asChild>
-                            <Link href="/marketplace" className={navigationMenuTriggerStyle()}>Marketplace</Link>
-                        </NavigationMenuLink>
-                    </NavigationMenuItem>
+                        {/* Home */}
+                        <NavigationMenuItem>
+                            <NavigationMenuLink asChild>
+                                <Link href="/" className={navigationMenuTriggerStyle()}>Home</Link>
+                            </NavigationMenuLink>
+                        </NavigationMenuItem>
 
-                    {/* Services */}
-                    <NavigationMenuItem>
-                        <NavigationMenuLink asChild>
-                            <Link href="/services" className={navigationMenuTriggerStyle()}>Services</Link>
-                        </NavigationMenuLink>
-                    </NavigationMenuItem>
+                        {/* Marketplace */}
+                        <NavigationMenuItem>
+                            <NavigationMenuLink asChild>
+                                <Link href="/marketplace" className={navigationMenuTriggerStyle()}>Marketplace</Link>
+                            </NavigationMenuLink>
+                        </NavigationMenuItem>
 
-                    {/* About */}
-                    <NavigationMenuItem>
-                        <NavigationMenuLink asChild>
-                            <Link href="/about" className={navigationMenuTriggerStyle()}>About</Link>
-                        </NavigationMenuLink>
-                    </NavigationMenuItem>
+                        {/* Services */}
+                        <NavigationMenuItem>
+                            <NavigationMenuLink asChild>
+                                <Link href="/services" className={navigationMenuTriggerStyle()}>Services</Link>
+                            </NavigationMenuLink>
+                        </NavigationMenuItem>
 
-                    {/* Contact */}
-                    <NavigationMenuItem>
-                        <NavigationMenuLink asChild>
-                            <Link href="/contact" className={navigationMenuTriggerStyle()}>Contact</Link>
-                        </NavigationMenuLink>
-                    </NavigationMenuItem>
+                        {/* About */}
+                        <NavigationMenuItem>
+                            <NavigationMenuLink asChild>
+                                <Link href="/about" className={navigationMenuTriggerStyle()}>About</Link>
+                            </NavigationMenuLink>
+                        </NavigationMenuItem>
 
-                    {/* Solutions */}
-                    <NavigationMenuItem>
-                        <NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                            <ul className="grid gap-2 p-4 w-[500px] md:grid-cols-2">
-                                {components.map((item) => (
-                                    <ListItem key={item.href} href={item.href} icon={item.icon} title={item.title}>
-                                        {item.description}
-                                    </ListItem>
-                                ))}
-                            </ul>
-                        </NavigationMenuContent>
-                    </NavigationMenuItem>
+                        {/* Contact */}
+                        <NavigationMenuItem>
+                            <NavigationMenuLink asChild>
+                                <Link href="/contact" className={navigationMenuTriggerStyle()}>Contact</Link>
+                            </NavigationMenuLink>
+                        </NavigationMenuItem>
 
-                </NavigationMenuList>
+                        {/* Solutions */}
+                        <NavigationMenuItem>
+                            <NavigationMenuTrigger className="cursor-pointer">Solutions</NavigationMenuTrigger>
+                            <NavigationMenuContent>
+                                <ul className="grid gap-2 p-4 w-[500px] md:grid-cols-2 cursor-pointer">
+                                    {components.map((item) => (
+                                        <ListItem key={item.href} href={item.href} icon={item.icon} title={item.title}>
+                                            {item.description}
+                                        </ListItem>
+                                    ))}
+                                </ul>
+                            </NavigationMenuContent>
+                        </NavigationMenuItem>
 
-            </NavigationMenu>
+                    </NavigationMenuList>
+
+                </NavigationMenu>
+            </div>
 
             {/* RIGHT */}
-            <div className="flex items-center gap-4">
-                <Link href="/dashboard">Dashboard</Link>
+            <div className="hidden lg:flex items-center gap-4">
+                <div className="flex items-center gap-4">
+                    {/* Language Selector */}
 
-                {/* Theme Toggle */}
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" size="icon">
-                            <Sun className="h-5 w-5 dark:hidden" />
-                            <Moon className="h-5 w-5 hidden dark:block" />
+                    <DropdownMenu >
+                        <DropdownMenuTrigger asChild>
+
+                            <Button variant="ghost" size="sm" className="space-x-2 cursor-pointer">
+                                <Globe className="w-4 h-4" />
+                                <span>{languages.find((l) => l.code === language)?.code}</span>
+                                <ChevronDown className="w-3 h-3" />
+
+                            </Button>
+                        </DropdownMenuTrigger>
+
+                        <DropdownMenuContent align="end" className="bg-background border shadow-md w-40 ">
+                            {languages.map((lang) => (
+
+                                <DropdownMenuItem
+                                    key={lang.code}
+                                    onClick={() => setLanguage(lang.code)}
+                                    className="flex items-center justify-between space-x-2 cursor-pointer hover:bg-muted"
+                                >
+                                    <div className="flex items-center space-x-2">
+                                        <Languages className="w-4 h-4" />
+
+
+                                        <span>{lang.label}</span>
+                                    </div>
+                                    {language === lang.code && <Check className="w-4 h-4 text-primary" />}
+
+                                </DropdownMenuItem>
+                            ))}
+                        </DropdownMenuContent>
+
+                    </DropdownMenu>
+
+                    <Link href="/login"  >
+                        <Button variant="default" size="sm" className="cursor-pointer   ">
+                            Login
                         </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => setTheme("light")}>
-                            Light
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setTheme("dark")}>
-                            Dark
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setTheme("system")}>
-                            System
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                    </Link>
+                    <Link href="/dashboard">
+                        <Button variant="ghost" size="sm" className="cursor-pointer  ">
+                            Dashboard
+                        </Button>
+                    </Link>
 
-                {/* Avatar Dropdown */}
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Avatar>
-                            <AvatarImage src="https://avatars.githubusercontent.com/u/82398768" />
-                            <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            <User className="mr-2 h-4 w-4" /> Profile
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <Settings className="mr-2 h-4 w-4" /> Settings
-                        </DropdownMenuItem>
-                        <DropdownMenuItem variant="destructive">
-                            <LogOut className="mr-2 h-4 w-4" /> Logout
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                    {/* Theme Toggle */}
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline" size="icon">
+                                {/* Icon depends on actual theme */}
+                                <Sun className="h-5 w-5 dark:hidden" />
+                                <Moon className="h-5 w-5 hidden dark:block" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => setTheme("light")}>
+                                <div className="flex items-center gap-2 w-full">
+                                    <Sun className="h-4 w-4" />
+                                    <span className="flex-1">Light</span>
+                                    {resolvedTheme === "light" && <Check className="h-4 w-4 text-primary" />}
+                                </div>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={() => setTheme("dark")}>
+                                <div className="flex items-center gap-2 w-full">
+                                    <Moon className="h-4 w-4" />
+                                    <span className="flex-1">Dark</span>
+                                    {resolvedTheme === "dark" && <Check className="h-4 w-4 text-primary" />}
+                                </div>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={() => setTheme("system")}>
+                                <div className="flex items-center gap-2 w-full">
+                                    <Laptop2 className="h-4 w-4" />
+                                    <span className="flex-1">System</span>
+                                    {resolvedTheme === "system" && <Check className="h-4 w-4 text-primary" />}
+                                </div>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
+                    {/* Avatar Dropdown */}
+                    {/* <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Avatar>
+                                <AvatarImage src="https://avatars.githubusercontent.com/u/82398768" />
+                                <AvatarFallback>CN</AvatarFallback>
+                            </Avatar>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="start">
+                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>
+                                <User className="mr-2 h-4 w-4" /> Profile
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <Settings className="mr-2 h-4 w-4" /> Settings
+                            </DropdownMenuItem>
+                            <DropdownMenuItem variant="destructive">
+                                <LogOut className="mr-2 h-4 w-4" /> Logout
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu> */}
+                </div>
             </div>
         </nav>
     );
@@ -190,32 +261,32 @@ const Navbar = () => {
 
 // Helper component
 function ListItem({
-  title,
-  children,
-  href,
-  icon: Icon, 
+    title,
+    children,
+    href,
+    icon: Icon,
 }: {
-  title: string;
-  children: React.ReactNode;
-  href: string;
-  icon?: React.ElementType; 
+    title: string;
+    children: React.ReactNode;
+    href: string;
+    icon?: React.ElementType;
 }) {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <Link
-          href={href}
-          className="block rounded-md p-3 hover:bg-muted transition-colors"
-        >
-          <div className="flex items-center space-x-2 text-sm font-medium">
-            {Icon && <Icon className="w-4 h-4 text-primary-500" />} {/*  */}
-            <span>{title}</span>
-          </div>
-          <p className="text-xs text-muted-foreground">{children}</p>
-        </Link>
-      </NavigationMenuLink>
-    </li>
-  );
+    return (
+        <li>
+            <NavigationMenuLink asChild>
+                <Link
+                    href={href}
+                    className="block rounded-md p-3 hover:bg-muted transition-colors"
+                >
+                    <div className="flex items-center space-x-2 text-sm font-medium">
+                        {Icon && <Icon className="w-4 h-4 text-primary-500" />} {/*  */}
+                        <span>{title}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">{children}</p>
+                </Link>
+            </NavigationMenuLink>
+        </li>
+    );
 }
 
 export default Navbar;
