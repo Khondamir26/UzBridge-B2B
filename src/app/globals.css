@@ -127,6 +127,7 @@
   body {
     @apply bg-background text-foreground;
   }
+
 }
 
 @layer utilities {
@@ -155,3 +156,4 @@
     @apply transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl;
   }
 }
+
