@@ -14,6 +14,7 @@ import {
     Check,
     Languages,
     Laptop2,
+    Menu,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -35,8 +36,11 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
-import {useTheme } from "next-themes";
+import { useTheme } from "next-themes";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 // Optional demo content:
 
@@ -68,8 +72,24 @@ const components = [
 ];
 
 const Navbar = () => {
-    const { resolvedTheme , setTheme } = useTheme();
+    const { resolvedTheme, setTheme } = useTheme();
     const [language, setLanguage] = React.useState("EN");
+    const pathname = usePathname();
+    const [open, setOpen] = React.useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 10); // change threshold if needed
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const isActive = (path: string) => pathname === path;
+
 
     const languages = [
         { code: "EN", label: "English", icon: "🇺🇸" },
@@ -78,16 +98,19 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className=" relative flex items-center justify-between px-4 py-2 border-b ">
-
+        <nav className={`flex items-center justify-between px-4 py-2 fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
+            ? 'backdrop-blur-md shadow-lg border-b'
+            : 'bg-transparent'
+            }`}>
+        
             {/* LEFT: Logo and Sidebar Trigger */}
-            <div className="container mx-auto flex items-center justify-between px-4 py-2 relative">
+            <div className="container mx-auto flex items-center justify-between px-4 py-2 ">
                 {/* LEFT */}
                 <SidebarTrigger />
             </div>
 
             {/* CENTER: Navigation Menu */}
-            <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex flex-1 justify-center">
+            <div className="hidden lg:flex flex-1 justify-center">
 
                 <NavigationMenu >
                     <NavigationMenuList className="space-x-2 ">
@@ -255,6 +278,50 @@ const Navbar = () => {
                     </DropdownMenu> */}
                 </div>
             </div>
+            {/* MOBILE MENU (only visible on mobile) */}
+            <div className="md:hidden">
+                <Sheet open={open} onOpenChange={setOpen}>
+                    <SheetTrigger asChild>
+                        <Button variant="ghost" size="sm">
+                            <Menu className="w-5 h-5" />
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="right" className="bg-background text-foreground">
+                        <div className="flex flex-col mt-8 space-y-6">
+                            {[
+                                { label: "Home", href: "/" },
+                                { label: "Marketplace", href: "/marketplace" },
+                                { label: "Services", href: "/services" },
+                                { label: "About", href: "/about" },
+                                { label: "Contact", href: "/contact" },
+                            ].map((item) => (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className={navigationMenuTriggerStyle({
+                                        className: isActive(item.href) ? "text-primary" : "text-muted-foreground hover:text-primary",
+                                    })}
+                                    onClick={() => setOpen(false)}
+                                >
+                                    {item.label}
+                                </Link>
+                            ))}
+
+                            <div className="flex flex-col pt-6 border-t space-y-4">
+                                <Link href="/login" onClick={() => setOpen(false)}>
+                                    <Button variant="outline" className="w-full">Login</Button>
+                                </Link>
+                                <Link href="/dashboard" onClick={() => setOpen(false)}>
+                                    <Button className="w-full">Dashboard</Button>
+                                </Link>
+                            </div>
+                        </div>
+                    </SheetContent>
+                </Sheet>
+            </div>
+
+
+
         </nav>
     );
 };

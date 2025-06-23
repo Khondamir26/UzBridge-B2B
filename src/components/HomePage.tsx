@@ -55,15 +55,15 @@ const Home = () => {
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex justify-center flex-col sm:flex-row gap-4">
                 <Link href="/marketplace" passHref>
-                  <Button size="lg" className="px-8 py-4">
+                  <Button size="lg" className="px-4 py-4 w-full ">
                     Explore Marketplace
-                    <ArrowRight className="ml-2 w-5 h-5" />
+                    <ArrowRight className="w-5 h-5" />
                   </Button>
                 </Link>
-                <Button variant="outline" size="lg" className="group px-8 py-4">
-                  <Play className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform" />
+                <Button variant="outline" size="lg" className=" px-8 py-4">
+                  <Play className=" w-5 h-5 group-hover:scale-110 transition-transform" />
                   Watch Demo
                 </Button>
               </div>
