@@ -432,7 +432,7 @@ const Marketplace = () => {
           </div>
 
           <div className="text-center mt-16">
-            <Button variant="outline" size="lg" className="transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ bg-muted">
+            <Button variant="outline" size="lg" className="rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ bg-muted">
               Load More Products
             </Button>
           </div>

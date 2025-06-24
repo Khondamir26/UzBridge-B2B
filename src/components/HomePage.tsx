@@ -40,8 +40,8 @@ const Home = () => {
         <div className="container mx-auto px-4 relative z-10 pt-10 pb-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in-up">
-              <div className="space-y-4 ">
-                <Badge>Connecting Uzbekistan to Global Markets</Badge>
+              <div className="space-y-4">
+                <Badge >Connecting Uzbekistan to Global Markets</Badge>
                 <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight">
                   TechBridge.AI:
                   <span className="bg-clip-text drop-shadow-sm block">
@@ -57,13 +57,13 @@ const Home = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/marketplace" passHref>
-                  <Button size="lg" className="px-4 py-4 w-full ">
+                  <Button size="lg" className="px-4 py-4 w-full rounded-xl cursor-pointer ">
                     Explore Marketplace
                     <ArrowRight className="w-5 h-5" />
                   </Button>
                 </Link>
-                <Button variant="outline" size="lg" className=" px-8 py-4">
-                  <Play className=" w-5 h-5 group-hover:scale-110 transition-transform" />
+                <Button variant="outline" size="lg" className=" px-8 py-4 rounded-xl cursor-pointer ">
+                  <Play className=" w-5 h-5 group-hover:scale-110 transition-transform " />
                   Watch Demo
                 </Button>
               </div>
@@ -126,7 +126,7 @@ const Home = () => {
             TechBridge supports any IT Park resident — especially Uzbek-built SaaS with global ambition.
             Our buyers include SMEs, governments, and resellers in MEA. We enable scaling via local partners.
           </p>
-          <Button size="lg" asChild>
+          <Button className="rounded-xl cursor-pointer " variant="default" size="lg" asChild>
             <Link href="/contact">Join the Platform</Link>
           </Button>
         </div>

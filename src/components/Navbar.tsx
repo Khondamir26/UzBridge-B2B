@@ -107,7 +107,7 @@ const Navbar = () => {
             // Очищаем padding при размонтировании компонента
             document.body.style.paddingTop = '0px';
         };
-    }, []);
+    }, [navbarHeight]);
 
     // ВТОРОЙ useEffect - для скролла
     useEffect(() => {
@@ -141,7 +141,7 @@ const Navbar = () => {
 
         >
 
-            <div className="container mx-auto flex items-center justify-between px-4 py-2">
+            <div className="container mx-auto flex items-center justify-between px-4 py-2 ">
                 {/* LEFT: Logo and Sidebar Trigger */}
                 <div className="flex items-center ">
                     {/* LEFT */}
@@ -149,47 +149,47 @@ const Navbar = () => {
                 </div>
 
                 {/* CENTER: Navigation Menu */}
-                <div className="hidden lg:flex flex-1 justify-center">
+                <div className="hidden lg:flex flex-1 justify-center ">
                     <NavigationMenu >
-                        <NavigationMenuList className="space-x-2 ">
+                        <NavigationMenuList className="space-x-2  ">
                             {/* Home */}
-                            <NavigationMenuItem>
-                                <NavigationMenuLink asChild>
+                            <NavigationMenuItem >
+                                <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
                                     <Link href="/" className={navigationMenuTriggerStyle()}>Home</Link>
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
 
                             {/* Marketplace */}
                             <NavigationMenuItem>
-                                <NavigationMenuLink asChild>
+                                <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
                                     <Link href="/marketplace" className={navigationMenuTriggerStyle()}>Marketplace</Link>
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
 
                             {/* Services */}
                             <NavigationMenuItem>
-                                <NavigationMenuLink asChild>
+                                <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
                                     <Link href="/services" className={navigationMenuTriggerStyle()}>Services</Link>
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
 
                             {/* About */}
                             <NavigationMenuItem>
-                                <NavigationMenuLink asChild>
+                                <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
                                     <Link href="/about" className={navigationMenuTriggerStyle()}>About</Link>
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
 
                             {/* Contact */}
                             <NavigationMenuItem>
-                                <NavigationMenuLink asChild>
+                                <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
                                     <Link href="/contact" className={navigationMenuTriggerStyle()}>Contact</Link>
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
 
                             {/* Solutions */}
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger className="cursor-pointer">Solutions</NavigationMenuTrigger>
+                                <NavigationMenuTrigger className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" >Solutions</NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <ul className="grid gap-2 p-4 w-[500px] md:grid-cols-2 cursor-pointer">
                                         {components.map((item) => (
@@ -210,7 +210,7 @@ const Navbar = () => {
                         {/* Language Selector */}
                         <DropdownMenu >
                             <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="sm" className="space-x-2 cursor-pointer">
+                                <Button variant="ghost" size="sm" className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer space-x-2">
                                     <Globe className="w-4 h-4" />
                                     <span>{languages.find((l) => l.code === language)?.code}</span>
                                     <ChevronDown className="w-3 h-3" />
@@ -235,12 +235,12 @@ const Navbar = () => {
                         </DropdownMenu>
 
                         <Link href="/login"  >
-                            <Button variant="default" size="sm" className="cursor-pointer   ">
+                            <Button variant="default" size="sm" className="cursor-pointer rounded-xl  ">
                                 Login
                             </Button>
                         </Link>
                         <Link href="/dashboard">
-                            <Button variant="ghost" size="sm" className="cursor-pointer  ">
+                            <Button variant="ghost" size="sm" className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer  ">
                                 Dashboard
                             </Button>
                         </Link>

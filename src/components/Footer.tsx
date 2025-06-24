@@ -25,12 +25,12 @@ const Footer = () => {
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-2 ">
               <Button variant="ghost" className="flex items-center cursor-pointer">
-                  <Building2 className="w-6 h-6 " />
+                <Building2 className="w-6 h-6 " />
                 <span className="text-xl font-bold ">UzBridge</span>
               </Button>
 
             </Link>
-            <p className="text-gray-400 leading-relaxed">
+            <p className="leading-relaxed text-muted-foreground">
               Empowering Uzbek tech companies to scale globally by offering a
               curated marketplace and market entry support in the Middle East
               and Africa.
@@ -39,7 +39,7 @@ const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="p-2 hover:bg-gray-800 cursor-pointer"
+                className=" rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
@@ -47,7 +47,7 @@ const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="p-2 hover:bg-gray-800 cursor-pointer"
+                className=" rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
                 aria-label="Twitter"
               >
                 <Twitter className="w-5 h-5" />
@@ -55,7 +55,7 @@ const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="p-2 hover:bg-gray-800 cursor-pointer"
+                className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -63,7 +63,7 @@ const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="p-2 hover:bg-gray-800 cursor-pointer"
+                className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
                 aria-label="Instagram"
               >
                 <Youtube className="w-5 h-5" />
@@ -85,7 +85,7 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block text-gray-400 hover:text-white transition-colors duration-200"
+                  className="block text-muted-foreground hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor]"
                 >
                   {link.label}
                 </Link>
@@ -96,7 +96,7 @@ const Footer = () => {
           {/* Contact */}
           <div className="space-y-6">
             <h3 className="text-lg font-semibold">Get in Touch</h3>
-            <div className="space-y-4 text-gray-400">
+            <div className="space-y-4 text-muted-foreground">
               <div className="flex items-center space-x-3">
                 <Link href="mailto:info@uzbridge.com">
                   <Mail className="w-5 h-5 " />
@@ -133,8 +133,8 @@ const Footer = () => {
           {/* Newsletter */}
           <div className="space-y-6">
             <h4 className="text-lg font-semibold">Newsletter</h4>
-            <p className="text-sm text-gray-400">
-              Get the latest updates on MEA market opportunities
+            <p className="text-sm text-muted-foreground">
+              Get the latest updates on <br />MEA market opportunities
             </p>
             <form className="flex space-x-2">
               <Input
@@ -142,7 +142,7 @@ const Footer = () => {
                 placeholder="Enter your email"
                 className=" "
               />
-              <Button variant="default" type="submit" className=" cursor-pointer ">
+              <Button variant="default" type="submit" className=" cursor-pointer rounded-xl">
                 Subscribe
               </Button>
             </form>
@@ -151,10 +151,10 @@ const Footer = () => {
       </div>
 
       {/* Bottom Footer */}
-      <div className="border-t border-gray-800">
+      <div className="border-t border-foreground">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-gray-400 text-sm">
+            <div className=" text-sm">
               © 2025 UzBridge. All rights reserved.
             </div>
             <div className="flex space-x-6 mt-4 md:mt-0">
@@ -166,7 +166,7 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                  className="block text-sm text-muted-foreground hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor]"
                 >
                   {link.label}
                 </Link>

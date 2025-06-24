@@ -251,10 +251,10 @@ const About = () => {
             let&apos;s build something amazing together.
           </p>
           <div className="flex justify-center gap-4 flex-wrap group inline-flex items-center gap-1 cursor-pointer">
-            <Button variant="default" size="lg" className="transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
+            <Button variant="default" size="lg" className="rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
               Partner With us <ArrowRight className="transition-transform group-hover:translate-x-1 w-4 h-4" />
             </Button>
-            <Button variant="outline" size="lg" className="transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
+            <Button variant="outline" size="lg" className=" rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
               Learn More
             </Button>
           </div>

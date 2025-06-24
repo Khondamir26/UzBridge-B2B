@@ -173,14 +173,14 @@ const Services = () => {
         <div className="container mx-auto px-4">
           <Tabs defaultValue="startups" className="w-full">
             <div className="text-center mb-12">
-              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 bg-muted">
+              <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 rounded-xl">
                 <TabsTrigger
                   value="startups"
                   className="data-[state=active]:bg-primary 
                   data-[state=active]:text-white 
                   dark:data-[state=active]:bg-white 
                   dark:data-[state=active]:text-black 
-                  text-muted-foreground cursor-pointer"
+                  text-muted-foreground cursor-pointer rounded-xl"
                 >
                   <Users className="w-4 h-4 mr-2 " />
                   Startups
@@ -192,7 +192,7 @@ const Services = () => {
                   data-[state=active]:text-white 
                   dark:data-[state=active]:bg-white 
                   dark:data-[state=active]:text-black 
-                  text-muted-foreground cursor-pointer"
+                  text-muted-foreground cursor-pointer rounded-xl"
                 >
                   <TrendingUp className="w-4 h-4 mr-2" />
                   Established Business
@@ -213,10 +213,10 @@ const Services = () => {
 
               <div className="grid lg:grid-cols-3 gap-8">
                 {startupsPackages.map((pkg, index) => (
-                  <Card key={index} className={`relative hover-lift ${pkg.popular ? 'ring-2 ring-accent/ border-accent shadow-sm' : ''}`}>
+                  <Card key={index} className={`relative hover-lift ${pkg.popular ? 'ring-2 ring-accent/ border-accent shadow-sm ' : ''}`}>
                     {pkg.popular && (
                       <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                        <Badge className=" px-4 py-1">
+                        <Badge className=" px-4 py-1 rounded-xl">
                           Most Popular
                         </Badge>
                       </div>
@@ -233,8 +233,8 @@ const Services = () => {
                       </div>
                     </CardHeader>
 
-                    <CardContent className="p-8 pt-0 space-y-6 items-center gap-1 cursor-pointer">
-                      <div className="space-y-3">
+                    <CardContent className="p-8 pt-0 space-y-6 items-center gap-1 cursor-pointer ">
+                      <div className="space-y-3 ">
                         {pkg.features.map((feature, idx) => (
                           <div key={idx} className="flex items-start space-x-3">
                             <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -244,7 +244,7 @@ const Services = () => {
                       </div>
 
                       <Button variant="default"
-                        className={`w-full transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer `}
+                        className={`rounded-xl w-full transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer `}
                       >
                         Get Started
                         <ArrowRight className="transition-transform group-hover:translate-x-1 w-4 h-4" />
@@ -270,7 +270,7 @@ const Services = () => {
                   <Card key={index} className={`relative hover-lift ${pkg.popular ? 'ring-2 ring-accent/ border-accent shadow-sm' : ''}`}>
                     {pkg.popular && (
                       <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                        <Badge className=" px-4 py-1">
+                        <Badge className=" px-4 py-1 rounded-xl">
                           Most Popular
                         </Badge>
                       </div>
@@ -298,7 +298,7 @@ const Services = () => {
                       </div>
 
                       <Button variant="default"
-                        className={`w-full cursor-pointer `}
+                        className={`rounded-xl w-full transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer `}
                       >
                         Get Started
                         <ArrowRight className="w-4 h-4 ml-2" />
@@ -406,10 +406,10 @@ const Services = () => {
               Schedule a free consultation to discuss your market entry strategy and find the perfect package for your business.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="default" size="lg" className="transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
+              <Button variant="default" size="lg" className="rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
                 Schedule Free Consultation
               </Button>
-              <Button variant="outline" size="lg" className=" transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
+              <Button variant="outline" size="lg" className="rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
                 Download Service Guide
               </Button>
             </div>
