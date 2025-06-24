@@ -284,7 +284,34 @@ const Navbar = () => {
                 </div>
 
                 {/* MOBILE MENU (only visible on mobile) */}
-                <div className="md:hidden">
+                <div className="flex items-center gap-4 md:hidden">
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline" size="icon" className="rounded-xl">
+                                <Sun className="h-5 w-5 dark:hidden" />
+                                <Moon className="h-5 w-5 hidden dark:block" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => setTheme("light")}>
+                                <Sun className="h-4 w-4" />
+                                <span className="flex-1">Light</span>
+                                {resolvedTheme === "light" && <Check className="h-4 w-4 text-primary" />}
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={() => setTheme("dark")}>
+                                <Moon className="h-4 w-4" />
+                                <span className="flex-1">Dark</span>
+                                {resolvedTheme === "dark" && <Check className="h-4 w-4 text-primary" />}
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={() => setTheme("system")}>
+                                <Laptop2 className="h-4 w-4" />
+                                <span className="flex-1">System</span>
+                                {resolvedTheme === "system" && <Check className="h-4 w-4 text-primary" />}
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                     <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger asChild>
                             <Button variant="ghost" size="sm">
