@@ -1,7 +1,7 @@
 'use client';
 
 import Image, { StaticImageData } from 'next/image';
-import { DollarSign } from "lucide-react";
+
 
 import erp from "@/img/erp.png";
 import finance from "@/img/finance.jpg";
@@ -40,7 +40,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import Footer from '@/components/Footer';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 interface Product {
@@ -67,7 +67,6 @@ const Marketplace = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isLoading, setIsLoading] = useState(true);
-  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 100);
@@ -237,6 +236,7 @@ const Marketplace = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      
       <section className="pt-18 pb-12 ">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 mb-12">
@@ -420,7 +420,7 @@ const Marketplace = () => {
                     </div>
                     <div className="flex space-x-2 ">
                       <Link className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap w-fit 
-                                  rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer" href="/about" >
+                                  rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer" href="/marketplace" >
                         Learn More
                         <ArrowRight className="w-3 h-3" />
                       </Link>
@@ -432,7 +432,7 @@ const Marketplace = () => {
           </div>
 
           <div className="text-center mt-16">
-            <Button variant="outline" size="lg" className="px-8">
+            <Button variant="outline" size="lg" className="transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ bg-muted">
               Load More Products
             </Button>
           </div>

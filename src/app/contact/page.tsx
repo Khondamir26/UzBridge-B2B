@@ -30,8 +30,26 @@ import {
 import Footer from '@/components/Footer';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
+import { useEffect } from "react";
 
 const Contact = () => {
+
+
+   useEffect(() => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+          }
+        });
+      }, { threshold: 0.1 });
+  
+      const elements = document.querySelectorAll(".animate-fade-in-up");
+      elements.forEach((el) => observer.observe(el));
+  
+      return () => observer.disconnect();
+    }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -69,11 +87,11 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background text-foreground ">
       {/* Header */}
-      <section className="pt-24 pb-16 bg-gradient-to-br to-background ">
+      <section className="pt-24 pb-16 bg-gradient-to-br to-background animate-fade-in-up ">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 max-w-4xl mx-auto">
             <Link className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap
-             w-fit rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer"
+             w-fit rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer hover-lift transition-transform duration-200 "
               href="/contact" >
               Get In Touch
               <ArrowRight className="w-3 h-3" />
@@ -92,9 +110,9 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="py-16">
+      <section className="py-16 animate-fade-in-up">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-3 gap-12 items-center">
             {/* Contact Information */}
             <div className="space-y-8">
               <div className="space-y-6">
@@ -291,7 +309,7 @@ const Contact = () => {
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Button
                         type="submit"
-                        className="bg-gradient-uzbek hover:opacity-90 flex-1"
+                        className="cursor-pointer hover:opacity-90 flex-1"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
@@ -306,7 +324,7 @@ const Contact = () => {
                           </>
                         )}
                       </Button>
-                      <Button type="button" variant="outline" className="flex-1">
+                      <Button type="button" variant="outline" className="cursor-pointer flex-1">
                         Schedule Call Instead
                       </Button>
                     </div>
@@ -319,7 +337,7 @@ const Contact = () => {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 bg-muted/40">
+      <section className="py-16 bg-muted/40 animate-fade-in-up">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl font-bold">Frequently Asked Questions</h2>
@@ -362,10 +380,10 @@ const Contact = () => {
                   'Yes, we offer various payment options including monthly subscriptions, quarterly packages, and custom enterprise agreements.',
               },
             ].map((faq, index) => (
-              <Card key={index} className="hover-lift">
+              <Card key={index} className="hover-lift cursor-default transition-transform duration-200 ">
                 <CardContent className="p-6 space-y-3">
-                  <h3 className="font-semibold text-lg">{faq.question}</h3>
-                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                  <h3 className="font-bold text-lg">{faq.question}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
                 </CardContent>
               </Card>
             ))}

@@ -1,19 +1,18 @@
 "use client"
 
-import { useRef, useEffect } from "react";
-import { Check, Video, ArrowRight, Megaphone, Zap, Users, TrendingUp, MessageSquare, Globe } from 'lucide-react';
+import { useEffect } from "react";
+import { Check, Video, ArrowRight, Megaphone, Users, TrendingUp, MessageSquare, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { useSidebar } from '@/components/ui/sidebar';
+
 
 
 const Services = () => {
 
-   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -154,7 +153,7 @@ const Services = () => {
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 max-w-4xl mx-auto">
             <Link className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap w-fit 
-                        rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer" href="/services" >
+                        rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer hover-lift transition-transform duration-200 " href="/services" >
               Professional Services
               <ArrowRight className="w-3 h-3" />
             </Link>
@@ -181,7 +180,7 @@ const Services = () => {
                   data-[state=active]:text-white 
                   dark:data-[state=active]:bg-white 
                   dark:data-[state=active]:text-black 
-                  text-muted-foreground"
+                  text-muted-foreground cursor-pointer"
                 >
                   <Users className="w-4 h-4 mr-2 " />
                   Startups
@@ -193,7 +192,7 @@ const Services = () => {
                   data-[state=active]:text-white 
                   dark:data-[state=active]:bg-white 
                   dark:data-[state=active]:text-black 
-                  text-muted-foreground"
+                  text-muted-foreground cursor-pointer"
                 >
                   <TrendingUp className="w-4 h-4 mr-2" />
                   Established Business
@@ -234,7 +233,7 @@ const Services = () => {
                       </div>
                     </CardHeader>
 
-                    <CardContent className="p-8 pt-0 space-y-6">
+                    <CardContent className="p-8 pt-0 space-y-6 items-center gap-1 cursor-pointer">
                       <div className="space-y-3">
                         {pkg.features.map((feature, idx) => (
                           <div key={idx} className="flex items-start space-x-3">
@@ -245,10 +244,10 @@ const Services = () => {
                       </div>
 
                       <Button variant="default"
-                        className={`w-full cursor-pointer `}
+                        className={`w-full transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer `}
                       >
                         Get Started
-                        <ArrowRight className="w-4 h-4 ml-2" />
+                        <ArrowRight className="transition-transform group-hover:translate-x-1 w-4 h-4" />
                       </Button>
 
                     </CardContent>
@@ -407,10 +406,10 @@ const Services = () => {
               Schedule a free consultation to discuss your market entry strategy and find the perfect package for your business.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="default" size="lg" className="cursor-pointer">
+              <Button variant="default" size="lg" className="transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
                 Schedule Free Consultation
               </Button>
-              <Button variant="outline" size="lg" className=" cursor-pointer ring-2 ring-accent/ ">
+              <Button variant="outline" size="lg" className=" transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
                 Download Service Guide
               </Button>
             </div>

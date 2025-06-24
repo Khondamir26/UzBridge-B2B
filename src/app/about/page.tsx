@@ -3,7 +3,7 @@ import ceo from "@/img/ceo.png";
 import cto from "@/img/cto.png";
 import munir from "@/img/munir.png";
 import tawney from "@/img/tawney.png";
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 
 import React from "react";
 import {
@@ -12,7 +12,6 @@ import {
   Star,
   ArrowRight,
   Award,
-  Users,
   Globe,
   TrendingUp,
 } from "lucide-react";
@@ -46,7 +45,7 @@ const team = [
     name: "Munir Yam",
     role: " Product Owner",
     image: munir,
-    bio: "A key team member at kpi.com, leveraging deep system knowledge to drive product development and align features with user needs for maximum value.",
+    bio: "Product strategist with deep system expertise, aligning user needs and features to drive innovation and business impact.",
   },
 ];
 
@@ -101,7 +100,6 @@ const values = [
 ];
 
 const About = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -124,7 +122,7 @@ const About = () => {
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <Link className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap w-fit 
-            rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer" href="/about" >
+            rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer hover-lift transition-transform duration-200 " href="/about" >
               About UzBridge
               <ArrowRight className="w-3 h-3" />
             </Link>
@@ -138,8 +136,8 @@ const About = () => {
               We&apos;re on a mission to empower Uzbek tech companies to scale globally by providing
               comprehensive market entry solutions for the Middle East and African markets.
             </p>
-            <div className="grid grid-cols-3 gap-6">
-              <Stat label="Partner Companies" value={150} suffix="+" />
+            <div className="grid grid-cols-3 gap-6 ">
+              <Stat label="Partner Companies " value={150} suffix="+" />
               <Stat label="MEA Countries" value={8} />
               <Stat label="Deal Value" value={50} suffix="M+" />
             </div>
@@ -154,11 +152,11 @@ const About = () => {
               className="w-full h-auto rounded-2xl shadow-2xl object-cover"
             />
 
-            <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-lg shadow">
-              <div className="flex items-center gap-3">
+            <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-lg shadow hover-lift transition-transform duration-200 cursor-default ">
+              <div className="flex items-center gap-3 ">
                 <Award className="w-6 h-6 " />
                 <div>
-                  <div className="font-semibold">Regional Excellence</div>
+                  <div className="font-semibold ">Regional Excellence</div>
                   <div className="text-sm text-muted-foreground">MEA Business Award 2024</div>
                 </div>
               </div>
@@ -169,7 +167,7 @@ const About = () => {
 
       {/* Mission & Vision */}
       <section className="py-16 animate-fade-in-up">
-        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-8">
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-8  cursor-default">
           <InfoCard icon={<TrendingUp className=" w-8 h-8" />} title="Our Mission">
             To empower Uzbek tech companies to scale globally through a curated marketplace,
             entry support, and enablement services tailored for MEA markets.
@@ -186,7 +184,7 @@ const About = () => {
           <SectionHeader title="Meet Our Team" subtitle="40+ expert team in Tashkent drives innovation, seamless product development, and top-tier global support." />
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((m, i) => (
-              <Card key={i} className="text-center shadow-md">
+              <Card key={i} className="text-center shadow-md hover-lift transition-transform duration-200 ">
                 <CardContent className="p-6 space-y-4">
                   <Image
                     src={m.image}
@@ -197,7 +195,7 @@ const About = () => {
                   />
                   <div className="space-y-1">
                     <h3 className="font-semibold text-lg tracking-wide">{m.name}</h3>
-                    <p className="p-2 text-primary text-sm font-medium">{m.role}</p>
+                    <p className="p-2 text-primary text-sm font-medium tracking-wide">{m.role}</p>
                     <p className="text-muted-foreground text-medium italic ">{m.bio}</p>
                   </div>
                 </CardContent>
@@ -217,7 +215,7 @@ const About = () => {
                 <div className="w-16 h-16 rounded-full flex items-center justify-center font-bold tracking-wide">
                   {m.year}
                 </div>
-                <div className="bg-card p-6 rounded-lg shadow w-full ring-2 ring-accent/">
+                <div className="bg-card p-6 rounded-lg shadow w-full ring-2 ring-accent/ hover-lift transition-transform duration-200 cursor-default">
                   <p className="">{m.event}</p>
                 </div>
               </div>
@@ -232,11 +230,11 @@ const About = () => {
           <SectionHeader title="Our Values" subtitle="What guides UzBridge every day." />
           <div className="grid lg:grid-cols-4 gap-8">
             {values.map((val, i) => (
-              <div key={i} className="text-center space-y-4">
-                <div className="w-16 h-16 mx-auto rounded-full flex items-center justify-center bg-background/80 shadow-md">
+              <div key={i} className="text-center space-y-4 ">
+                <div className="w-16 h-16 mx-auto rounded-full flex items-center justify-center bg-background/80 shadow-md hover-lift transition-transform duration-200 cursor-default">
                   <val.icon className="w-6 h-6" />
                 </div>
-                <h4 className="font-semibold text-lg">{val.title}</h4>
+                <h4 className="font-semibold text-lg ">{val.title}</h4>
                 <p className="text-muted-foreground text-sm">{val.description}</p>
               </div>
             ))}
@@ -252,11 +250,11 @@ const About = () => {
             Whether you&apos;re a Uzbek tech company looking to expand or a MEA business seeking innovative solutions,
             let&apos;s build something amazing together.
           </p>
-          <div className="flex justify-center gap-4 flex-wrap">
-            <Button variant="default" className="cursor-pointer">
-              Partner With Us <ArrowRight className=" w-4 h-4" />
+          <div className="flex justify-center gap-4 flex-wrap group inline-flex items-center gap-1 cursor-pointer">
+            <Button variant="default" size="lg" className="transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
+              Partner With us <ArrowRight className="transition-transform group-hover:translate-x-1 w-4 h-4" />
             </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-primary cursor-pointer">
+            <Button variant="outline" size="lg" className="transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
               Learn More
             </Button>
           </div>
@@ -270,17 +268,17 @@ const About = () => {
 
 const Stat = ({ label, value, suffix = "" }: { label: string; value: number; suffix?: string }) => (
   <div className="text-center">
-    <div className="text-3xl font-bold text-primary">
+    <div className="text-3xl font-bold text-primary ">
       <AnimatedCounter end={value} suffix={suffix} />
     </div>
-    <div className="text-muted-foreground text-sm">{label}</div>
+    <div className="text-muted-foreground text-sm ">{label}</div>
   </div>
 );
 
 const InfoCard = ({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) => (
-  <Card className="p-8 shadow-md">
+  <Card className="p-8 shadow-md hover-lift transition-transform duration-200">
     <CardContent className="space-y-6">
-      <div className="w-12 h-12 rounded-xl bg-uzbek-gradient flex items-center justify-center">
+      <div className="w-12 h-12 rounded-xl bg-uzbek-gradient flex items-center justify-center ">
         {icon}
       </div>
       <div>
@@ -292,8 +290,8 @@ const InfoCard = ({ icon, title, children }: { icon: React.ReactNode; title: str
 );
 
 const SectionHeader = ({ title, subtitle }: { title: string; subtitle: string }) => (
-  <div className="text-center space-y-2 mb-12">
-    <h2 className="text-3xl font-bold">{title}</h2>
+  <div className="text-center space-y-2 mb-12 ">
+    <h2 className="text-3xl font-bold ">{title}</h2>
     <p className="text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>
   </div>
 );

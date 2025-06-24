@@ -24,24 +24,24 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar"
 import { TeamSwitcher } from "./team-switcher"
-import { IconBuildingBridge } from "@tabler/icons-react"
+import { GiSuspensionBridge } from "react-icons/gi";
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "TechBridge.AI",
+    email: "info@techbridgeai.com",
     avatar: "/avatars/shadcn.jpg",
   },
   teams: [
     {
-      name: "UzBridge",
-      logo: IconBuildingBridge,
+      name: "TechBridge.AI",
+      logo: GiSuspensionBridge,
       plan: "Enterprise",
-       label: "TechBridge.ai",
+      label: "TechBridge.AI",
       sublabel: "Admin Panel",
       route: "/dashboard",
     },
- 
+
   ],
   navMain: [
     {
@@ -161,7 +161,7 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar >
       <SidebarHeader >
