@@ -98,7 +98,7 @@ const CRM = () => {
           <div className="flex justify-between items-center mb-8">
             <div>
               <h1 className="text-3xl font-bold">CRM Dashboard</h1>
-              <p className="text-gray-600 mt-2">Manage your leads, deals, and customer relationships</p>
+              <p className="text-muted-foreground mt-2">Manage your leads, deals, and customer relationships</p>
             </div>
             <Button className="bg-gradient-uzbek">
               <Plus className="w-4 h-4 mr-2" />
@@ -297,7 +297,7 @@ const CRM = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <Calendar className="w-5 h-5 mr-2" />
-                      This Month's Activity
+                      This Month&apos;s Activity
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
