@@ -1,5 +1,15 @@
 'use client';
 
+import Image, { StaticImageData } from 'next/image';
+import { DollarSign } from "lucide-react";
+
+import erp from "@/img/erp.png";
+import finance from "@/img/finance.jpg";
+import hospital from "@/img/hospital.png";
+import hrms from "@/img/hrms.png";
+import scm from "@/img/scm.jpeg";
+import sis from "@/img/sis.jpg";
+
 import {
   Search,
   Filter,
@@ -31,6 +41,26 @@ import {
 } from '@/components/ui/select';
 import Footer from '@/components/Footer';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+
+interface Product {
+  id: number;
+  name: string;
+  company: string;
+  category: string;
+  description: string;
+  rating: number;
+  reviews: number;
+  currency?: string;
+  billing?: string;
+  price: number | string;
+  languages: string[];
+  clients: number;
+  demo: boolean;
+  featured: boolean;
+  image: StaticImageData;
+  tags: string[];
+}
 
 const Marketplace = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -52,102 +82,114 @@ const Marketplace = () => {
     { id: 'healthcare', label: 'Healthcare', count: 16 },
   ];
 
-  const products = [
+  const products: Product[] = [
     {
       id: 1,
       name: "UzERP Pro",
       company: "TechFlow Solutions",
-      category: "ERP Systems",
+      category: "erp",
       description: "Complete enterprise resource planning solution for medium to large businesses with advanced inventory and financial management.",
       rating: 4.8,
       reviews: 156,
-      price: "Starting from $299/month",
+      price: 299,
+      currency: "USD",
+      billing: "month",
       languages: ["EN", "RU", "AR"],
       clients: 450,
       demo: true,
       featured: true,
-      image: "photo-1460925895917-afdab827c52f",
+      image: erp,
       tags: ["Cloud-based", "Multi-language", "API Integration"]
     },
     {
       id: 2,
       name: "FinanceUz Banking",
       company: "FinTech Innovations",
-      category: "Fintech",
+      category: "fintech",
       description: "Digital banking platform with comprehensive loan management, payment processing, and regulatory compliance for MEA markets.",
       rating: 4.9,
       reviews: 89,
       price: "Custom pricing",
+      currency: "USD",
+      billing: "month",
       languages: ["EN", "AR", "FR"],
       clients: 120,
       demo: true,
       featured: false,
-      image: "photo-1551288049-bebda4e38f71",
+      image: finance,
       tags: ["Banking", "Compliance", "Mobile-first"]
     },
     {
       id: 3,
       name: "EduSoft Campus",
       company: "Education Tech UZ",
-      category: "Education",
+      category: "education",
       description: "Integrated campus management system with student information, learning management, and parent communication modules.",
       rating: 4.7,
       reviews: 203,
-      price: "From $89/month",
+      price: 89,
+      currency: "USD",
+      billing: "month",
       languages: ["EN", "RU", "AR"],
       clients: 780,
       demo: true,
       featured: true,
-      image: "photo-1522202176988-66273c2fd55f",
+      image: sis,
       tags: ["LMS", "Student Portal", "Analytics"]
     },
     {
       id: 4,
       name: "LogiFlow Pro",
       company: "Smart Logistics UZ",
-      category: "Logistics",
+      category: "logistics",
       description: "Advanced logistics and supply chain management platform with real-time tracking and route optimization.",
       rating: 4.6,
       reviews: 134,
-      price: "Starting from $199/month",
+      price: 199,
+      currency: "USD",
+      billing: "month",
       languages: ["EN", "RU"],
       clients: 320,
       demo: true,
       featured: false,
-      image: "photo-1586528116311-ad8dd3c8310d",
-      tags: ["Real-time tracking", "Route optimization", "Warehouse management"]
+      image: scm,
+      tags: ["Real-time", "Route Opt", "Warehouse Mgmt"]
     },
     {
       id: 5,
       name: "HealthCare UZ",
       company: "MedTech Solutions",
-      category: "Healthcare",
+      category: "healthcare",
       description: "Comprehensive hospital management system with patient records, appointment scheduling, and billing integration.",
       rating: 4.8,
       reviews: 97,
       price: "Custom pricing",
+      currency: "USD",
+      billing: "month",
       languages: ["EN", "AR"],
       clients: 85,
       demo: true,
       featured: false,
-      image: "photo-1576091160399-112ba8d25d1f",
+      image: hospital,
       tags: ["HIPAA Compliant", "Telemedicine", "Analytics"]
     },
     {
       id: 6,
       name: "HRMax Pro",
       company: "WorkFlow Technologies",
-      category: "HR Management",
+      category: "hr",
       description: "Complete human resources management suite with payroll, performance tracking, and employee self-service portal.",
       rating: 4.7,
       reviews: 178,
-      price: "From $149/month",
+      price: 149,
+      currency: "USD",
+      billing: "month",
       languages: ["EN", "RU", "AR"],
       clients: 560,
       demo: true,
       featured: true,
-      image: "photo-1552664730-d307ca884978",
-      tags: ["Payroll", "Performance management", "Self-service"]
+      image: hrms,
+      tags: ["Payroll", "Performance Mgmt", "Self-service"]
     }
   ];
 
@@ -157,24 +199,18 @@ const Marketplace = () => {
       product.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory =
-      selectedCategory === 'all' ||
-      product.category.toLowerCase().includes(selectedCategory);
+      selectedCategory === 'all' || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background text-foreground">
-        <div className="pt-24 pb-16">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => (
-                <div
-                  key={i}
-                  className="h-80 bg-muted rounded-lg animate-pulse"
-                ></div>
-              ))}
-            </div>
+        <div className="pt-24 pb-16 container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="h-80 bg-muted rounded-lg animate-pulse"></div>
+            ))}
           </div>
         </div>
       </div>
@@ -207,10 +243,7 @@ const Marketplace = () => {
                   className="pl-10 py-3 text-lg"
                 />
               </div>
-              <Select
-                value={selectedCategory}
-                onValueChange={setSelectedCategory}
-              >
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                 <SelectTrigger className="w-full md:w-48">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
@@ -228,11 +261,7 @@ const Marketplace = () => {
               </Button>
             </div>
 
-            <Tabs
-              value={selectedCategory}
-              onValueChange={setSelectedCategory}
-              className="w-full"
-            >
+            <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
               <TabsList className="h-full w-full grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-2 bg-muted text-muted-foreground">
                 {categories.slice(0, 8).map((category) => (
                   <TabsTrigger
@@ -244,7 +273,6 @@ const Marketplace = () => {
                   </TabsTrigger>
                 ))}
               </TabsList>
-
             </Tabs>
           </div>
         </div>
@@ -254,7 +282,7 @@ const Marketplace = () => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
             <div className="space-y-2">
-              <h2 className="text-2xl font-bold ">
+              <h2 className="text-2xl font-bold">
                 {filteredProducts.length} Software Solutions
               </h2>
               <p className="text-muted-foreground">
@@ -276,23 +304,25 @@ const Marketplace = () => {
             </Select>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((product) => (
               <Card
                 key={product.id}
-                className={`group hover:shadow-lg transition duration-300 ${product.featured ? 'ring-2 ring-primary/20' : ''
+                className={`group hover:shadow-lg transition duration-300 ${product.featured ? 'ring-primary/20' : ''
                   }`}
               >
                 <CardHeader className="p-0">
                   <div className="relative overflow-hidden rounded-t-lg">
-                    <img
-                      src={`https://images.unsplash.com/${product.image}?w=400&h=250&fit=crop`}
+                    <Image
+                      src={product.image}
                       alt={product.name}
+                      width={400}
+                      height={250}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute top-4 left-4">
                       <Badge className="bg-background text-foreground">
-                        {product.category}
+                        {categories.find((c) => c.id === product.category)?.label || product.category}
                       </Badge>
                     </div>
                     <div className="absolute top-4 right-4 flex space-x-1">
@@ -323,7 +353,7 @@ const Marketplace = () => {
                     {product.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className=" flex flex-wrap gap-2">
                     {product.tags.map((tag, idx) => (
                       <Badge key={idx} variant="outline" className="text-xs">
                         {tag}
@@ -347,9 +377,22 @@ const Marketplace = () => {
 
                   <div className="flex items-center justify-between pt-4 border-t border-border">
                     <div className="space-y-1">
-                      <div className="text-lg font-bold text-primary">
-                        {product.price}
+                      <div className="flex items-center text-lg font-bold text-primary gap-1">
+                        {typeof product.price === "number" ? (
+                          <>
+                            <span>
+                              From {new Intl.NumberFormat("en-US", {
+                                style: "currency",
+                                currency: product.currency || "USD",
+                              }).format(product.price)}
+                              /{product.billing}
+                            </span>
+                          </>
+                        ) : (
+                          <span>{product.price}</span>
+                        )}
                       </div>
+
                       {product.demo && (
                         <div className="flex items-center text-green-600 dark:text-green-400 text-sm">
                           <Clock className="w-3 h-3 mr-1" />
@@ -357,13 +400,12 @@ const Marketplace = () => {
                         </div>
                       )}
                     </div>
-                    <div className="flex space-x-2">
-                      <Button variant="outline" size="sm">
+                    <div className="flex space-x-2 ">
+                      <Link className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap w-fit 
+                                  rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer" href="/about" >
                         Learn More
-                      </Button>
-                      <Button size="sm" className="bg-gradient-uzbek">
-                        <ArrowRight className="w-4 h-4" />
-                      </Button>
+                        <ArrowRight className="w-3 h-3" />
+                      </Link>
                     </div>
                   </div>
                 </CardContent>
@@ -385,5 +427,3 @@ const Marketplace = () => {
 };
 
 export default Marketplace;
-
-
