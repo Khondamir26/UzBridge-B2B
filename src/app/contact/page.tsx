@@ -67,9 +67,9 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground ">
       {/* Header */}
-      <section className="pt-24 pb-16 bg-gradient-to-br to-background">
+      <section className="pt-24 pb-16 bg-gradient-to-br to-background ">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 max-w-4xl mx-auto">
             <Link className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap

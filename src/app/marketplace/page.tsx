@@ -40,7 +40,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import Footer from '@/components/Footer';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 interface Product {
@@ -63,13 +63,31 @@ interface Product {
 }
 
 const Marketplace = () => {
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isLoading, setIsLoading] = useState(true);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 1500);
+    setTimeout(() => setIsLoading(false), 100);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const elements = document.querySelectorAll(".animate-fade-in-up");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
   }, []);
+
+  // useEffect(() => {
+  //   setTimeout(() => setIsLoading(false), 200);
+  // }, []);
 
   const categories = [
     { id: 'all', label: 'All Software', count: 142 },
@@ -219,7 +237,7 @@ const Marketplace = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <section className="pt-18 pb-12">
+      <section className="pt-18 pb-12 ">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 mb-12">
             <h1 className="text-4xl lg:text-6xl font-bold">

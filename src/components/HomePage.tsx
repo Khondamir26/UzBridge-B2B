@@ -55,7 +55,7 @@ const Home = () => {
                 </p>
               </div>
 
-              <div className="flex justify-center flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/marketplace" passHref>
                   <Button size="lg" className="px-4 py-4 w-full ">
                     Explore Marketplace

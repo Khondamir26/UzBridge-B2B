@@ -3,10 +3,13 @@ import ceo from "@/img/ceo.png";
 import cto from "@/img/cto.png";
 import munir from "@/img/munir.png";
 import tawney from "@/img/tawney.png";
-
+import { useRef, useEffect } from "react";
 
 import React from "react";
 import {
+  Lightbulb,
+  Handshake,
+  Star,
   ArrowRight,
   Award,
   Users,
@@ -75,29 +78,49 @@ const values = [
     title: "Innovation",
     description:
       "We believe in the power of technology to transform businesses and communities.",
+    icon: Lightbulb,
   },
   {
     title: "Partnership",
     description:
-      "Success comes through genuine collaboration and mutual growth with our clients.",
+      "Success comes from genuine collaboration and shared growth.",
+    icon: Handshake,
   },
   {
     title: "Excellence",
     description:
       "We maintain the highest standards in everything we deliver to our partners.",
+    icon: Star,
   },
   {
     title: "Cultural Bridge",
     description:
       "We understand and respect the diverse cultures we work with across regions.",
+    icon: Globe,
   },
 ];
 
 const About = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const elements = document.querySelectorAll(".animate-fade-in-up");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
-      <section className="pt-10 pb-16">
+      <section className="pt-10 pb-16 bg-muted animate-fade-in-up">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <Link className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap w-fit 
@@ -145,7 +168,7 @@ const About = () => {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-16">
+      <section className="py-16 animate-fade-in-up">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-8">
           <InfoCard icon={<TrendingUp className=" w-8 h-8" />} title="Our Mission">
             To empower Uzbek tech companies to scale globally through a curated marketplace,
@@ -158,7 +181,7 @@ const About = () => {
       </section>
 
       {/* Team */}
-      <section className="py-16 bg-muted">
+      <section className="py-16 bg-muted animate-fade-in-up">
         <div className="container mx-auto px-4">
           <SectionHeader title="Meet Our Team" subtitle="40+ expert team in Tashkent drives innovation, seamless product development, and top-tier global support." />
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -185,17 +208,17 @@ const About = () => {
       </section>
 
       {/* Timeline */}
-      <section className="py-16">
+      <section className="py-16 animate-fade-in-up">
         <div className="container mx-auto px-4">
           <SectionHeader title="Our Journey" subtitle="Milestones of connecting Uzbek innovation to the world." />
           <div className="space-y-8 max-w-4xl mx-auto">
             {milestones.map((m, i) => (
-              <div key={i} className="flex gap-4 items-start">
-                <div className="w-16 h-16 rounded-full bg-uzbek-gradient text-white flex items-center justify-center font-bold">
+              <div key={i} className="flex gap-4 items-center ">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center font-bold tracking-wide">
                   {m.year}
                 </div>
-                <div className="bg-card p-6 rounded-lg shadow w-full">
-                  <p className="text-muted-foreground">{m.event}</p>
+                <div className="bg-card p-6 rounded-lg shadow w-full ring-2 ring-accent/">
+                  <p className="">{m.event}</p>
                 </div>
               </div>
             ))}
@@ -204,14 +227,14 @@ const About = () => {
       </section>
 
       {/* Values */}
-      <section className="py-16 bg-muted">
+      <section className="py-16 bg-muted animate-fade-in-up">
         <div className="container mx-auto px-4">
           <SectionHeader title="Our Values" subtitle="What guides UzBridge every day." />
           <div className="grid lg:grid-cols-4 gap-8">
             {values.map((val, i) => (
               <div key={i} className="text-center space-y-4">
-                <div className="w-16 h-16 mx-auto rounded-full bg-uzbek-gradient flex items-center justify-center">
-                  <Users className="text-white w-6 h-6" />
+                <div className="w-16 h-16 mx-auto rounded-full flex items-center justify-center bg-background/80 shadow-md">
+                  <val.icon className="w-6 h-6" />
                 </div>
                 <h4 className="font-semibold text-lg">{val.title}</h4>
                 <p className="text-muted-foreground text-sm">{val.description}</p>
@@ -222,7 +245,7 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-to-br from-primary to-accent text-white">
+      <section className="py-16 animate-fade-in-up">
         <div className="container mx-auto px-4 text-center space-y-6 max-w-2xl">
           <h2 className="text-4xl font-bold">Ready to Join Our Success Story?</h2>
           <p className="text-lg">
@@ -230,10 +253,10 @@ const About = () => {
             let&apos;s build something amazing together.
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
-            <Button className="bg-white text-primary hover:bg-gray-100">
-              Partner With Us <ArrowRight className="ml-2 w-4 h-4" />
+            <Button variant="default" className="cursor-pointer">
+              Partner With Us <ArrowRight className=" w-4 h-4" />
             </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-primary cursor-pointer">
               Learn More
             </Button>
           </div>
