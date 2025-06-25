@@ -126,7 +126,7 @@ const About = () => {
               About UzBridge
               <ArrowRight className="w-3 h-3" />
             </Link>
-            <h1 className="text-4xl lg:text-6xl font-bold">
+            <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
               Bridging Innovation
               <span className="block bg-clip-text">
                 Across Continents

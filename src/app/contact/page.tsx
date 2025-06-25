@@ -87,7 +87,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background text-foreground ">
       {/* Header */}
-      <section className="pt-24 pb-16 bg-gradient-to-br to-background animate-fade-in-up ">
+      <section className="pt-24 pb-16 bg-muted bg-gradient-to-br to-accent animate-fade-in-up ">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 max-w-4xl mx-auto">
             <Link className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap
@@ -96,9 +96,9 @@ const Contact = () => {
               Get In Touch
               <ArrowRight className="w-3 h-3" />
             </Link>
-            <h1 className="text-4xl lg:text-6xl font-bold">
+            <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
               Let&apos;s Start Your{' '}
-              <span className="text-primary block">Global Journey</span>
+              <span className="font-bold block">Global Journey</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
               Ready to expand your Uzbek tech business into MEA markets?
@@ -337,7 +337,7 @@ const Contact = () => {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 bg-muted/40 animate-fade-in-up">
+      <section className="py-16 bg-muted animate-fade-in-up">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl font-bold">Frequently Asked Questions</h2>

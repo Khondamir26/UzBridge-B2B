@@ -130,9 +130,10 @@ const Navbar = () => {
     return (
         <nav
             ref={navbarRef}
-            className={` flex items-center justify-between px-4 py-2 fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
-                ? 'backdrop-blur-md shadow-lg border-b'
-                : 'bg-transparent'
+            className={` flex items-center justify-between px-4 py-2 fixed top-0 w-full z-50
+                  duration-300 bg-background transition-shadow ${isScrolled
+                ? 'shadow-lg'
+                : ''
                 }`}
             style={{
                 height: navbarHeight > 0 ? `${navbarHeight}px` : 'auto',
@@ -208,7 +209,7 @@ const Navbar = () => {
                 <div className="hidden lg:flex items-center gap-4 ">
                     <div className="flex items-center gap-4">
                         {/* Language Selector */}
-                        <DropdownMenu >
+                        <DropdownMenu modal={false}>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" size="sm" className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer space-x-2">
                                     <Globe className="w-4 h-4" />
@@ -246,7 +247,7 @@ const Navbar = () => {
                         </Link>
 
                         {/* Theme Toggle */}
-                        <DropdownMenu>
+                        <DropdownMenu modal={false}>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="outline" size="icon">
                                     {/* Icon depends on actual theme */}
@@ -315,7 +316,7 @@ const Navbar = () => {
                     <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger asChild>
                             <Button variant="ghost" size="sm">
-                                <Menu className="w-5 h-5" />
+                                <Menu className="w-full h-5" />
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="bg-background text-foreground">

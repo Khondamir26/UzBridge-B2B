@@ -36,13 +36,13 @@ const Home = () => {
     <div className="min-h-screen bg-background text-foreground transition-colors">
       
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden uzbek-pattern animate-fade-in-up">
+      <section ref={heroRef} className="bg-muted relative min-h-screen flex items-center justify-center overflow-hidden animate-fade-in-up">
         <div className="container mx-auto px-4 relative z-10 pt-10 pb-16">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in-up">
               <div className="space-y-4">
                 <Badge >Connecting Uzbekistan to Global Markets</Badge>
-                <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight">
+                <h1 className="text-6xl lg:text-5xl font-extrabold leading-tight">
                   TechBridge.AI:
                   <span className="bg-clip-text drop-shadow-sm block">
                     Made in Uzbekistan. Built for the World.
@@ -93,7 +93,7 @@ const Home = () => {
       </section>
 
       {/* Problem Section */}
-      <section className="py-24 bg-muted animate-fade-in-up">
+      <section className="py-24 animate-fade-in-up">
         <div className="container px-4 mx-auto space-y-12">
           <h2 className="text-4xl font-bold text-center">The Problem</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-muted-foreground text-sm">
@@ -106,7 +106,7 @@ const Home = () => {
       </section>
 
       {/* Solution Section */}
-      <section className="py-24 animate-fade-in-up">
+      <section className="py-24 bg-muted nimate-fade-in-up">
         <div className="container px-4 mx-auto space-y-12">
           <h2 className="text-4xl font-bold text-center">TechBridge: The Centralized Gateway</h2>
           <div className="grid md:grid-cols-2 gap-10 text-muted-foreground text-sm">
@@ -119,7 +119,7 @@ const Home = () => {
       </section>
 
       {/* Who We Serve */}
-      <section className="py-24 bg-muted animate-fade-in-up">
+      <section className="py-24 animate-fade-in-up">
         <div className="container px-4 mx-auto text-center space-y-8">
           <h2 className="text-4xl font-bold">Who We Serve</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">

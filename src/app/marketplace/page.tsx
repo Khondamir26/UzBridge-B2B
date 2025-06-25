@@ -237,7 +237,7 @@ const Marketplace = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       
-      <section className="pt-18 pb-12 ">
+      <section className="pt-18 pb-12 bg-muted ">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 mb-12">
             <h1 className="text-4xl lg:text-6xl font-bold">
@@ -269,7 +269,7 @@ const Marketplace = () => {
                   {categories.map((category) => (
                     <SelectItem key={category.id} value={category.id}>
                       {category.label} ({category.count})
-                    </SelectItem>
+                    </SelectItem>                                   
                   ))}
                 </SelectContent>
               </Select>
@@ -280,7 +280,7 @@ const Marketplace = () => {
             </div>
 
             <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
-              <TabsList className="h-full w-full grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-2 bg-muted text-muted-foreground">
+              <TabsList className="h-full w-full grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-2 ring-1 ring-muted/">
                 {categories.slice(0, 8).map((category) => (
                   <TabsTrigger
                     key={category.id}
