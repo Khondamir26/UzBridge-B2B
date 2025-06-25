@@ -42,7 +42,7 @@ const Home = () => {
             <div className="space-y-8 animate-fade-in-up">
               <div className="space-y-4">
                 <Badge >Connecting Uzbekistan to Global Markets</Badge>
-                <h1 className="text-6xl lg:text-5xl font-extrabold leading-tight">
+                <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">
                   TechBridge.AI:
                   <span className="bg-clip-text drop-shadow-sm block">
                     Made in Uzbekistan. Built for the World.

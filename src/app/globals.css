@@ -149,4 +149,12 @@
     @apply transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl;
   }
 }
+/* hide-scrollbar.css */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE & Edge */
+}
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}

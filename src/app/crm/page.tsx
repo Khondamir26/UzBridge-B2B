@@ -1,19 +1,21 @@
 "use client";
 
 import React, { useState } from 'react';
-import { 
-  Users, 
-  Plus, 
-  Search, 
-  Filter, 
-  MoreVertical, 
-  Phone, 
-  Mail, 
+import {
+  Users,
+  Plus,
+  Search,
+  Filter,
+  MoreVertical,
+  Phone,
+  Mail,
   Calendar,
   TrendingUp,
   DollarSign,
   Target,
-  Activity
+  Activity,
+  Globe,
+  MessageSquare
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -24,7 +26,32 @@ import Footer from '@/components/Footer';
 
 const CRM = () => {
   const [searchTerm, setSearchTerm] = useState('');
-
+  const processSteps = [
+    {
+      step: "01",
+      title: "Market Analysis",
+      description: "Deep dive into your target MEA markets and opportunities",
+      icon: Globe,
+    },
+    {
+      step: "02",
+      title: "Strategy Development",
+      description: "Create customized go-to-market strategy with localization plan",
+      icon: TrendingUp,
+    },
+    {
+      step: "03",
+      title: "Content & Campaigns",
+      description: "Launch targeted marketing campaigns with localized content",
+      icon: MessageSquare,
+    },
+    {
+      step: "04",
+      title: "Sales & Support",
+      description: "Dedicated sales representation and ongoing market support",
+      icon: Users,
+    },
+  ];
   const leads = [
     {
       id: 1,
@@ -90,9 +117,9 @@ const CRM = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      
-      <div className="pt-20 pb-8">
+    <div className="min-h-screen">
+
+      <div className="pt-16 pb-8">
         <div className="container mx-auto px-4">
           {/* Header */}
           <div className="flex justify-between items-center mb-8">
@@ -100,23 +127,22 @@ const CRM = () => {
               <h1 className="text-3xl font-bold">CRM Dashboard</h1>
               <p className="text-muted-foreground mt-2">Manage your leads, deals, and customer relationships</p>
             </div>
-            <Button className="bg-gradient-uzbek">
+            <Button variant="default" className="rounded-xl cursor-pointer">
               <Plus className="w-4 h-4 mr-2" />
               Add New Lead
             </Button>
           </div>
-
           {/* Stats Cards */}
           <div className="grid md:grid-cols-4 gap-6 mb-8">
             <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
+              <CardContent className="p-6 ">
+                <div className="flex items-center justify-between ">
                   <div>
-                    <p className="text-sm text-gray-600">Total Leads</p>
+                    <p className="text-sm text-muted-foreground">Total Leads</p>
                     <p className="text-3xl font-bold">127</p>
                     <p className="text-sm text-green-600">+12% this month</p>
                   </div>
-                  <Users className="w-8 h-8 text-primary-500" />
+                  <Users className="w-8 h-8 text-primary-500 " />
                 </div>
               </CardContent>
             </Card>
@@ -125,7 +151,7 @@ const CRM = () => {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-600">Active Deals</p>
+                    <p className="text-sm text-muted-foreground">Active Deals</p>
                     <p className="text-3xl font-bold">23</p>
                     <p className="text-sm text-blue-600">+5 this week</p>
                   </div>
@@ -138,7 +164,7 @@ const CRM = () => {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-600">Pipeline Value</p>
+                    <p className="text-sm text-muted-foreground">Pipeline Value</p>
                     <p className="text-3xl font-bold">$425K</p>
                     <p className="text-sm text-green-600">+8% increase</p>
                   </div>
@@ -151,11 +177,11 @@ const CRM = () => {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-600">Win Rate</p>
+                    <p className="text-sm text-muted-foreground">Win Rate</p>
                     <p className="text-3xl font-bold">67%</p>
                     <p className="text-sm text-green-600">Above average</p>
                   </div>
-                  <TrendingUp className="w-8 h-8 text-accent" />
+                  <TrendingUp className="w-8 h-8" />
                 </div>
               </CardContent>
             </Card>
@@ -163,7 +189,7 @@ const CRM = () => {
 
           {/* Main Content */}
           <Tabs defaultValue="leads" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className=" grid w-full grid-cols-3">
               <TabsTrigger value="leads">Leads</TabsTrigger>
               <TabsTrigger value="deals">Deals</TabsTrigger>
               <TabsTrigger value="analytics">Analytics</TabsTrigger>
@@ -173,7 +199,7 @@ const CRM = () => {
             <TabsContent value="leads" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 ">
                     <CardTitle className="flex items-center">
                       <Users className="w-5 h-5 mr-2" />
                       Recent Leads
@@ -198,15 +224,19 @@ const CRM = () => {
                 <CardContent>
                   <div className="space-y-4">
                     {leads.map((lead) => (
-                      <div key={lead.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+                      <div
+                        key={lead.id}
+                        className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 border rounded-lg hover:bg-gray-50"
+                      >
+                        {/* Left: Avatar + Info */}
                         <div className="flex items-center space-x-4">
                           <div className="w-12 h-12 bg-gradient-uzbek rounded-full flex items-center justify-center text-white font-semibold">
-                            {lead.name.split(' ').map(n => n[0]).join('')}
+                            {lead.name.split(" ").map((n) => n[0]).join("")}
                           </div>
                           <div>
                             <h3 className="font-semibold">{lead.name}</h3>
                             <p className="text-sm text-gray-600">{lead.company}</p>
-                            <div className="flex items-center space-x-4 mt-1">
+                            <div className="flex flex-wrap gap-2 mt-1">
                               <span className="text-xs text-gray-500 flex items-center">
                                 <Mail className="w-3 h-3 mr-1" />
                                 {lead.email}
@@ -218,10 +248,10 @@ const CRM = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-4">
-                          <Badge className={getStatusColor(lead.status)}>
-                            {lead.status}
-                          </Badge>
+
+                        {/* Right: Status, Value, Menu */}
+                        <div className="flex items-center justify-between md:justify-end gap-4">
+                          <Badge className={getStatusColor(lead.status)}>{lead.status}</Badge>
                           <div className="text-right">
                             <p className="font-semibold">{lead.value}</p>
                             <p className="text-xs text-gray-500">{lead.lastContact}</p>
