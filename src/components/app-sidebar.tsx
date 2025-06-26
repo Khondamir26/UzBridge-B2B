@@ -25,12 +25,13 @@ import {
 } from "@/components/ui/sidebar"
 import { TeamSwitcher } from "./team-switcher"
 import { GiSuspensionBridge } from "react-icons/gi";
+import avatar from "@/img/khonda.jpg";
 
 const data = {
   user: {
     name: "TechBridge.AI",
     email: "info@techbridgeai.com",
-    avatar: "/avatars/shadcn.jpg",
+    avatar: avatar,
   },
   teams: [
     {
