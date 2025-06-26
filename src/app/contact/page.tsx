@@ -32,25 +32,49 @@ import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import { useEffect } from "react";
 
+// Types for your form data
+interface FormData {
+  name: string;
+  email: string;
+  company: string;
+  phone: string;
+  service: string;
+  message: string;
+}
+
+interface ApiResponse {
+  message?: string;
+  error?: string;
+  details?: string[];
+  contact?: {
+    id: string;
+    name: string;
+    email: string;
+    createdAt: string;
+  };
+}
+
+
+
 const Contact = () => {
 
 
-   useEffect(() => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-          }
-        });
-      }, { threshold: 0.1 });
-  
-      const elements = document.querySelectorAll(".animate-fade-in-up");
-      elements.forEach((el) => observer.observe(el));
-  
-      return () => observer.disconnect();
-    }, []);
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+        }
+      });
+    }, { threshold: 0.1 });
 
-  const [formData, setFormData] = useState({
+    const elements = document.querySelectorAll(".animate-fade-in-up");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     company: '',
@@ -58,31 +82,63 @@ const Contact = () => {
     service: '',
     message: '',
   });
+  // State for form submission
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
 
+  const { toast } = useToast();
+  // Handle form field changes
+  const handleChange = (field: keyof FormData, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  // ✅ THIS IS THE UPDATED handleSubmit FUNCTION
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    toast({
-      title: 'Message sent successfully!',
-      description: "We'll get back to you within 24 hours.",
-    });
-    setFormData({
-      name: '',
-      email: '',
-      company: '',
-      phone: '',
-      service: '',
-      message: '',
-    });
-    setIsSubmitting(false);
+
+    try {
+      // Send data to your API route
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data: ApiResponse = await response.json();
+
+      if (response.ok) {
+        // Success - show success message
+        alert('Message sent successfully! We\'ll get back to you soon.');
+
+        // Reset form to empty state
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phone: '',
+          service: '',
+          message: '',
+        });
+      } else {
+        // Handle API errors
+        console.error('API Error:', data.error);
+        alert(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      // Handle network errors
+      console.error('Network error:', error);
+      alert('Network error. Please check your connection and try again.');
+    } finally {
+      // Always set submitting back to false
+      setIsSubmitting(false);
+    }
   };
 
-  const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
 
   return (
     <div className="min-h-screen bg-background text-foreground ">
