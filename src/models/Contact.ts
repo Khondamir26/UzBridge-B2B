@@ -54,9 +54,7 @@ const ContactSchema = new Schema<IContact>(
       maxlength: [1000, 'Message cannot exceed 1000 characters'],
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true, collection: 'contacts' }
 );
 
 // Prevent re-compilation during development
