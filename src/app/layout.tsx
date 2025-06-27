@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
 import { Poppins } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -49,7 +50,7 @@ export default async function RootLayout({
 
         </ThemeProvider>
 
-
+        <Toaster position="top-center" richColors duration={5000}  />
       </body>
     </html>
   );

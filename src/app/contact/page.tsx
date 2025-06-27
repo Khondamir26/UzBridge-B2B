@@ -28,9 +28,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import Footer from '@/components/Footer';
-import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 // Types for your form data
 interface FormData {
@@ -85,7 +85,7 @@ const Contact = () => {
   // State for form submission
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { toast } = useToast();
+
   // Handle form field changes
   const handleChange = (field: keyof FormData, value: string) => {
     setFormData(prev => ({
@@ -113,7 +113,9 @@ const Contact = () => {
 
       if (response.ok) {
         // Success - show success message
-        alert('Message sent successfully! We\'ll get back to you soon.');
+        toast.success("Message sent successfully!", {
+          description: "We'll get back to you soon.",
+        });
 
         // Reset form to empty state
         setFormData({
@@ -127,12 +129,16 @@ const Contact = () => {
       } else {
         // Handle API errors
         console.error('API Error:', data.error);
-        alert(data.error || 'Something went wrong. Please try again.');
+        toast.error("Error", {
+          description: data.message || "Something went wrong. Please try again.",
+        });
       }
     } catch (error) {
       // Handle network errors
       console.error('Network error:', error);
-      alert('Network error. Please check your connection and try again.');
+      toast.error("Network Error", {
+        description: "Please check your connection and try again.",
+      });
     } finally {
       // Always set submitting back to false
       setIsSubmitting(false);

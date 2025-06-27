@@ -9,7 +9,14 @@ const Toaster = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
       theme={theme as ToasterProps["theme"]}
-      className="toaster group"
+      position="top-center"
+      className="toaster group text-base" // 👈 увеличенный шрифт
+      toastOptions={{
+        classNames: {
+          toast: "text-base font-medium", // текст внутри тоста
+          description: "text-sm text-muted-foreground mt-1", // описание снизу
+        },
+      }}
       style={
         {
           "--normal-bg": "var(--popover)",
@@ -19,7 +26,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
       }
       {...props}
     />
-  )
+  );
 }
 
 export { Toaster }
