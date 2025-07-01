@@ -140,7 +140,7 @@ const Footer = () => {
               <Input
                 type="email"
                 placeholder="Enter your email"
-                className=" "
+                className="rounded-xl "
               />
               <Button variant="default" type="submit" className=" cursor-pointer rounded-xl">
                 Subscribe
