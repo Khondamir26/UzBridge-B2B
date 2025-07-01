@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const MONGODB_URI = process.env.MONGODB_URI!;
 
 if (!MONGODB_URI) {
-  throw new Error('mongodb+srv://xzdaun2:tvarlox2006@cluster0.qzyo7v4.mongodb.net/contacts?retryWrites=true&w=majority&appName=Cluster0');
+  throw new Error('Please define the MONGODB_URI environment variable');
 }
 
 interface GlobalWithMongoose {

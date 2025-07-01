@@ -4,7 +4,7 @@ export interface IContact extends Document {
   name: string;
   email: string;
   company?: string;
-  phone?: string;
+  phone: string;
   service?: string;
   message: string;
   createdAt: Date;
@@ -32,6 +32,7 @@ const ContactSchema = new Schema<IContact>(
       maxlength: [100, 'Company name cannot exceed 100 characters'],
     },
     phone: {
+      required: [true, 'Phone is required'],
       type: String,
       trim: true,
     },
@@ -45,7 +46,9 @@ const ContactSchema = new Schema<IContact>(
         'custom-solution',
         'partnership',
         'other'
+
       ],
+      required: false,
     },
     message: {
       type: String,
@@ -54,7 +57,7 @@ const ContactSchema = new Schema<IContact>(
       maxlength: [1000, 'Message cannot exceed 1000 characters'],
     },
   },
-  { timestamps: true, collection: 'contacts' }
+  { timestamps: true, collection: 'contacts'}
 );
 
 // Prevent re-compilation during development

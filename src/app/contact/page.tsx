@@ -36,9 +36,9 @@ import { toast } from "sonner";
 interface FormData {
   name: string;
   email: string;
-  company: string;
+  company?: string;
   phone: string;
-  service: string;
+  service?: string;
   message: string;
 }
 
@@ -79,7 +79,7 @@ const Contact = () => {
     email: '',
     company: '',
     phone: '',
-    service: '',
+    service: undefined,
     message: '',
   });
   // State for form submission
@@ -305,9 +305,10 @@ const Contact = () => {
                       </div>
                       <div className="space-y-2">
                         <label className="text-sm font-medium">
-                          Phone Number
+                          Phone Number *
                         </label>
                         <Input
+                          required
                           type="tel"
                           placeholder="+998 91 123 45 67"
                           value={formData.phone}
