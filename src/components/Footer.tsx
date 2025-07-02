@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   Building2,
@@ -14,8 +14,44 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+
 
 const Footer = () => {
+  // 🔽 добавлено: стейт и отправка формы
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email || !email.includes("@")) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        toast.success(data.message);
+        setEmail("");
+      } else {
+        toast.error(data.message || "Subscription failed");
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+  //
   return (
     <footer className="bg-muted/30">
       {/* Main Footer */}
@@ -136,14 +172,22 @@ const Footer = () => {
             <p className="text-sm text-muted-foreground">
               Get the latest updates on <br />MEA market opportunities
             </p>
-            <form className="flex space-x-2">
+            <form className="flex space-x-2" onSubmit={handleSubscribe}>
               <Input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="rounded-xl "
+                className="rounded-xl"
+                required
               />
-              <Button variant="default" type="submit" className=" cursor-pointer rounded-xl">
-                Subscribe
+              <Button
+                variant="default"
+                type="submit"
+                className="cursor-pointer rounded-xl"
+                disabled={loading}
+              >
+                {loading ? "Subscribing..." : "Subscribe"}
               </Button>
             </form>
           </div>
