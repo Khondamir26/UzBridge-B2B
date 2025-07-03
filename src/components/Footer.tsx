@@ -18,7 +18,7 @@ import { toast } from "sonner";
 
 
 const Footer = () => {
-  // 🔽 добавлено: стейт и отправка формы
+  // добавлено: стейт и отправка формы
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 

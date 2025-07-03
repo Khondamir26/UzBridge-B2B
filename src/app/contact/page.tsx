@@ -387,9 +387,16 @@ const Contact = () => {
                           </>
                         )}
                       </Button>
-                      <Button type="button" variant="outline" className="cursor-pointer flex-1">
-                        Schedule Call Instead
-                      </Button>
+                      <Link
+                        href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1rg4TOS2A6ZBwxCNsTekCavRGrw5Zckt4yujmekISbEpd8hf9ER--clf0BNO54B4-vrt6n1wkf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1"
+                      >
+                        <Button type="button" variant="outline" className="cursor-pointer w-full">
+                          Schedule Call Instead
+                        </Button>
+                      </Link>
                     </div>
                   </form>
                 </CardContent>
