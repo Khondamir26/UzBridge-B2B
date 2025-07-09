@@ -8,6 +8,7 @@ import { cookies } from "next/headers";
 import { Poppins } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -51,7 +52,9 @@ export default async function RootLayout({
 
         </ThemeProvider>
 
-        <Toaster position="top-center" richColors duration={5000}  />
+        <Toaster position="top-center" richColors duration={5000} />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
