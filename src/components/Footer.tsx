@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {
-  Building2,
   Mail,
   Phone,
   MapPin,
@@ -15,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { GiSuspensionBridge } from "react-icons/gi";
 
 
 const Footer = () => {
@@ -61,7 +61,7 @@ const Footer = () => {
           <div className="space-y-6">
             <Link href="/" className="flex items-center space-x-2 ">
               <Button variant="ghost" className="flex items-center cursor-pointer">
-                <Building2 className="w-6 h-6 " />
+                <GiSuspensionBridge className="size-8 " />
                 <span className="text-xl font-bold ">UzBridge</span>
               </Button>
 
@@ -210,7 +210,7 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block text-sm text-muted-foreground hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor]"
+                  className="hover:underline block text-sm text-muted-foreground hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor]"
                 >
                   {link.label}
                 </Link>
