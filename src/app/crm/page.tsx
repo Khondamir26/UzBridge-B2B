@@ -199,25 +199,27 @@ const CRM = () => {
             <TabsContent value="leads" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 ">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4  ">
                     <CardTitle className="flex items-center">
                       <Users className="w-5 h-5 mr-2" />
                       Recent Leads
                     </CardTitle>
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-2 items-center justify-between">
                       <div className="relative">
-                        <Search className="w-4 h-4 absolute left-3 top-3 text-gray-400" />
+                        <Search className="w-4 h-4 absolute left-3 top-3 text-muted-foreground" />
                         <Input
                           placeholder="Search leads..."
                           value={searchTerm}
                           onChange={(e) => setSearchTerm(e.target.value)}
                           className="pl-10 w-64"
+
                         />
                       </div>
-                      <Button variant="outline" size="sm">
-                        <Filter className="w-4 h-4 mr-2" />
-                        Filter
+                      <Button variant="outline">
+                        <Filter className="w-4 h-4" />
+                        <span className="hidden sm:inline">Filter</span>
                       </Button>
+
                     </div>
                   </div>
                 </CardHeader>
@@ -226,22 +228,22 @@ const CRM = () => {
                     {leads.map((lead) => (
                       <div
                         key={lead.id}
-                        className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 border rounded-lg hover:bg-gray-50"
+                        className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-4 border rounded-lg hover:bg-muted"
                       >
                         {/* Left: Avatar + Info */}
                         <div className="flex items-center space-x-4">
-                          <div className="w-12 h-12 bg-gradient-uzbek rounded-full flex items-center justify-center text-white font-semibold">
+                          <div className="w-12 h-12 rounded-full flex items-center justify-center font-semibold">
                             {lead.name.split(" ").map((n) => n[0]).join("")}
                           </div>
                           <div>
                             <h3 className="font-semibold">{lead.name}</h3>
-                            <p className="text-sm text-gray-600">{lead.company}</p>
-                            <div className="flex flex-wrap gap-2 mt-1">
-                              <span className="text-xs text-gray-500 flex items-center">
-                                <Mail className="w-3 h-3 mr-1" />
+                            <p className="text-sm text-muted-foreground">{lead.company}</p>
+                            <div className="flex flex-wrap gap-2 mt-1 items-center">
+                              <span className="text-xs text-muted-foreground flex items-center">
+                                <Mail className="w-3 h-3 mr-1 " />
                                 {lead.email}
                               </span>
-                              <span className="text-xs text-gray-500 flex items-center">
+                              <span className="text-xs text-muted-foreground flex ">
                                 <Phone className="w-3 h-3 mr-1" />
                                 {lead.phone}
                               </span>
@@ -252,13 +254,15 @@ const CRM = () => {
                         {/* Right: Status, Value, Menu */}
                         <div className="flex items-center justify-between md:justify-end gap-4">
                           <Badge className={getStatusColor(lead.status)}>{lead.status}</Badge>
-                          <div className="text-right">
-                            <p className="font-semibold">{lead.value}</p>
-                            <p className="text-xs text-gray-500">{lead.lastContact}</p>
+                          <div className="flex justify-between">
+                            <div className="text-right">
+                              <p className="font-semibold">{lead.value}</p>
+                              <p className="text-xs text-muted-foreground">{lead.lastContact}</p>
+                            </div>
+                            <Button variant="ghost" size="sm" className='cursor-pointer'>
+                              <MoreVertical className="w-4 h-4" />
+                            </Button>
                           </div>
-                          <Button variant="ghost" size="sm">
-                            <MoreVertical className="w-4 h-4" />
-                          </Button>
                         </div>
                       </div>
                     ))}
@@ -282,11 +286,11 @@ const CRM = () => {
                       <div key={deal.id} className="flex items-center justify-between p-4 border rounded-lg">
                         <div>
                           <h3 className="font-semibold">{deal.company}</h3>
-                          <p className="text-sm text-gray-600">Stage: {deal.stage}</p>
+                          <p className="text-sm text-muted-foreground">Stage: {deal.stage}</p>
                         </div>
                         <div className="text-right">
                           <p className="font-semibold text-lg">{deal.value}</p>
-                          <p className="text-sm text-gray-600">{deal.probability} • {deal.closeDate}</p>
+                          <p className="text-sm text-muted-foreground">{deal.probability} • {deal.closeDate}</p>
                         </div>
                       </div>
                     ))}
