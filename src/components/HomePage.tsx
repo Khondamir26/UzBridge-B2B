@@ -57,12 +57,12 @@ const Home = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/marketplace" passHref>
-                  <Button size="lg" className="px-4 py-4 w-full rounded-xl cursor-pointer ">
+                  <Button size="lg" className="px-4 py-4 w-full rounded-2xl cursor-pointer ">
                     Explore Marketplace
                     <ArrowRight className="w-5 h-5" />
                   </Button>
                 </Link>
-                <Button variant="outline" size="lg" className=" px-8 py-4 rounded-xl cursor-pointer ">
+                <Button variant="outline" size="lg" className=" px-8 py-4 rounded-2xl cursor-pointer ">
                   <Play className=" w-5 h-5 group-hover:scale-110 transition-transform " />
                   Watch Demo
                 </Button>
@@ -126,7 +126,7 @@ const Home = () => {
             TechBridge supports any IT Park resident — especially Uzbek-built SaaS with global ambition.
             Our buyers include SMEs, governments, and resellers in MEA. We enable scaling via local partners.
           </p>
-          <Button className="rounded-xl cursor-pointer " variant="default" size="lg" asChild>
+          <Button className="rounded-2xl cursor-pointer " variant="default" size="lg" asChild>
             <Link href="/contact">Join the Platform</Link>
           </Button>
         </div>

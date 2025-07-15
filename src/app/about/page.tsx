@@ -168,7 +168,7 @@ const About = () => {
       {/* Mission & Vision */}
       <section className="py-16 animate-fade-in-up">
         <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-8  cursor-default">
-          <InfoCard icon={<TrendingUp className=" w-8 h-8" />} title="Our Mission">
+          <InfoCard icon={<TrendingUp className="w-8 h-8" />} title="Our Mission">
             To empower Uzbek tech companies to scale globally through a curated marketplace,
             entry support, and enablement services tailored for MEA markets.
           </InfoCard>
@@ -209,13 +209,13 @@ const About = () => {
       <section className="py-16 animate-fade-in-up">
         <div className="container mx-auto px-4">
           <SectionHeader title="Our Journey" subtitle="Milestones of connecting Uzbek innovation to the world." />
-          <div className="space-y-8 max-w-4xl mx-auto">
+          <div className="space-y-8 max-w-4xl mx-auto ">
             {milestones.map((m, i) => (
               <div key={i} className="flex gap-4 items-center ">
                 <div className="w-16 h-16 rounded-full flex items-center justify-center font-bold tracking-wide">
                   {m.year}
                 </div>
-                <div className="bg-card p-6 rounded-lg shadow w-full ring-2 ring-accent/ hover-lift transition-transform duration-200 cursor-default">
+                <div className="rounded-2xl bg-card p-6 shadow w-full ring-2 ring-accent/ hover-lift transition-transform duration-200 cursor-default">
                   <p className="">{m.event}</p>
                 </div>
               </div>
@@ -251,10 +251,10 @@ const About = () => {
             let&apos;s build something amazing together.
           </p>
           <div className="flex justify-center gap-4 flex-wrap group inline-flex items-center gap-1 cursor-pointer">
-            <Button variant="default" size="lg" className="rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
+            <Button variant="default" size="lg" className="rounded-2xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
               Partner With us <ArrowRight className="transition-transform group-hover:translate-x-1 w-4 h-4" />
             </Button>
-            <Button variant="outline" size="lg" className=" rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
+            <Button variant="outline" size="lg" className=" rounded-2xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
               Learn More
             </Button>
           </div>
@@ -276,9 +276,9 @@ const Stat = ({ label, value, suffix = "" }: { label: string; value: number; suf
 );
 
 const InfoCard = ({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) => (
-  <Card className="p-8 shadow-md hover-lift transition-transform duration-200">
+  <Card className="rounded-2xl p-8 shadow-md hover-lift transition-transform duration-200">
     <CardContent className="space-y-6">
-      <div className="w-12 h-12 rounded-xl bg-uzbek-gradient flex items-center justify-center ">
+      <div className="w-12 h-12 rounded-xl flex items-center justify-center ">
         {icon}
       </div>
       <div>

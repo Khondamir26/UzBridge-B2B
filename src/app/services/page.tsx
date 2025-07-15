@@ -244,7 +244,7 @@ const Services = () => {
                       </div>
 
                       <Button variant="default"
-                        className={`rounded-xl w-full transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer `}
+                        className={`rounded-2xl w-full transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer `}
                       >
                         Get Started
                         <ArrowRight className="transition-transform group-hover:translate-x-1 w-4 h-4" />
@@ -298,7 +298,7 @@ const Services = () => {
                       </div>
 
                       <Button variant="default"
-                        className={`rounded-xl w-full transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer `}
+                        className={`rounded-2xl w-full transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer `}
                       >
                         Get Started
                         <ArrowRight className="w-4 h-4 ml-2" />
@@ -406,10 +406,10 @@ const Services = () => {
               Schedule a free consultation to discuss your market entry strategy and find the perfect package for your business.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="default" size="lg" className="rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
+              <Button variant="default" size="lg" className="rounded-2xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
                 Schedule Free Consultation
               </Button>
-              <Button variant="outline" size="lg" className="rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
+              <Button variant="outline" size="lg" className="rounded-2xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
                 Download Service Guide
               </Button>
             </div>

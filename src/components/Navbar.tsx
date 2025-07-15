@@ -214,7 +214,7 @@ const Navbar = () => {
                         {/* Language Selector */}
                         <DropdownMenu modal={false}>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="sm" className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer space-x-2">
+                                <Button variant="ghost" size="sm" className="rounded-2xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer space-x-2">
                                     <Globe className="w-4 h-4" />
                                     <span>{languages.find((l) => l.code === language)?.code}</span>
                                     <ChevronDown className="w-3 h-3" />
@@ -239,12 +239,12 @@ const Navbar = () => {
                         </DropdownMenu>
 
                         <Link href="/login"  >
-                            <Button variant="default" size="sm" className="cursor-pointer rounded-xl  ">
+                            <Button variant="default" size="sm" className="cursor-pointer rounded-2xl  ">
                                 Sign In
                             </Button>
                         </Link>
                         <Link href="/signup">
-                            <Button variant="ghost" size="sm" className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer  ">
+                            <Button variant="ghost" size="sm" className="rounded-2xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer  ">
                                 Sign Up
                             </Button>
                         </Link>
@@ -252,7 +252,7 @@ const Navbar = () => {
                         {/* Theme Toggle */}
                         <DropdownMenu modal={false}>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="outline" size="icon">
+                                <Button className="rounded-2xl" variant="outline" size="icon">
                                     {/* Icon depends on actual theme */}
                                     <Sun className="h-5 w-5 dark:hidden" />
                                     <Moon className="h-5 w-5 hidden dark:block" />

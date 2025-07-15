@@ -31,6 +31,7 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { Faq } from "@/components/faq";
 
 // Types for your form data
 interface FormData {
@@ -176,78 +177,75 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-12 items-center">
             {/* Contact Information */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <h2 className="text-2xl font-bold">Contact Information</h2>
-                <p className="text-muted-foreground">
-                  Get in touch with our team to discuss your market entry
-                  strategy and find the perfect solution for your business.
-                </p>
-              </div>
+            <div className="h-full">
+              <div className="flex flex-col justify-between h-full space-y-8">
+                {/* Top Part: Contact Info */}
+                <div className="space-y-6">
+                  <h2 className="text-2xl font-bold">Contact Information</h2>
 
-              <div className="space-y-6">
-                {[
-                  {
-                    icon: MapPin,
-                    title: 'Office Locations',
-                    details: [
-                      'Tashkent, Uzbekistan',
-                      'Business Bay, Dubai, UAE',
-                    ],
-                  },
-                  {
-                    icon: Phone,
-                    title: 'Phone Numbers',
-                    details: ['+998 91 123 45 67 (UZ)', '+971 50 123 45 67 (UAE)'],
-                  },
-                  {
-                    icon: Mail,
-                    title: 'Email Addresses',
-                    details: ['info@uzbridge.com', 'partnerships@uzbridge.com'],
-                  },
-                  {
-                    icon: Clock,
-                    title: 'Business Hours',
-                    details: [
-                      'Mon-Fri: 9:00 AM - 6:00 PM (GMT+5)',
-                      'Sat: 10:00 AM - 2:00 PM (GMT+5)',
-                    ],
-                  },
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className="font-semibold">{item.title}</h3>
-                      {item.details.map((detail, idx) => (
-                        <p key={idx} className="text-sm text-muted-foreground">
-                          {detail}
-                        </p>
-                      ))}
-                    </div>
+                  <div className="space-y-6">
+                    {[
+                      {
+                        icon: MapPin,
+                        title: 'Office Locations',
+                        details: ['Tashkent, Uzbekistan', 'Business Bay, Dubai, UAE'],
+                      },
+                      {
+                        icon: Phone,
+                        title: 'Phone Numbers',
+                        details: ['+998 91 123 45 67 (UZ)', '+971 50 123 45 67 (UAE)'],
+                      },
+                      {
+                        icon: Mail,
+                        title: 'Email Addresses',
+                        details: ['info@uzbridge.com', 'partnerships@uzbridge.com'],
+                      },
+                      {
+                        icon: Clock,
+                        title: 'Business Hours',
+                        details: [
+                          'Mon-Fri: 9:00 AM - 6:00 PM (GMT+5)',
+                          'Sat: 10:00 AM - 2:00 PM (GMT+5)',
+                        ],
+                      },
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-start space-x-4">
+                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <item.icon className="w-6 h-6 text-primary" />
+                        </div>
+                        <div className="space-y-1">
+                          <h3 className="font-semibold">{item.title}</h3>
+                          {item.details.map((detail, idx) => (
+                            <p key={idx} className="text-sm text-muted-foreground">
+                              {detail}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
 
-              {/* Quick Actions */}
-              <div className="space-y-4">
-                <h3 className="font-semibold">Quick Actions</h3>
-                <div className="space-y-2">
-                  <Button variant="default" className="w-full justify-start cursor-pointer" >
-                    <Globe className="w-4 h-4 mr-2" />
-                    Schedule Video Call
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start cursor-pointer">
-                    <CheckCircle className="w-4 h-4 mr-2" />
-                    Download Company Brochure
-                  </Button>
+                {/* Bottom Part: Quick Actions */}
+                <div className="space-y-4">
+                  <h3 className="font-semibold">Quick Actions</h3>
+                  <div className="space-y-2">
+                    <Button variant="default" className="rounded-2xl w-full justify-start cursor-pointer">
+                      <Globe className="w-4 h-4 mr-2" />
+                      Schedule Video Call
+                    </Button>
+                    <Button variant="outline" className="rounded-2xl w-full justify-start cursor-pointer">
+                      <CheckCircle className="w-4 h-4 mr-2" />
+                      Download Company Brochure
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Contact Form */}
-            <div className="lg:col-span-2">
+
+            {/* Contact Form */} 
+            <div className="lg:col-span-2 h-full ">
               <Card className="border border-border shadow-xl bg-card text-card-foreground">
                 <CardHeader>
                   <CardTitle className="text-2xl">Send Us a Message</CardTitle>
@@ -264,6 +262,7 @@ const Contact = () => {
                           Full Name *
                         </label>
                         <Input
+                          className='rounded-2xl'
                           required
                           type="text"
                           placeholder="Enter your full name"
@@ -278,6 +277,7 @@ const Contact = () => {
                           Email Address *
                         </label>
                         <Input
+                          className='rounded-2xl'
                           required
                           type="email"
                           placeholder="your.email@company.com"
@@ -295,6 +295,7 @@ const Contact = () => {
                           Company Name
                         </label>
                         <Input
+                          className='rounded-2xl'
                           type="text"
                           placeholder="Your company name"
                           value={formData.company}
@@ -304,10 +305,11 @@ const Contact = () => {
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">
+                        <label className="text-sm font-medium ">
                           Phone Number *
                         </label>
                         <Input
+                          className='rounded-2xl'
                           required
                           type="tel"
                           placeholder="+998 91 123 45 67"
@@ -320,7 +322,7 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">
+                      <label className="text-sm font-medium ">
                         Service Interest
                       </label>
                       <Select
@@ -329,7 +331,7 @@ const Contact = () => {
                           handleChange('service', value)
                         }
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="rounded-2xl">
                           <SelectValue placeholder="Select a service you're interested in" />
                         </SelectTrigger>
                         <SelectContent className="bg-popover text-popover-foreground border-border">
@@ -357,7 +359,7 @@ const Contact = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">Message *</label>
+                      <label className="text-sm font-medium ">Message *</label>
                       <Textarea
                         required
                         rows={5}
@@ -372,7 +374,7 @@ const Contact = () => {
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Button
                         type="submit"
-                        className="cursor-pointer hover:opacity-90 flex-1"
+                        className="rounded-2xl cursor-pointer hover:opacity-90 flex-1"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
@@ -382,7 +384,7 @@ const Contact = () => {
                           </>
                         ) : (
                           <>
-                            <Send className="w-4 h-4 mr-2" />
+                            <Send className="w-4 h-4 mr-2 " />
                             Send Message
                           </>
                         )}
@@ -393,7 +395,7 @@ const Contact = () => {
                         rel="noopener noreferrer"
                         className="flex-1"
                       >
-                        <Button type="button" variant="outline" className="cursor-pointer w-full">
+                        <Button type="button" variant="outline" className="rounded-2xl cursor-pointer w-full">
                           Schedule Call Instead
                         </Button>
                       </Link>
@@ -405,9 +407,9 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
       {/* FAQ */}
-      <section className="py-16 bg-muted animate-fade-in-up">
+      <Faq />
+      {/*  <section className="py-16 bg-muted animate-fade-in-up">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl font-bold">Frequently Asked Questions</h2>
@@ -459,7 +461,7 @@ const Contact = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>

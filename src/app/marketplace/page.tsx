@@ -9,6 +9,7 @@ import hospital from "@/img/hospital.png";
 import hrms from "@/img/hrms.png";
 import scm from "@/img/scm.jpeg";
 import sis from "@/img/sis.jpg";
+import { PaginationDemo } from "@/components/pagination-demo"
 
 import {
   Search,
@@ -236,14 +237,15 @@ const Marketplace = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      
+
       <section className="pt-18 pb-12 bg-muted ">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 mb-12">
-            <h1 className="text-4xl lg:text-6xl font-bold">
-              Discover <span className="text-primary">Uzbek Software</span>
+            <h1 className="text-4xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-neutral-400 via-muted-foreground-500 to-white">
+              Discover <span className="font-extrabold">Uzbek Software</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+
+            <p className="text-xl max-w-3xl mx-auto">
               Explore premium B2B software solutions built by innovative Uzbek
               companies, tailored for Middle East and African markets.
             </p>
@@ -258,34 +260,34 @@ const Marketplace = () => {
                   placeholder="Search software, companies, or technologies..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 py-3 text-lg"
+                  className="rounded-2xl pl-10 py-3 text-lg"
                 />
               </div>
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-full md:w-48">
+                <SelectTrigger className="w-full md:w-48 rounded-2xl">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
-                <SelectContent className="bg-popover text-popover-foreground border-border">
+                <SelectContent className=" rounded-2xl bg-popover text-popover-foreground border-border">
                   {categories.map((category) => (
                     <SelectItem key={category.id} value={category.id}>
                       {category.label} ({category.count})
-                    </SelectItem>                                   
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
-              <Button variant="outline" className="md:w-auto">
+              <Button variant="outline" className="rounded-2xl md:w-auto">
                 <Filter className="w-4 h-4 mr-2" />
                 More Filters
               </Button>
             </div>
 
             <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
-              <TabsList className="h-full w-full grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-2 ring-1 ring-muted/">
+              <TabsList className="rounded-2xl h-full w-full grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-2 ring-1 ring-muted/">
                 {categories.slice(0, 8).map((category) => (
                   <TabsTrigger
                     key={category.id}
                     value={category.id}
-                    className="text-xs lg:text-sm"
+                    className="rounded-2xl text-xs lg:text-sm"
                   >
                     {category.label.split(' ')[0]}
                   </TabsTrigger>
@@ -310,10 +312,10 @@ const Marketplace = () => {
               </p>
             </div>
             <Select defaultValue="featured">
-              <SelectTrigger className="w-48">
+              <SelectTrigger className="w-48 rounded-2xl">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-popover text-popover-foreground border-border">
+              <SelectContent className=" rounded-xl bg-popover text-popover-foreground border-border">
                 <SelectItem value="featured">Featured First</SelectItem>
                 <SelectItem value="rating">Highest Rated</SelectItem>
                 <SelectItem value="newest">Newest</SelectItem>
@@ -432,9 +434,12 @@ const Marketplace = () => {
           </div>
 
           <div className="text-center mt-16">
-            <Button variant="outline" size="lg" className="rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ bg-muted">
+            <div className="mb-10 flex justify-center">
+              <PaginationDemo />
+            </div>
+            {/* <Button variant="outline" size="lg" className="rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ bg-muted">
               Load More Products
-            </Button>
+            </Button> */}
           </div>
         </div>
       </section>
