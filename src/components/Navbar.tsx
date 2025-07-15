@@ -15,6 +15,7 @@ import {
     Languages,
     Laptop2,
     Menu,
+    LayoutDashboard 
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -51,13 +52,13 @@ const components = [
         icon: BarChart3,
     },
     {
-        title: "Marketplace",
-        href: "/marketplace",
+        title: "Dashboard",
+        href: "/dashboard",
         description: "B2B software directory.",
-        icon: Building2,
+        icon: LayoutDashboard,
     },
     {
-        title: "Agency Services",
+        title: "Services",
         href: "/services",
         description: "Market entry support.",
         icon: Users,
@@ -132,8 +133,8 @@ const Navbar = () => {
             ref={navbarRef}
             className={` flex items-center justify-between px-4 py-2 fixed top-0 w-full z-50
                   duration-300 bg-background transition-shadow ${isScrolled
-                ? 'shadow-lg'
-                : ''
+                    ? 'shadow-lg'
+                    : ''
                 }`}
             style={{
                 height: navbarHeight > 0 ? `${navbarHeight}px` : 'auto',
@@ -167,26 +168,28 @@ const Navbar = () => {
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
 
-                            {/* Services */}
+                            {/* App Builder */}
                             <NavigationMenuItem>
                                 <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
-                                    <Link href="/services" className={navigationMenuTriggerStyle()}>Services</Link>
+                                    <Link href="/about" className={navigationMenuTriggerStyle()}>App Builder</Link>
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
 
-                            {/* About */}
+                            {/* Pricing */}
                             <NavigationMenuItem>
                                 <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
-                                    <Link href="/about" className={navigationMenuTriggerStyle()}>About</Link>
+                                    <Link href="/services" className={navigationMenuTriggerStyle()}>Pricing</Link>
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
+
+
 
                             {/* Contact */}
-                            <NavigationMenuItem>
+                            {/* <NavigationMenuItem>
                                 <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
                                     <Link href="/contact" className={navigationMenuTriggerStyle()}>Contact</Link>
                                 </NavigationMenuLink>
-                            </NavigationMenuItem>
+                            </NavigationMenuItem> */}
 
                             {/* Solutions */}
                             <NavigationMenuItem>
@@ -237,12 +240,12 @@ const Navbar = () => {
 
                         <Link href="/login"  >
                             <Button variant="default" size="sm" className="cursor-pointer rounded-xl  ">
-                                Login
+                                Sign In
                             </Button>
                         </Link>
-                        <Link href="/dashboard">
+                        <Link href="/signup">
                             <Button variant="ghost" size="sm" className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer  ">
-                                Dashboard
+                                Sign Up
                             </Button>
                         </Link>
 
