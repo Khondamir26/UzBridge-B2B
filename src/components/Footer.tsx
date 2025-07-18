@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { GiSuspensionBridge } from "react-icons/gi";
+import Image from "next/image";
 
 
 const Footer = () => {
@@ -59,12 +60,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center space-x-2 ">
-              <Button variant="ghost" className="flex items-center cursor-pointer">
-                <GiSuspensionBridge className="size-8 " />
-                <span className="text-xl font-bold ">UzBridge</span>
-              </Button>
-
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/icons/zaytra_ai.png" // путь к логотипу
+                alt="Zaytra.AI Logo"
+                width={32}
+                height={32}
+                className="object-contain"
+              />
+              <span className="text-lg font-semibold text-white">Zaytra.ai</span>
             </Link>
             <p className="leading-relaxed text-muted-foreground">
               Empowering Uzbek tech companies to scale globally by offering a
@@ -137,7 +141,7 @@ const Footer = () => {
                 <Link href="mailto:info@uzbridge.com">
                   <Mail className="w-5 h-5 " />
                 </Link>
-                <Link href="mailto:info@uzbridge.com"><span>info@uzbridge.com</span>
+                <Link href="mailto:info@uzbridge.com"><span>info@zaytra.com</span>
 
                 </Link>
               </div>
@@ -199,7 +203,7 @@ const Footer = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className=" text-sm">
-              © 2025 UzBridge. All rights reserved.
+              © 2025 Zaytra.ai. All rights reserved.
             </div>
             <div className="flex space-x-6 mt-4 md:mt-0">
               {[

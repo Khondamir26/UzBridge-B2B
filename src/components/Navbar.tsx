@@ -15,7 +15,7 @@ import {
     Languages,
     Laptop2,
     Menu,
-    LayoutDashboard 
+    LayoutDashboard
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -42,6 +42,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 
 // Optional demo content:
 const components = [
@@ -143,13 +144,24 @@ const Navbar = () => {
 
         >
 
+            <div className="flex items-center ">
+                {/* LEFT:Sidebar Trigger */}
+                <SidebarTrigger />
+            </div>
             <div className="container mx-auto flex items-center justify-between px-4 py-2 ">
-                {/* LEFT: Logo and Sidebar Trigger */}
-                <div className="flex items-center ">
-                    {/* LEFT */}
-                    <SidebarTrigger />
+                {/* Logo */}
+                <div className="md:flex items-center gap-4 flex-shrink-0">
+                    <Link href="/" className="flex items-center gap-2">
+                        <Image
+                            src="/icons/zaytra_ai.png" // путь к логотипу
+                            alt="Zaytra.AI Logo"
+                            width={32}
+                            height={32}
+                            className="object-contain"
+                        />
+                        <span className="text-lg font-semibold text-white">Zaytra.ai</span>
+                    </Link>
                 </div>
-
                 {/* CENTER: Navigation Menu */}
                 <div className="hidden lg:flex flex-1 justify-center ">
                     <NavigationMenu >
@@ -207,9 +219,8 @@ const Navbar = () => {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
-
                 {/* RIGHT */}
-                <div className="hidden lg:flex items-center gap-4 ">
+                <div className="hidden md:flex items-center gap-4 ">
                     <div className="flex items-center gap-4">
                         {/* Language Selector */}
                         <DropdownMenu modal={false}>
@@ -286,7 +297,6 @@ const Navbar = () => {
                         </DropdownMenu>
                     </div>
                 </div>
-
                 {/* MOBILE MENU (only visible on mobile) */}
                 <div className="flex items-center gap-4 md:hidden">
                     <DropdownMenu>

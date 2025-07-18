@@ -43,7 +43,7 @@ const Home = () => {
               <div className="space-y-4">
                 <Badge >Connecting Uzbekistan to Global Markets</Badge>
                 <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">
-                  UzBridge.AI:
+                  Zaytra.ai:
                   <span className="bg-clip-text drop-shadow-sm block">
                     Made in Uzbekistan. Built for the World.
                   </span>
