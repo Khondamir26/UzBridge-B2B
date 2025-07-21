@@ -354,22 +354,6 @@ const VendorApp = () => {
                         </div>
 
 
-
-                        return (
-                        <>
-                            {/* Секция */}
-                            {currentSection === 0 && <Section1 />}
-                            {currentSection === 1 && <Section2 />}
-                            {/* и т.д. */}
-
-                            {/* Пагинация */}
-                            <PaginationDemo
-                                currentSection={currentSection}
-                                setCurrentSection={setCurrentSection}
-                            />
-                        </>
-                        );
-
                         {/* Company Info  --- Section 1*/}
                         <div className="lg:col-span-2 h-full ">
                             <Card className="border border-border shadow-xl bg-card text-card-foreground">
