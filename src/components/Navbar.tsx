@@ -71,6 +71,34 @@ const components = [
         icon: MessageSquare,
     },
 ];
+const vendorComponents = [
+    {
+        title: "Vendor Portal",
+        href: "/vendor-portal",
+        description: "Access and manage your vendor dashboard.",
+        icon: LayoutDashboard,
+    },
+    {
+        title: "Product Listing",
+        href: "/vendor/products",
+        description: "Add, update, and manage your offerings.",
+        icon: BarChart3,
+    },
+    {
+        title: "Order Management",
+        href: "/vendor/orders",
+        description: "Track orders, shipments, and returns.",
+        icon: Users,
+    },
+    {
+        title: "Vendor Application",
+        href: "/vendor-application",
+        description: "Apply to list your product on UzBridge Marketplace.",
+        icon: Building2,
+    },
+];
+
+
 
 const Navbar = () => {
     const { resolvedTheme, setTheme } = useTheme();
@@ -159,13 +187,13 @@ const Navbar = () => {
                             height={32}
                             className="object-contain"
                         />
-                        <span className="text-lg font-semibold text-white">Zaytra.ai</span>
+                        <span className="text-lg font-semibold ">Zaytra.ai</span>
                     </Link>
                 </div>
                 {/* CENTER: Navigation Menu */}
                 <div className="hidden lg:flex flex-1 justify-center ">
                     <NavigationMenu >
-                        <NavigationMenuList className="space-x-2  ">
+                        <NavigationMenuList>
                             {/* Home */}
                             <NavigationMenuItem >
                                 <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
@@ -194,8 +222,6 @@ const Navbar = () => {
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
 
-
-
                             {/* Contact */}
                             {/* <NavigationMenuItem>
                                 <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
@@ -204,6 +230,18 @@ const Navbar = () => {
                             </NavigationMenuItem> */}
 
                             {/* Solutions */}
+                            <NavigationMenuItem>
+                                <NavigationMenuTrigger className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" >Vendors</NavigationMenuTrigger>
+                                <NavigationMenuContent>
+                                    <ul className="grid gap-2 p-4 w-[500px] md:grid-cols-2 cursor-pointer">
+                                        {vendorComponents.map((item) => (
+                                            <ListItem key={item.href} href={item.href} icon={item.icon} title={item.title}>
+                                                {item.description}
+                                            </ListItem>
+                                        ))}
+                                    </ul>
+                                </NavigationMenuContent>
+                            </NavigationMenuItem>
                             <NavigationMenuItem>
                                 <NavigationMenuTrigger className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" >Solutions</NavigationMenuTrigger>
                                 <NavigationMenuContent>

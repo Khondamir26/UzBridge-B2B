@@ -3,38 +3,63 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 
-export function PaginationDemo() {
+export function PaginationDemo({
+  currentSection,
+  setCurrentSection,
+}: {
+  currentSection: number;
+  setCurrentSection: (page: number) => void;
+}) {
+  const totalSections = 6;
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationPrevious
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentSection > 0) {
+                setCurrentSection(currentSection - 1);
+              }
+            }}
+          />
         </PaginationItem>
+
+        {[...Array(totalSections)].map((_, idx) => (
+          <PaginationItem key={idx}>
+            <PaginationLink
+              href="#"
+              isActive={currentSection === idx}
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentSection(idx);
+              }}
+            >
+              {idx + 1}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+
         <PaginationItem>
-          <PaginationLink href="#" isActive>1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentSection < totalSections - 1) {
+                setCurrentSection(currentSection + 1);
+              }
+            }}
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
-  )
+  );
 }

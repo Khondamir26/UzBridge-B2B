@@ -68,7 +68,7 @@ const Footer = () => {
                 height={32}
                 className="object-contain"
               />
-              <span className="text-lg font-semibold text-white">Zaytra.ai</span>
+              <span className="text-lg font-semibold">Zaytra.ai</span>
             </Link>
             <p className="leading-relaxed text-muted-foreground">
               Empowering Uzbek tech companies to scale globally by offering a
