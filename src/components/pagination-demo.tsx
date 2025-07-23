@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import {
   Pagination,
   PaginationContent,
@@ -8,6 +9,31 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+
+function VendorApplicationPage() {
+  const [currentSection, setCurrentSection] = useState(0); // 👈 Start at 0 if you're indexing from 0
+
+  return (
+    <div className="text-center mt-16">
+      <div className="mb-10 flex justify-center">
+        <PaginationDemo
+          currentSection={currentSection}
+          setCurrentSection={setCurrentSection}
+        />
+      </div>
+
+      {/* 👇 You can use currentSection to render the appropriate section content */}
+      <div className="mt-8">
+        <h2 className="text-lg font-semibold">Current Section: {currentSection + 1}</h2>
+        {/* Example: You can conditionally render forms based on currentSection */}
+      </div>
+    </div>
+  );
+}
+
+export default VendorApplicationPage;
+
+// --------------------------
 
 export function PaginationDemo({
   currentSection,
