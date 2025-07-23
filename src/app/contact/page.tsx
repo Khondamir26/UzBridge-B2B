@@ -399,7 +399,7 @@ const Contact = () => {
                           Schedule Call Instead
                         </Button>
                       </Link>
-                    </div>
+                    </div>  
                   </form>
                 </CardContent>
               </Card>

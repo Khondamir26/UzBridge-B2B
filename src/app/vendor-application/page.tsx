@@ -1,38 +1,36 @@
 "use client";
 import CountrySelect from '@/components/CountrySelect';
 import React, { useState } from 'react';
+import { MultiSelect } from "@/components/ui/multi-select"
 import {
-    MapPin,
-    Phone,
-    Mail,
-    Clock,
     Send,
-    CheckCircle,
-    Globe,
     ArrowRight,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select';
+
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { Faq } from "@/components/faq";
 import { PaginationDemo } from '@/components/pagination-demo';
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from '@/components/ui/textarea';
 
 // Types for your form data
 interface FormData {
@@ -42,7 +40,7 @@ interface FormData {
     country: string;
     website: string;
     yearFounded: string;
-    employees: string;
+    employees: string[];
     itParkResident: string;
 
     // Section 2: Primary Contact
@@ -63,7 +61,9 @@ interface FormData {
     startingPrice: string;
     isLive: string;
     liveLink: string;
-    productVideo: string;
+    productVideo: string; // keep this if used elsewhere
+    productFile: File | null; // ✅ new file input
+    productVideoLink: string;
     pitchDeck: File | null;
 
     // Section 4: Integration & Compatibility
@@ -129,6 +129,7 @@ const VendorApp = () => {
         return () => observer.disconnect();
     }, []);
 
+
     const [formData, setFormData] = useState<FormData>({
         // Section 1: Company Information
         legalCompanyName: '',
@@ -136,7 +137,7 @@ const VendorApp = () => {
         country: '',
         website: '',
         yearFounded: '',
-        employees: '',
+        employees: [],
         itParkResident: '', // 'yes' or 'no'
 
         // Section 2: Primary Contact
@@ -158,6 +159,8 @@ const VendorApp = () => {
         isLive: '', // 'yes' or 'no'
         liveLink: '',
         productVideo: '',
+        productFile: null,
+        productVideoLink: '',
         pitchDeck: null, // File or null
 
         // Section 4: Integration & Compatibility
@@ -190,18 +193,59 @@ const VendorApp = () => {
         agreeToContact: false,
         submissionDate: '',
     });
+    const industries = [
+        { label: "Retail", value: "Retail" },
+        { label: "Finance", value: "Finance" },
+        { label: "Manufacturing", value: "Manufacturing" },
+        { label: "Education", value: "Education" },
+        { label: "Government", value: "Government" },
+        { label: "Other", value: "Other" },
+    ]
+    const categories = [
+        { label: "CRM", value: "CRM" },
+        { label: "ERP", value: "ERP" },
+        { label: "HR", value: "HR" },
+        { label: "Accounting", value: "Accounting" },
+        { label: "EdTech", value: "EdTech" },
+        { label: "HealthTech", value: "HealthTech" },
+        { label: "Other", value: "Other" }
+    ];
+    const languages = [
+        { label: "English", value: "English" },
+        { label: "Arabic", value: "Arabic" },
+        { label: "French", value: "French" },
+        { label: "Russian", value: "Russian" },
+        { label: "Uzbek", value: "Uzbek" },
+    ];
+    const pricingModel = [
+        { label: "Freemium", value: "Freemium" },
+        { label: "Subscription", value: "Subscription" },
+        { label: "Tiered", value: "Tiered" },
+        { label: "Pay-per-use", value: "Pay-per-use" },
+        { label: "One-time", value: "One-time" },
+    ]
 
     // State for form submission
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [currentSection, setCurrentSection] = useState(0);
 
     // Handle form field changes
-    const handleChange = (field: keyof FormData, value: string) => {
+    function handleChange(field: string, value: string | string[] | File | null) {
+        setFormData((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    }
+
+
+    const handleMultiChange = (field: keyof FormData, value: string | string[]) => {
         setFormData(prev => ({
             ...prev,
             [field]: value
         }));
     };
+
+
 
     // ✅ THIS IS THE UPDATED handleSubmit FUNCTION
     const handleSubmit = async (e: React.FormEvent) => {
@@ -271,11 +315,9 @@ const VendorApp = () => {
                         </Link>
                         <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
                             Become a Vendor
-                            <span className="font-bold block">on Zaytra.ai </span>
                         </h1>
                         <p className="text-xl text-muted-foreground leading-relaxed">
-                            List your modular B2B software on Zaytra.ai to reach MEA customers and grow your business.
-                            Apply now to join our curated platform.
+                            Apply to list your B2B product and make it available as a modular app feature on <span className='font-bold text-2xl'>Zaytra.ai</span>
                         </p>
                     </div>
                 </div>
@@ -285,82 +327,20 @@ const VendorApp = () => {
             {/* Contact Form & Info */}
             <section className="py-16 animate-fade-in-up">
                 <div className="container mx-auto px-4">
-                    <div className="grid lg:grid-cols-3 gap-12 items-center">
-                        {/* Contact Information */}
-                        <div className="h-full">
-                            <div className="flex flex-col justify-between h-full space-y-8">
-                                {/* Top Part: Contact Info */}
-                                <div className="space-y-6">
-                                    <h2 className="text-2xl font-bold">Contact Information</h2>
-
-                                    <div className="space-y-6">
-                                        {[
-                                            {
-                                                icon: MapPin,
-                                                title: 'Office Locations',
-                                                details: ['Tashkent, Uzbekistan', 'Business Bay, Dubai, UAE'],
-                                            },
-                                            {
-                                                icon: Phone,
-                                                title: 'Phone Numbers',
-                                                details: ['+998 91 123 45 67 (UZ)', '+971 50 123 45 67 (UAE)'],
-                                            },
-                                            {
-                                                icon: Mail,
-                                                title: 'Email Addresses',
-                                                details: ['info@uzbridge.com', 'partnerships@uzbridge.com'],
-                                            },
-                                            {
-                                                icon: Clock,
-                                                title: 'Business Hours',
-                                                details: [
-                                                    'Mon-Fri: 9:00 AM - 6:00 PM (GMT+5)',
-                                                    'Sat: 10:00 AM - 2:00 PM (GMT+5)',
-                                                ],
-                                            },
-                                        ].map((item, index) => (
-                                            <div key={index} className="flex items-start space-x-4">
-                                                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                    <item.icon className="w-6 h-6 text-primary" />
-                                                </div>
-                                                <div className="space-y-1">
-                                                    <h3 className="font-semibold">{item.title}</h3>
-                                                    {item.details.map((detail, idx) => (
-                                                        <p key={idx} className="text-sm text-muted-foreground">
-                                                            {detail}
-                                                        </p>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Bottom Part: Quick Actions */}
-                                <div className="space-y-4">
-                                    <h3 className="font-semibold">Quick Actions</h3>
-                                    <div className="space-y-2">
-                                        <Button variant="default" className="rounded-2xl w-full justify-start cursor-pointer">
-                                            <Globe className="w-4 h-4 mr-2" />
-                                            Schedule Video Call
-                                        </Button>
-                                        <Button variant="outline" className="rounded-2xl w-full justify-start cursor-pointer">
-                                            <CheckCircle className="w-4 h-4 mr-2" />
-                                            Download Company Brochure
-                                        </Button>
-                                    </div>
-                                </div>
-                            </div>
+                    <div className="grid gap-12 items-center">
+                        <div className="lg:col-span-4 text-center">
+                            <h2 className="text-3xl font-semibold">Vendor Application Form</h2>
+                            <p className="text-muted-foreground mt-2">
+                                Apply to list your B2B product and make it available as a modular app feature on <span className="font-bold">Zaytra.ai</span>
+                            </p>
                         </div>
-
-
                         {/* Company Info  --- Section 1*/}
-                        <div className="lg:col-span-2 h-full ">
+                        <div className="lg:col-span-4 h-full ">
                             <Card className="border border-border shadow-xl bg-card text-card-foreground">
                                 <CardHeader>
-                                    <CardTitle className="text-2xl">Vendor Application Form</CardTitle>
+                                    <CardTitle className="text-xl">Vendor Application Form</CardTitle>
                                     <p className="text-muted-foreground">
-                                        Apply to list your B2B product and make it available as a modular app feature on <span className='font-bold'>Zaytra.ai</span>
+                                        1. Company Information
                                     </p>
                                 </CardHeader>
                                 <CardContent>
@@ -439,17 +419,22 @@ const VendorApp = () => {
                                                 <label className="text-sm font-medium">
                                                     Number of Employees *
                                                 </label>
-                                                <Input
-                                                    required
-                                                    className="rounded-2xl"
-                                                    type="text"
-                                                    placeholder="e.g. 1–10, 11–50, 51–200, 201+"
-                                                    value={formData.employees}
-                                                    onChange={(e) =>
-                                                        handleChange('employees', e.target.value)
-                                                    }
-                                                />
+                                                <Select>
+                                                    <SelectTrigger className="w-full rounded-2xl">
+                                                        <SelectValue placeholder="Select" />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectGroup>
+                                                            <SelectLabel>Number</SelectLabel>
+                                                            <SelectItem value="1-10">1-10</SelectItem>
+                                                            <SelectItem value="11-50">11-50</SelectItem>
+                                                            <SelectItem value="51–200">51–200</SelectItem>
+                                                            <SelectItem value="201+">201+</SelectItem>
+                                                        </SelectGroup>
+                                                    </SelectContent>
+                                                </Select>
                                             </div>
+
                                             <div className="space-y-2">
                                                 <label className="text-sm font-medium">
                                                     IT Park Resident ?*
@@ -480,6 +465,688 @@ const VendorApp = () => {
                                                         <span className="text-sm">No</span>
                                                     </label>
                                                 </div>
+                                            </div>
+
+                                        </div>
+
+                                        <PaginationDemo
+                                            currentSection={currentSection}
+                                            setCurrentSection={setCurrentSection}
+                                        />
+                                        <div className="flex flex-col sm:flex-row gap-4">
+                                            <Button
+                                                type="submit"
+                                                className="rounded-2xl cursor-pointer hover:opacity-90 flex-1"
+                                                disabled={isSubmitting}
+                                            >
+                                                {isSubmitting ? (
+                                                    <>
+                                                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                                                        Sending...
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Send className="w-4 h-4 mr-2 " />
+                                                        Send Message
+                                                    </>
+                                                )}
+                                            </Button>
+                                            <Link
+                                                href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1rg4TOS2A6ZBwxCNsTekCavRGrw5Zckt4yujmekISbEpd8hf9ER--clf0BNO54B4-vrt6n1wkf"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex-1"
+                                            >
+                                                <Button type="button" variant="outline" className="rounded-2xl cursor-pointer w-full">
+                                                    Schedule Call Instead
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                    </form>
+                                </CardContent>
+                            </Card>
+                        </div>
+                        {/* : Primary Contact ---- Section 2 */}
+                        <div className="lg:col-span-4 h-full ">
+                            <Card className="border border-border shadow-xl bg-card text-card-foreground">
+                                <CardHeader>
+                                    <CardTitle className="text-xl">Vendor Application Form</CardTitle>
+                                    <p className="text-muted-foreground">
+                                        2. Primary Contact
+                                    </p>
+                                </CardHeader>
+                                <CardContent>
+                                    <form onSubmit={handleSubmit} className="space-y-6">
+                                        <div className="grid md:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Full Name *
+                                                </label>
+                                                <Input
+                                                    className='rounded-2xl'
+                                                    required
+                                                    type="text"
+                                                    placeholder="Enter your full name"
+                                                    value={formData.contactName}
+                                                    onChange={(e) =>
+                                                        handleChange('contactName', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Position / Title *
+                                                </label>
+                                                <Input
+                                                    className='rounded-2xl'
+                                                    required
+                                                    type="string"
+                                                    placeholder="Position"
+                                                    value={formData.contactTitle}
+                                                    onChange={(e) =>
+                                                        handleChange('contactTitle', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="grid md:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Email Address *
+                                                </label>
+                                                <Input
+                                                    className='rounded-2xl'
+                                                    type="email"
+                                                    placeholder="your-company@gmail.com"
+                                                    value={formData.contactEmail}
+                                                    onChange={(e) =>
+                                                        handleChange('contactEmail', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium ">
+                                                    Phone Number *
+                                                </label>
+                                                <Input
+                                                    className='rounded-2xl'
+                                                    required
+                                                    type="tel"
+                                                    placeholder="+998 91 123 45 67"
+                                                    value={formData.contactPhone}
+                                                    onChange={(e) =>
+                                                        handleChange('contactPhone', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium ">
+                                                    LinkedIn Profile *
+                                                </label>
+                                                <Input
+                                                    className='rounded-2xl'
+                                                    required
+                                                    type="url"
+                                                    placeholder="https://linkedin.com/in/your-username"
+                                                    value={formData.linkedin}
+                                                    onChange={(e) =>
+                                                        handleChange('linkedin', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <PaginationDemo
+                                            currentSection={currentSection}
+                                            setCurrentSection={setCurrentSection}
+                                        />
+                                        <div className="flex flex-col sm:flex-row gap-4">
+                                            <Button
+                                                type="submit"
+                                                className="rounded-2xl cursor-pointer hover:opacity-90 flex-1"
+                                                disabled={isSubmitting}
+                                            >
+                                                {isSubmitting ? (
+                                                    <>
+                                                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                                                        Sending...
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Send className="w-4 h-4 mr-2 " />
+                                                        Send Message
+                                                    </>
+                                                )}
+                                            </Button>
+                                            <Link
+                                                href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1rg4TOS2A6ZBwxCNsTekCavRGrw5Zckt4yujmekISbEpd8hf9ER--clf0BNO54B4-vrt6n1wkf"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex-1"
+                                            >
+                                                <Button type="button" variant="outline" className="rounded-2xl cursor-pointer w-full">
+                                                    Schedule Call Instead
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                    </form>
+                                </CardContent>
+                            </Card>
+                        </div>
+                        {/* : : Product Overview ---- Section 3 */}
+                        <div className="lg:col-span-4 h-full ">
+                            <Card className="border border-border shadow-xl bg-card text-card-foreground">
+                                <CardHeader>
+                                    <CardTitle className="text-xl">Vendor Application Form</CardTitle>
+                                    <p className="text-muted-foreground">
+                                        3. Product Overview
+                                    </p>
+                                </CardHeader>
+                                <CardContent>
+                                    <form onSubmit={handleSubmit} className="space-y-6">
+                                        <div className="grid md:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Product Name *
+                                                </label>
+                                                <Input
+                                                    className='rounded-2xl'
+                                                    required
+                                                    type="text"
+                                                    placeholder="Name"
+                                                    value={formData.productName}
+                                                    onChange={(e) =>
+                                                        handleChange('productName', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    One-line Product Pitch*
+                                                </label>
+                                                <Input
+                                                    className='rounded-2xl'
+                                                    required
+                                                    type="text"
+                                                    placeholder="Text(max 150 characters)"
+                                                    value={formData.productPitch}
+                                                    onChange={(e) =>
+                                                        handleChange('productPitch', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="grid md:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Product Category *
+                                                </label>
+                                                <MultiSelect
+                                                    selected={formData.productCategory}
+                                                    onChange={(newValues) => handleMultiChange("productCategory", newValues)}
+                                                    options={categories}
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium ">
+                                                    Target Industries *
+                                                </label>
+                                                <MultiSelect
+                                                    selected={formData.targetIndustries}
+                                                    onChange={(newValues) => handleMultiChange("targetIndustries", newValues)}
+                                                    options={industries}
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium ">
+                                                    Languages *
+                                                </label>
+                                                <MultiSelect
+                                                    selected={formData.supportedLanguages}
+                                                    onChange={(newValues) => handleMultiChange("supportedLanguages", newValues)}
+                                                    options={languages}
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium ">
+                                                    Pricing Model *
+                                                </label>
+                                                <MultiSelect
+                                                    selected={formData.pricingModel}
+                                                    onChange={(newValues) => handleMultiChange("pricingModel", newValues)}
+                                                    options={pricingModel}
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Starting Price (USD) *
+                                                </label>
+                                                <Input
+                                                    className='rounded-2xl'
+                                                    required
+                                                    type="number"
+                                                    placeholder="Enter Price"
+                                                    value={formData.startingPrice}
+                                                    onChange={(e) =>
+                                                        handleChange('startingPrice', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Link to live product/demo *
+                                                </label>
+                                                <Input
+                                                    className="rounded-2xl"
+                                                    required
+                                                    type="url"
+                                                    placeholder="https://your-product-demo.com"
+                                                    value={formData.liveLink}
+                                                    onChange={(e) =>
+                                                        handleChange('liveLink', e.target.value)
+                                                    }
+                                                />
+
+                                            </div>
+                                            <div className="space-y-2 flex flex-col justify-between">
+                                                {/* File upload UI */}
+                                                <div>
+                                                    <label className="text-sm font-medium">Product Video/Presentation *</label>
+
+                                                    <label
+                                                        htmlFor="productVideo"
+                                                        className="flex items-center justify-between w-full rounded-2xl text-muted-foreground font-medium border border-input px-4 py-2 text-sm cursor-pointer hover:bg-accent transition"
+                                                    >
+                                                        {formData.productVideo ? formData.productVideo : "Upload your file here"}
+                                                    </label>
+                                                    <input
+                                                        id="productFile"
+                                                        type="file"
+                                                        accept="video/*,application/pdf"
+                                                        className="hidden"
+                                                        onChange={(e) => {
+                                                            const file = e.target.files?.[0];
+                                                            if (file) {
+                                                                handleChange("productFile", file);
+                                                                handleChange("productVideoLink", ""); // clear link if file chosen
+                                                            }
+                                                        }}
+                                                    />
+                                                </div>
+
+                                                {/* OR separator */}
+                                                <div className="text-center text-sm text-muted-foreground font-bold tracking-wide">— OR —</div>
+
+                                                {/* Link input */}
+                                                <input
+                                                    type="url"
+                                                    placeholder="Paste YouTube or Vimeo link"
+                                                    value={formData.productVideoLink}
+                                                    onChange={(e) => {
+                                                        handleChange("productVideoLink", e.target.value);
+                                                        handleChange("productFile", null); // clear file if link entered
+                                                    }}
+                                                    className="w-full rounded-2xl border px-4 py-2 text-sm border-border font-medium"
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium ">
+                                                    Description *
+                                                </label>
+                                                <Textarea
+                                                    required
+                                                    rows={5}
+                                                    placeholder="Tell us how we can help you..."
+                                                    value={formData.productDescription}
+                                                    onChange={(e) =>
+                                                        handleChange('productDescription', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Is the product live and operational ?*
+                                                </label>
+                                                <div className="flex gap-2 h-9 py-1  ">
+                                                    <label className="flex items-center space-x-2">
+                                                        <input
+                                                            type="radio"
+                                                            name="isLive"
+                                                            value="Yes"
+                                                            checked={formData.isLive === 'Yes'}
+                                                            onChange={(e) => handleChange('isLive', e.target.value)}
+                                                            className="h-4 w-4"
+                                                            required
+                                                        />
+                                                        <span className="text-sm">Yes</span>
+                                                    </label>
+                                                    <label className="flex items-center space-x-2">
+                                                        <input
+                                                            type="radio"
+                                                            name="isLive"
+                                                            value="No"
+                                                            checked={formData.isLive === 'No'}
+                                                            onChange={(e) => handleChange('isLive', e.target.value)}
+                                                            className="h-4 w-4"
+                                                            required
+                                                        />
+                                                        <span className="text-sm">No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div className="space-y-2 ">
+                                                {/* PDF upload */}
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">Upload Pitch Deck *</label>
+                                                    <label
+                                                        htmlFor="pitchDeck"
+                                                        className="flex items-center justify-between w-full rounded-2xl text-muted-foreground font-medium border border-input px-4 py-2 text-sm cursor-pointer hover:bg-accent transition"
+                                                    >
+                                                        {formData.pitchDeck instanceof File
+                                                            ? formData.pitchDeck.name
+                                                            : formData.pitchDeck
+                                                                ? formData.pitchDeck
+                                                                : "Upload File (PDF only)"}
+                                                    </label>
+
+                                                    <input
+                                                        id="pitchDeck"
+                                                        type="file"
+                                                        accept="application/pdf"
+                                                        className="hidden"
+                                                        onChange={(e) => {
+                                                            const file = e.target.files?.[0] || null;
+                                                            if (file && file.type === "application/pdf") {
+                                                                handleChange("pitchDeck", file);
+                                                                // Optionally clear any previous URL if set:
+                                                                // handleChange("pitchDeckUrl", "");
+                                                            } else {
+                                                                toast.warning("Please upload a PDF file only.");
+                            
+                                                            }
+                                                        }}
+                                                    />
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <PaginationDemo
+                                            currentSection={currentSection}
+                                            setCurrentSection={setCurrentSection}
+                                        />
+                                        <div className="flex flex-col sm:flex-row gap-4">
+                                            <Button
+                                                type="submit"
+                                                className="rounded-2xl cursor-pointer hover:opacity-90 flex-1"
+                                                disabled={isSubmitting}
+                                            >
+                                                {isSubmitting ? (
+                                                    <>
+                                                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                                                        Sending...
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Send className="w-4 h-4 mr-2 " />
+                                                        Send Message
+                                                    </>
+                                                )}
+                                            </Button>
+                                            <Link
+                                                href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1rg4TOS2A6ZBwxCNsTekCavRGrw5Zckt4yujmekISbEpd8hf9ER--clf0BNO54B4-vrt6n1wkf"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex-1"
+                                            >
+                                                <Button type="button" variant="outline" className="rounded-2xl cursor-pointer w-full">
+                                                    Schedule Call Instead
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                    </form>
+                                </CardContent>
+                            </Card>
+                        </div>
+                        {/* : : Product Overview ---- Section 4 */}
+                        <div className="lg:col-span-4 h-full ">
+                            <Card className="border border-border shadow-xl bg-card text-card-foreground">
+                                <CardHeader>
+                                    <CardTitle className="text-xl">Vendor Application Form</CardTitle>
+                                    <p className="text-muted-foreground">
+                                        3. Product Overview
+                                    </p>
+                                </CardHeader>
+                                <CardContent>
+                                    <form onSubmit={handleSubmit} className="space-y-6">
+                                        <div className="grid md:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Product Name *
+                                                </label>
+                                                <Input
+                                                    className='rounded-2xl'
+                                                    required
+                                                    type="text"
+                                                    placeholder="Name"
+                                                    value={formData.productName}
+                                                    onChange={(e) =>
+                                                        handleChange('productName', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    One-line Product Pitch*
+                                                </label>
+                                                <Input
+                                                    className='rounded-2xl'
+                                                    required
+                                                    type="text"
+                                                    placeholder="Text(max 150 characters)"
+                                                    value={formData.productPitch}
+                                                    onChange={(e) =>
+                                                        handleChange('productPitch', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="grid md:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Product Category *
+                                                </label>
+                                                <MultiSelect
+                                                    selected={formData.productCategory}
+                                                    onChange={(newValues) => handleMultiChange("productCategory", newValues)}
+                                                    options={categories}
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium ">
+                                                    Target Industries *
+                                                </label>
+                                                <MultiSelect
+                                                    selected={formData.targetIndustries}
+                                                    onChange={(newValues) => handleMultiChange("targetIndustries", newValues)}
+                                                    options={industries}
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium ">
+                                                    Languages *
+                                                </label>
+                                                <MultiSelect
+                                                    selected={formData.supportedLanguages}
+                                                    onChange={(newValues) => handleMultiChange("supportedLanguages", newValues)}
+                                                    options={languages}
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium ">
+                                                    Pricing Model *
+                                                </label>
+                                                <MultiSelect
+                                                    selected={formData.pricingModel}
+                                                    onChange={(newValues) => handleMultiChange("pricingModel", newValues)}
+                                                    options={pricingModel}
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Starting Price (USD) *
+                                                </label>
+                                                <Input
+                                                    className='rounded-2xl'
+                                                    required
+                                                    type="number"
+                                                    placeholder="Enter Price"
+                                                    value={formData.startingPrice}
+                                                    onChange={(e) =>
+                                                        handleChange('startingPrice', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Link to live product/demo *
+                                                </label>
+                                                <Input
+                                                    className="rounded-2xl"
+                                                    required
+                                                    type="url"
+                                                    placeholder="https://your-product-demo.com"
+                                                    value={formData.liveLink}
+                                                    onChange={(e) =>
+                                                        handleChange('liveLink', e.target.value)
+                                                    }
+                                                />
+
+                                            </div>
+                                            <div className="space-y-2 flex flex-col justify-between">
+                                                {/* File upload UI */}
+                                                <div>
+                                                    <label className="text-sm font-medium">Product Video/Presentation *</label>
+
+                                                    <label
+                                                        htmlFor="productVideo"
+                                                        className="flex items-center justify-between w-full rounded-2xl text-muted-foreground font-medium border border-input px-4 py-2 text-sm cursor-pointer hover:bg-accent transition"
+                                                    >
+                                                        {formData.productVideo ? formData.productVideo : "Upload your file here"}
+                                                    </label>
+                                                    <input
+                                                        id="productFile"
+                                                        type="file"
+                                                        accept="video/*,application/pdf"
+                                                        className="hidden"
+                                                        onChange={(e) => {
+                                                            const file = e.target.files?.[0];
+                                                            if (file) {
+                                                                handleChange("productFile", file);
+                                                                handleChange("productVideoLink", ""); // clear link if file chosen
+                                                            }
+                                                        }}
+                                                    />
+                                                </div>
+
+                                                {/* OR separator */}
+                                                <div className="text-center text-sm text-muted-foreground font-bold tracking-wide">— OR —</div>
+
+                                                {/* Link input */}
+                                                <input
+                                                    type="url"
+                                                    placeholder="Paste YouTube or Vimeo link"
+                                                    value={formData.productVideoLink}
+                                                    onChange={(e) => {
+                                                        handleChange("productVideoLink", e.target.value);
+                                                        handleChange("productFile", null); // clear file if link entered
+                                                    }}
+                                                    className="w-full rounded-2xl border px-4 py-2 text-sm border-border font-medium"
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium ">
+                                                    Description *
+                                                </label>
+                                                <Textarea
+                                                    required
+                                                    rows={5}
+                                                    placeholder="Tell us how we can help you..."
+                                                    value={formData.productDescription}
+                                                    onChange={(e) =>
+                                                        handleChange('productDescription', e.target.value)
+                                                    }
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-medium">
+                                                    Is the product live and operational ?*
+                                                </label>
+                                                <div className="flex gap-2 h-9 py-1  ">
+                                                    <label className="flex items-center space-x-2">
+                                                        <input
+                                                            type="radio"
+                                                            name="isLive"
+                                                            value="Yes"
+                                                            checked={formData.isLive === 'Yes'}
+                                                            onChange={(e) => handleChange('isLive', e.target.value)}
+                                                            className="h-4 w-4"
+                                                            required
+                                                        />
+                                                        <span className="text-sm">Yes</span>
+                                                    </label>
+                                                    <label className="flex items-center space-x-2">
+                                                        <input
+                                                            type="radio"
+                                                            name="isLive"
+                                                            value="No"
+                                                            checked={formData.isLive === 'No'}
+                                                            onChange={(e) => handleChange('isLive', e.target.value)}
+                                                            className="h-4 w-4"
+                                                            required
+                                                        />
+                                                        <span className="text-sm">No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div className="space-y-2 ">
+                                                {/* PDF upload */}
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">Upload Pitch Deck *</label>
+                                                    <label
+                                                        htmlFor="pitchDeck"
+                                                        className="flex items-center justify-between w-full rounded-2xl text-muted-foreground font-medium border border-input px-4 py-2 text-sm cursor-pointer hover:bg-accent transition"
+                                                    >
+                                                        {formData.pitchDeck instanceof File
+                                                            ? formData.pitchDeck.name
+                                                            : formData.pitchDeck
+                                                                ? formData.pitchDeck
+                                                                : "Upload File (PDF only)"}
+                                                    </label>
+
+                                                    <input
+                                                        id="pitchDeck"
+                                                        type="file"
+                                                        accept="application/pdf"
+                                                        className="hidden"
+                                                        onChange={(e) => {
+                                                            const file = e.target.files?.[0] || null;
+                                                            if (file && file.type === "application/pdf") {
+                                                                handleChange("pitchDeck", file);
+                                                                // Optionally clear any previous URL if set:
+                                                                // handleChange("pitchDeckUrl", "");
+                                                            } else {
+                                                                toast.warning("Please upload a PDF file only.");
+                            
+                                                            }
+                                                        }}
+                                                    />
+                                                </div>
+
                                             </div>
 
                                         </div>
