@@ -20,8 +20,8 @@ const poppins = Poppins({
 
 
 export const metadata: Metadata = {
-  title: "TechBridge.AI",
-  description: "Connecting Uzbek tech with MEA market opportunities.",
+  title: "Zaytra.ai",
+  description: "Your Bridge to the World's Markets",
 };
 
 export default async function RootLayout({

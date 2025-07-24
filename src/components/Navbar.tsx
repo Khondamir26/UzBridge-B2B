@@ -196,32 +196,28 @@ const Navbar = () => {
                         <NavigationMenuList>
                             {/* Home */}
                             <NavigationMenuItem >
-                                <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
+                                <NavigationMenuLink className="hover:rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
                                     <Link href="/" className={navigationMenuTriggerStyle()}>Home</Link>
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
-
                             {/* Marketplace */}
                             <NavigationMenuItem>
-                                <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
+                                <NavigationMenuLink className="hover:rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
                                     <Link href="/marketplace" className={navigationMenuTriggerStyle()}>Marketplace</Link>
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
-
+                            {/* Marketing */}
+                            <NavigationMenuItem>
+                                <NavigationMenuLink className="hover:rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
+                                    <Link href="/services" className={navigationMenuTriggerStyle()}>Marketing</Link>
+                                </NavigationMenuLink>
+                            </NavigationMenuItem>
                             {/* App Builder */}
                             <NavigationMenuItem>
-                                <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
+                                <NavigationMenuLink className="hover:rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
                                     <Link href="/about" className={navigationMenuTriggerStyle()}>App Builder</Link>
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
-
-                            {/* Pricing */}
-                            <NavigationMenuItem>
-                                <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
-                                    <Link href="/services" className={navigationMenuTriggerStyle()}>Pricing</Link>
-                                </NavigationMenuLink>
-                            </NavigationMenuItem>
-
                             {/* Contact */}
                             {/* <NavigationMenuItem>
                                 <NavigationMenuLink className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
@@ -231,7 +227,7 @@ const Navbar = () => {
 
                             {/* Solutions */}
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" >Vendors</NavigationMenuTrigger>
+                                <NavigationMenuTrigger className="hover:rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" >Vendors</NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <ul className="grid gap-2 p-4 w-[500px] md:grid-cols-2 cursor-pointer">
                                         {vendorComponents.map((item) => (
@@ -243,7 +239,7 @@ const Navbar = () => {
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
                             <NavigationMenuItem>
-                                <NavigationMenuTrigger className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" >Solutions</NavigationMenuTrigger>
+                                <NavigationMenuTrigger className="hover:rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" >Solutions</NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <ul className="grid gap-2 p-4 w-[500px] md:grid-cols-2 cursor-pointer">
                                         {components.map((item) => (
@@ -263,7 +259,7 @@ const Navbar = () => {
                         {/* Language Selector */}
                         <DropdownMenu modal={false}>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="sm" className="rounded-2xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer space-x-2">
+                                <Button variant="ghost" size="sm" className="rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer">
                                     <Globe className="w-4 h-4" />
                                     <span>{languages.find((l) => l.code === language)?.code}</span>
                                     <ChevronDown className="w-3 h-3" />
@@ -288,12 +284,12 @@ const Navbar = () => {
                         </DropdownMenu>
 
                         <Link href="/login"  >
-                            <Button variant="default" size="sm" className="cursor-pointer rounded-2xl  ">
+                            <Button variant="default" size="sm" className="cursor-pointer rounded-full  ">
                                 Sign In
                             </Button>
                         </Link>
                         <Link href="/signup">
-                            <Button variant="ghost" size="sm" className="rounded-2xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer  ">
+                            <Button variant="ghost" size="sm" className="rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer  ">
                                 Sign Up
                             </Button>
                         </Link>

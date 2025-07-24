@@ -9,7 +9,7 @@ import hospital from "@/img/hospital.png";
 import hrms from "@/img/hrms.png";
 import scm from "@/img/scm.jpeg";
 import sis from "@/img/sis.jpg";
-import { PaginationDemo } from "@/components/pagination-demo"
+// import { PaginationDemo } from "@/components/pagination-demo"
 
 import {
   Search,
@@ -435,11 +435,14 @@ const Marketplace = () => {
 
           <div className="text-center mt-16">
             <div className="mb-10 flex justify-center">
-              <PaginationDemo />
+              {/* <PaginationDemo
+                currentSection={currentSection}
+                setCurrentSection={setCurrentSection}
+              /> */}
+              <Button variant="outline" size="lg" className="rounded-full transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ bg-muted">
+                Load More
+              </Button>
             </div>
-            {/* <Button variant="outline" size="lg" className="rounded-xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ bg-muted">
-              Load More Products
-            </Button> */}
           </div>
         </div>
       </section>

@@ -29,16 +29,16 @@ import avatar from "@/img/khonda.jpg";
 
 const data = {
   user: {
-    name: "TechBridge.AI",
-    email: "info@techbridgeai.com",
+    name: "Zaytra.ai",
+    email: "info@zaytra.com",
     avatar: avatar,
   },
   teams: [
     {
-      name: "TechBridge.AI",
+      name: "Zaytra.ai",
       logo: GiSuspensionBridge,
       plan: "Enterprise",
-      label: "TechBridge.AI",
+      label: "Zaytra.ai",
       sublabel: "Admin Panel",
       route: "/dashboard",
     },

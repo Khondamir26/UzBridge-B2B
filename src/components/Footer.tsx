@@ -14,7 +14,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { GiSuspensionBridge } from "react-icons/gi";
 import Image from "next/image";
 
 
@@ -46,6 +45,7 @@ const Footer = () => {
       } else {
         toast.error(data.message || "Subscription failed");
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
@@ -79,7 +79,7 @@ const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className=" rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
+                className=" rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
@@ -87,7 +87,7 @@ const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className=" rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
+                className=" rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
                 aria-label="Twitter"
               >
                 <Twitter className="w-5 h-5" />
@@ -95,7 +95,7 @@ const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
+                className="rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -103,7 +103,7 @@ const Footer = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="rounded-xl p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
+                className="rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer"
                 aria-label="Instagram"
               >
                 <Youtube className="w-5 h-5" />
@@ -182,13 +182,13 @@ const Footer = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="rounded-xl"
+                className="rounded-full"
                 required
               />
               <Button
                 variant="default"
                 type="submit"
-                className="cursor-pointer rounded-xl"
+                className="cursor-pointer rounded-full"
                 disabled={loading}
               >
                 {loading ? "Subscribing..." : "Subscribe"}
