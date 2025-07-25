@@ -1,6 +1,6 @@
 "use client";
 import CountrySelect from '@/components/CountrySelect';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { MultiSelect } from "@/components/ui/multi-select"
 import {
     Send,
@@ -62,7 +62,7 @@ interface FormData {
     isLive: string;
     liveLink: string;
     productVideo: string; // keep this if used elsewhere
-    productFile: File | null; // ✅ new file input
+    productFile: File | null; // ✅ new file Input
     productVideoLink: string;
     pitchDeck: File | null;
 
@@ -112,8 +112,9 @@ interface ApiResponse {
 
 
 const VendorApp = () => {
-
+    const formRef = useRef<HTMLDivElement | null>(null);
     const [currentSection, setCurrentSection] = useState(0);
+
 
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
@@ -129,6 +130,11 @@ const VendorApp = () => {
 
         return () => observer.disconnect();
     }, []);
+    useEffect(() => {
+        if (formRef.current) {
+            formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [currentSection]);
 
 
     const [formData, setFormData] = useState<FormData>({
@@ -224,6 +230,14 @@ const VendorApp = () => {
         { label: "Tiered", value: "Tiered" },
         { label: "Pay-per-use", value: "Pay-per-use" },
         { label: "One-time", value: "One-time" },
+    ]
+    const methods = [
+        { label: "API", value: "API" },
+        { label: " Embed/iFrame", value: " Embed/iFrame" },
+        { label: "Widget", value: "Widget" },
+        { label: "Webhook", value: "Webhook" },
+        { label: "Zapier", value: "Zapier" },
+        { label: "Other", value: "Other" },
     ]
 
     // State for form submission
@@ -371,8 +385,7 @@ const VendorApp = () => {
             <section className="py-16 animate-fade-in-up">
                 <div className="container mx-auto px-4">
                     <div className="grid gap-12 items-center">
-
-                        <div className="lg:col-span-4 text-center">
+                        <div ref={formRef} className="lg:col-span-4 text-center">
                             <h2 className="text-3xl font-semibold">Vendor Application Form</h2>
                             <p className="text-muted-foreground mt-2">
                                 Apply to list your B2B product and make it available as a modular app feature on <span className="font-bold">Zaytra.ai</span>
@@ -486,7 +499,7 @@ const VendorApp = () => {
                                                     </label>
                                                     <div className="flex gap-2 h-9 py-1  ">
                                                         <label className="flex items-center space-x-2">
-                                                            <input
+                                                            <Input
                                                                 type="radio"
                                                                 name="itParkResident"
                                                                 value="Yes"
@@ -498,7 +511,7 @@ const VendorApp = () => {
                                                             <span className="text-sm">Yes</span>
                                                         </label>
                                                         <label className="flex items-center space-x-2">
-                                                            <input
+                                                            <Input
                                                                 type="radio"
                                                                 name="itParkResident"
                                                                 value="No"
@@ -810,7 +823,7 @@ const VendorApp = () => {
                                                         >
                                                             {formData.productVideo ? formData.productVideo : "Upload your file here"}
                                                         </label>
-                                                        <input
+                                                        <Input
                                                             id="productFile"
                                                             type="file"
                                                             accept="video/*,application/pdf"
@@ -828,8 +841,8 @@ const VendorApp = () => {
                                                     {/* OR separator */}
                                                     <div className="text-center text-sm text-muted-foreground font-bold tracking-wide">— OR —</div>
 
-                                                    {/* Link input */}
-                                                    <input
+                                                    {/* Link Input */}
+                                                    <Input
                                                         type="url"
                                                         placeholder="Paste YouTube or Vimeo link"
                                                         value={formData.productVideoLink}
@@ -860,7 +873,7 @@ const VendorApp = () => {
                                                     </label>
                                                     <div className="flex gap-2 h-9 py-1  ">
                                                         <label className="flex items-center space-x-2">
-                                                            <input
+                                                            <Input
                                                                 type="radio"
                                                                 name="isLive"
                                                                 value="Yes"
@@ -872,7 +885,7 @@ const VendorApp = () => {
                                                             <span className="text-sm">Yes</span>
                                                         </label>
                                                         <label className="flex items-center space-x-2">
-                                                            <input
+                                                            <Input
                                                                 type="radio"
                                                                 name="isLive"
                                                                 value="No"
@@ -900,7 +913,7 @@ const VendorApp = () => {
                                                                     : "Upload File (PDF only)"}
                                                         </label>
 
-                                                        <input
+                                                        <Input
                                                             id="pitchDeck"
                                                             type="file"
                                                             accept="application/pdf"
@@ -961,14 +974,14 @@ const VendorApp = () => {
                                 </Card>
                             </div>
                         )}
-                        {/* : : Product Overview ---- Section 4 */}
+                        {/* : : Integration & Compatibility ---- Section 4 */}
                         {currentSection === 3 && (
                             <div className="lg:col-span-4 h-full ">
                                 <Card className="border border-border shadow-xl bg-card text-card-foreground">
                                     <CardHeader>
                                         <CardTitle className="text-xl">Vendor Application Form</CardTitle>
                                         <p className="text-muted-foreground">
-                                            3. Product Overview
+                                            4. Integration & Compatibility
                                         </p>
                                     </CardHeader>
                                     <CardContent>
@@ -976,187 +989,28 @@ const VendorApp = () => {
                                             <div className="grid md:grid-cols-2 gap-4">
                                                 <div className="space-y-2">
                                                     <label className="text-sm font-medium">
-                                                        Product Name *
-                                                    </label>
-                                                    <Input
-                                                        className='rounded-2xl'
-                                                        required
-                                                        type="text"
-                                                        placeholder="Name"
-                                                        value={formData.productName}
-                                                        onChange={(e) =>
-                                                            handleChange('productName', e.target.value)
-                                                        }
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-sm font-medium">
-                                                        One-line Product Pitch*
-                                                    </label>
-                                                    <Input
-                                                        className='rounded-2xl'
-                                                        required
-                                                        type="text"
-                                                        placeholder="Text(max 150 characters)"
-                                                        value={formData.productPitch}
-                                                        onChange={(e) =>
-                                                            handleChange('productPitch', e.target.value)
-                                                        }
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="grid md:grid-cols-2 gap-4">
-                                                <div className="space-y-2">
-                                                    <label className="text-sm font-medium">
-                                                        Product Category *
-                                                    </label>
-                                                    <MultiSelect
-                                                        selected={formData.productCategory}
-                                                        onChange={(newValues) => handleMultiChange("productCategory", newValues)}
-                                                        options={categories}
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-sm font-medium ">
-                                                        Target Industries *
-                                                    </label>
-                                                    <MultiSelect
-                                                        selected={formData.targetIndustries}
-                                                        onChange={(newValues) => handleMultiChange("targetIndustries", newValues)}
-                                                        options={industries}
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-sm font-medium ">
-                                                        Languages *
-                                                    </label>
-                                                    <MultiSelect
-                                                        selected={formData.supportedLanguages}
-                                                        onChange={(newValues) => handleMultiChange("supportedLanguages", newValues)}
-                                                        options={languages}
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-sm font-medium ">
-                                                        Pricing Model *
-                                                    </label>
-                                                    <MultiSelect
-                                                        selected={formData.pricingModel}
-                                                        onChange={(newValues) => handleMultiChange("pricingModel", newValues)}
-                                                        options={pricingModel}
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-sm font-medium">
-                                                        Starting Price (USD) *
-                                                    </label>
-                                                    <Input
-                                                        className='rounded-2xl'
-                                                        required
-                                                        type="number"
-                                                        placeholder="Enter Price"
-                                                        value={formData.startingPrice}
-                                                        onChange={(e) =>
-                                                            handleChange('startingPrice', e.target.value)
-                                                        }
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-sm font-medium">
-                                                        Link to live product/demo *
-                                                    </label>
-                                                    <Input
-                                                        className="rounded-2xl"
-                                                        required
-                                                        type="url"
-                                                        placeholder="https://your-product-demo.com"
-                                                        value={formData.liveLink}
-                                                        onChange={(e) =>
-                                                            handleChange('liveLink', e.target.value)
-                                                        }
-                                                    />
-
-                                                </div>
-                                                <div className="space-y-2 flex flex-col justify-between">
-                                                    {/* File upload UI */}
-                                                    <div>
-                                                        <label className="text-sm font-medium">Product Video/Presentation *</label>
-
-                                                        <label
-                                                            htmlFor="productVideo"
-                                                            className="flex items-center justify-between w-full rounded-2xl text-muted-foreground font-medium border border-input px-4 py-2 text-sm cursor-pointer hover:bg-accent transition"
-                                                        >
-                                                            {formData.productVideo ? formData.productVideo : "Upload your file here"}
-                                                        </label>
-                                                        <input
-                                                            id="productFile"
-                                                            type="file"
-                                                            accept="video/*,application/pdf"
-                                                            className="hidden"
-                                                            onChange={(e) => {
-                                                                const file = e.target.files?.[0];
-                                                                if (file) {
-                                                                    handleChange("productFile", file);
-                                                                    handleChange("productVideoLink", ""); // clear link if file chosen
-                                                                }
-                                                            }}
-                                                        />
-                                                    </div>
-
-                                                    {/* OR separator */}
-                                                    <div className="text-center text-sm text-muted-foreground font-bold tracking-wide">— OR —</div>
-
-                                                    {/* Link input */}
-                                                    <input
-                                                        type="url"
-                                                        placeholder="Paste YouTube or Vimeo link"
-                                                        value={formData.productVideoLink}
-                                                        onChange={(e) => {
-                                                            handleChange("productVideoLink", e.target.value);
-                                                            handleChange("productFile", null); // clear file if link entered
-                                                        }}
-                                                        className="w-full rounded-2xl border px-4 py-2 text-sm border-border font-medium"
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-sm font-medium ">
-                                                        Description *
-                                                    </label>
-                                                    <Textarea
-                                                        required
-                                                        rows={5}
-                                                        placeholder="Tell us how we can help you..."
-                                                        value={formData.productDescription}
-                                                        onChange={(e) =>
-                                                            handleChange('productDescription', e.target.value)
-                                                        }
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-sm font-medium">
-                                                        Is the product live and operational ?*
+                                                        Do you offer an API or SDK ?*
                                                     </label>
                                                     <div className="flex gap-2 h-9 py-1  ">
                                                         <label className="flex items-center space-x-2">
-                                                            <input
+                                                            <Input
                                                                 type="radio"
                                                                 name="isLive"
                                                                 value="Yes"
-                                                                checked={formData.isLive === 'Yes'}
-                                                                onChange={(e) => handleChange('isLive', e.target.value)}
+                                                                checked={formData.hasApiOrSdk === 'Yes'}
+                                                                onChange={(e) => handleChange('hasApiOrSdk', e.target.value)}
                                                                 className="h-4 w-4"
                                                                 required
                                                             />
                                                             <span className="text-sm">Yes</span>
                                                         </label>
                                                         <label className="flex items-center space-x-2">
-                                                            <input
+                                                            <Input
                                                                 type="radio"
-                                                                name="isLive"
+                                                                name="ApiOrSdk"
                                                                 value="No"
-                                                                checked={formData.isLive === 'No'}
-                                                                onChange={(e) => handleChange('isLive', e.target.value)}
+                                                                checked={formData.hasApiOrSdk === 'No'}
+                                                                onChange={(e) => handleChange('hasApiOrSdk', e.target.value)}
                                                                 className="h-4 w-4"
                                                                 required
                                                             />
@@ -1164,44 +1018,548 @@ const VendorApp = () => {
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <div className="space-y-2 ">
-                                                    {/* PDF upload */}
-                                                    <div className="space-y-2">
-                                                        <label className="text-sm font-medium">Upload Pitch Deck *</label>
-                                                        <label
-                                                            htmlFor="pitchDeck"
-                                                            className="flex items-center justify-between w-full rounded-2xl text-muted-foreground font-medium border border-input px-4 py-2 text-sm cursor-pointer hover:bg-accent transition"
-                                                        >
-                                                            {formData.pitchDeck instanceof File
-                                                                ? formData.pitchDeck.name
-                                                                : formData.pitchDeck
-                                                                    ? formData.pitchDeck
-                                                                    : "Upload File (PDF only)"}
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Integration method available *
+                                                    </label>
+                                                    <MultiSelect
+                                                        selected={formData.integrationMethods}
+                                                        onChange={(newValues) => handleMultiChange("integrationMethods", newValues)}
+                                                        options={methods}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="grid md:grid-cols-2 gap-4">
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Does your team support Sandbox access or Trial environments ?*
+                                                    </label>
+                                                    <div className="flex gap-2 h-9 py-1  ">
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="hasSandbox"
+                                                                value="Yes"
+                                                                checked={formData.hasSandbox === 'Yes'}
+                                                                onChange={(e) => handleChange('hasSandbox', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">Yes</span>
                                                         </label>
-
-                                                        <input
-                                                            id="pitchDeck"
-                                                            type="file"
-                                                            accept="application/pdf"
-                                                            className="hidden"
-                                                            onChange={(e) => {
-                                                                const file = e.target.files?.[0] || null;
-                                                                if (file && file.type === "application/pdf") {
-                                                                    handleChange("pitchDeck", file);
-                                                                    // Optionally clear any previous URL if set:
-                                                                    // handleChange("pitchDeckUrl", "");
-                                                                } else {
-                                                                    toast.warning("Please upload a PDF file only.");
-
-                                                                }
-                                                            }}
-                                                        />
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="hasSandbox"
+                                                                value="No"
+                                                                checked={formData.hasSandbox === 'No'}
+                                                                onChange={(e) => handleChange('hasSandbox', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">No</span>
+                                                        </label>
                                                     </div>
 
                                                 </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Provide API documentation link (if available) *
+                                                    </label>
+                                                    <Input
+                                                        className='rounded-2xl'
+                                                        required
+                                                        type="url"
+                                                        placeholder="https://api.com"
+                                                        value={formData.apiDocsLink}
+                                                        onChange={(e) =>
+                                                            handleChange('apiDocsLink', e.target.value)
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium ">
+                                                        Can your product be offered as a modular “block” in our no-code builder?
+                                                    </label>
+                                                    <div className="flex gap-2 h-9 py-1  ">
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="isLive"
+                                                                value="Yes"
+                                                                checked={formData.modularCompatible === 'Yes'}
+                                                                onChange={(e) => handleChange('modularCompatible', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">Yes</span>
+                                                        </label>
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="ApiOrSdk"
+                                                                value="No"
+                                                                checked={formData.modularCompatible === 'No'}
+                                                                onChange={(e) => handleChange('modularCompatible', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">No</span>
+                                                        </label>
+                                                    </div>
 
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Expected response time to Leads *
+                                                    </label>
+                                                    <Select
+                                                        value={formData.leadResponseTime}
+                                                        onValueChange={(value) => handleChange("leadResponseTime", value)}>
+                                                        <SelectTrigger className="w-full rounded-2xl">
+                                                            <SelectValue placeholder="Select" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectGroup>
+                                                                <SelectLabel>Response Time</SelectLabel>
+                                                                <SelectItem value="within 24h">Within 24h</SelectItem>
+                                                                <SelectItem value="within 48h">Within 48h</SelectItem>
+                                                                <SelectItem value="3+ days">3+ days</SelectItem>
+                                                            </SelectGroup>
+                                                        </SelectContent>
+                                                    </Select>
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium ">
+                                                        If yes, describe which features could be modularized *
+                                                    </label>
+                                                    <Textarea
+                                                        required
+                                                        rows={4}
+                                                        placeholder="Describe..."
+                                                        value={formData.modularFeaturesDescription}
+                                                        onChange={(e) =>
+                                                            handleChange('modularFeaturesDescription', e.target.value)
+                                                        }
+                                                    />
+                                                </div>
                                             </div>
+                                            <PaginationDemo
+                                                currentSection={currentSection}
+                                                setCurrentSection={setCurrentSection}
+                                            />
+                                            <div className="flex flex-col sm:flex-row gap-4">
+                                                <Button
+                                                    type="submit"
+                                                    className="rounded-2xl cursor-pointer hover:opacity-90 flex-1"
+                                                    disabled={isSubmitting}
+                                                >
+                                                    {isSubmitting ? (
+                                                        <>
+                                                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                                                            Sending...
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <Send className="w-4 h-4 mr-2 " />
+                                                            Send Message
+                                                        </>
+                                                    )}
+                                                </Button>
+                                                <Link
+                                                    href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1rg4TOS2A6ZBwxCNsTekCavRGrw5Zckt4yujmekISbEpd8hf9ER--clf0BNO54B4-vrt6n1wkf"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex-1"
+                                                >
+                                                    <Button type="button" variant="outline" className="rounded-2xl cursor-pointer w-full">
+                                                        Schedule Call Instead
+                                                    </Button>
+                                                </Link>
+                                            </div>
+                                        </form>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                        )}
+                        {/* : : Commercial Terms ---- Section 5 */}
+                        {currentSection === 4 && (
+                            <div className="lg:col-span-4 h-full ">
+                                <Card className="border border-border shadow-xl bg-card text-card-foreground">
+                                    <CardHeader>
+                                        <CardTitle className="text-xl">Vendor Application Form</CardTitle>
+                                        <p className="text-muted-foreground">
+                                            5. Commercial Terms
+                                        </p>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <form onSubmit={handleSubmit} className="space-y-6">
+                                            <div className="grid md:grid-cols-2 gap-4">
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Do you offer an API or SDK ?*
+                                                    </label>
+                                                    <div className="flex gap-2 h-9 py-1  ">
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="isLive"
+                                                                value="Yes"
+                                                                checked={formData.hasApiOrSdk === 'Yes'}
+                                                                onChange={(e) => handleChange('hasApiOrSdk', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">Yes</span>
+                                                        </label>
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="ApiOrSdk"
+                                                                value="No"
+                                                                checked={formData.hasApiOrSdk === 'No'}
+                                                                onChange={(e) => handleChange('hasApiOrSdk', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">No</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Integration method available *
+                                                    </label>
+                                                    <MultiSelect
+                                                        selected={formData.integrationMethods}
+                                                        onChange={(newValues) => handleMultiChange("integrationMethods", newValues)}
+                                                        options={methods}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="grid md:grid-cols-2 gap-4">
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Does your team support Sandbox access or Trial environments ?*
+                                                    </label>
+                                                    <div className="flex gap-2 h-9 py-1  ">
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="hasSandbox"
+                                                                value="Yes"
+                                                                checked={formData.hasSandbox === 'Yes'}
+                                                                onChange={(e) => handleChange('hasSandbox', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">Yes</span>
+                                                        </label>
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="hasSandbox"
+                                                                value="No"
+                                                                checked={formData.hasSandbox === 'No'}
+                                                                onChange={(e) => handleChange('hasSandbox', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">No</span>
+                                                        </label>
+                                                    </div>
 
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Provide API documentation link (if available) *
+                                                    </label>
+                                                    <Input
+                                                        className='rounded-2xl'
+                                                        required
+                                                        type="url"
+                                                        placeholder="https://api.com"
+                                                        value={formData.apiDocsLink}
+                                                        onChange={(e) =>
+                                                            handleChange('apiDocsLink', e.target.value)
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium ">
+                                                        Can your product be offered as a modular “block” in our no-code builder?
+                                                    </label>
+                                                    <div className="flex gap-2 h-9 py-1  ">
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="isLive"
+                                                                value="Yes"
+                                                                checked={formData.modularCompatible === 'Yes'}
+                                                                onChange={(e) => handleChange('modularCompatible', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">Yes</span>
+                                                        </label>
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="ApiOrSdk"
+                                                                value="No"
+                                                                checked={formData.modularCompatible === 'No'}
+                                                                onChange={(e) => handleChange('modularCompatible', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">No</span>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Expected response time to Leads *
+                                                    </label>
+                                                    <Select
+                                                        value={formData.leadResponseTime}
+                                                        onValueChange={(value) => handleChange("leadResponseTime", value)}>
+                                                        <SelectTrigger className="w-full rounded-2xl">
+                                                            <SelectValue placeholder="Select" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectGroup>
+                                                                <SelectLabel>Response Time</SelectLabel>
+                                                                <SelectItem value="within 24h">Within 24h</SelectItem>
+                                                                <SelectItem value="within 48h">Within 48h</SelectItem>
+                                                                <SelectItem value="3+ days">3+ days</SelectItem>
+                                                            </SelectGroup>
+                                                        </SelectContent>
+                                                    </Select>
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium ">
+                                                        If yes, describe which features could be modularized *
+                                                    </label>
+                                                    <Textarea
+                                                        required
+                                                        rows={4}
+                                                        placeholder="Describe..."
+                                                        value={formData.modularFeaturesDescription}
+                                                        onChange={(e) =>
+                                                            handleChange('modularFeaturesDescription', e.target.value)
+                                                        }
+                                                    />
+                                                </div>
+                                            </div>
+                                            <PaginationDemo
+                                                currentSection={currentSection}
+                                                setCurrentSection={setCurrentSection}
+                                            />
+                                            <div className="flex flex-col sm:flex-row gap-4">
+                                                <Button
+                                                    type="submit"
+                                                    className="rounded-2xl cursor-pointer hover:opacity-90 flex-1"
+                                                    disabled={isSubmitting}
+                                                >
+                                                    {isSubmitting ? (
+                                                        <>
+                                                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                                                            Sending...
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <Send className="w-4 h-4 mr-2 " />
+                                                            Send Message
+                                                        </>
+                                                    )}
+                                                </Button>
+                                                <Link
+                                                    href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1rg4TOS2A6ZBwxCNsTekCavRGrw5Zckt4yujmekISbEpd8hf9ER--clf0BNO54B4-vrt6n1wkf"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex-1"
+                                                >
+                                                    <Button type="button" variant="outline" className="rounded-2xl cursor-pointer w-full">
+                                                        Schedule Call Instead
+                                                    </Button>
+                                                </Link>
+                                            </div>
+                                        </form>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                        )}
+                        {/* : :  Additional Materials (Optional)---- Section 6 */}
+                        {currentSection === 5 && (
+                            <div className="lg:col-span-4 h-full ">
+                                <Card className="border border-border shadow-xl bg-card text-card-foreground">
+                                    <CardHeader>
+                                        <CardTitle className="text-xl">Vendor Application Form</CardTitle>
+                                        <p className="text-muted-foreground">
+                                            5. Commercial Terms
+                                        </p>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <form onSubmit={handleSubmit} className="space-y-6">
+                                            <div className="grid md:grid-cols-2 gap-4">
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Do you offer an API or SDK ?*
+                                                    </label>
+                                                    <div className="flex gap-2 h-9 py-1  ">
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="isLive"
+                                                                value="Yes"
+                                                                checked={formData.hasApiOrSdk === 'Yes'}
+                                                                onChange={(e) => handleChange('hasApiOrSdk', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">Yes</span>
+                                                        </label>
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="ApiOrSdk"
+                                                                value="No"
+                                                                checked={formData.hasApiOrSdk === 'No'}
+                                                                onChange={(e) => handleChange('hasApiOrSdk', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">No</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Integration method available *
+                                                    </label>
+                                                    <MultiSelect
+                                                        selected={formData.integrationMethods}
+                                                        onChange={(newValues) => handleMultiChange("integrationMethods", newValues)}
+                                                        options={methods}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="grid md:grid-cols-2 gap-4">
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Does your team support Sandbox access or Trial environments ?*
+                                                    </label>
+                                                    <div className="flex gap-2 h-9 py-1  ">
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="hasSandbox"
+                                                                value="Yes"
+                                                                checked={formData.hasSandbox === 'Yes'}
+                                                                onChange={(e) => handleChange('hasSandbox', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">Yes</span>
+                                                        </label>
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="hasSandbox"
+                                                                value="No"
+                                                                checked={formData.hasSandbox === 'No'}
+                                                                onChange={(e) => handleChange('hasSandbox', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">No</span>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Provide API documentation link (if available) *
+                                                    </label>
+                                                    <Input
+                                                        className='rounded-2xl'
+                                                        required
+                                                        type="url"
+                                                        placeholder="https://api.com"
+                                                        value={formData.apiDocsLink}
+                                                        onChange={(e) =>
+                                                            handleChange('apiDocsLink', e.target.value)
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium ">
+                                                        Can your product be offered as a modular “block” in our no-code builder?
+                                                    </label>
+                                                    <div className="flex gap-2 h-9 py-1  ">
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="isLive"
+                                                                value="Yes"
+                                                                checked={formData.modularCompatible === 'Yes'}
+                                                                onChange={(e) => handleChange('modularCompatible', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">Yes</span>
+                                                        </label>
+                                                        <label className="flex items-center space-x-2">
+                                                            <Input
+                                                                type="radio"
+                                                                name="ApiOrSdk"
+                                                                value="No"
+                                                                checked={formData.modularCompatible === 'No'}
+                                                                onChange={(e) => handleChange('modularCompatible', e.target.value)}
+                                                                className="h-4 w-4"
+                                                                required
+                                                            />
+                                                            <span className="text-sm">No</span>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium">
+                                                        Expected response time to Leads *
+                                                    </label>
+                                                    <Select
+                                                        value={formData.leadResponseTime}
+                                                        onValueChange={(value) => handleChange("leadResponseTime", value)}>
+                                                        <SelectTrigger className="w-full rounded-2xl">
+                                                            <SelectValue placeholder="Select" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectGroup>
+                                                                <SelectLabel>Response Time</SelectLabel>
+                                                                <SelectItem value="within 24h">Within 24h</SelectItem>
+                                                                <SelectItem value="within 48h">Within 48h</SelectItem>
+                                                                <SelectItem value="3+ days">3+ days</SelectItem>
+                                                            </SelectGroup>
+                                                        </SelectContent>
+                                                    </Select>
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <label className="text-sm font-medium ">
+                                                        If yes, describe which features could be modularized *
+                                                    </label>
+                                                    <Textarea
+                                                        required
+                                                        rows={4}
+                                                        placeholder="Describe..."
+                                                        value={formData.modularFeaturesDescription}
+                                                        onChange={(e) =>
+                                                            handleChange('modularFeaturesDescription', e.target.value)
+                                                        }
+                                                    />
+                                                </div>
+                                            </div>
                                             <PaginationDemo
                                                 currentSection={currentSection}
                                                 setCurrentSection={setCurrentSection}

@@ -42,7 +42,7 @@ const testimonials = [
     rating: 5
   },
   {
-    quote: "No-code + vendors = growth playground.",
+    quote: "No-code + vendors = product growth playground.",
     author: "Alex Lee",
     role: "Product Lead, CloudBase",
     image: alex, // Replace with actual paths
@@ -104,7 +104,7 @@ const Testimonials = () => {
                             src={testimonial.image}
                             alt={testimonial.author}
                             fill
-                            className="object-cover object-center"
+                            className="object-cover"
                           />
                         </div>
                         <div>

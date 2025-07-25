@@ -52,7 +52,7 @@ const team = [
 const milestones = [
   {
     year: "2023",
-    event: "UzBridge founded with vision to connect Uzbek tech to global markets",
+    event: "Zaytra.ai founded with vision to connect Uzbek tech to global markets",
   },
   {
     year: "2023",
@@ -123,7 +123,7 @@ const About = () => {
           <div className="space-y-8">
             <Link className="inline-flex items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap w-fit 
             rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/20 transition-colors cursor-pointer hover-lift transition-transform duration-200 " href="/about" >
-              About UzBridge
+              About Zaytra.ai
               <ArrowRight className="w-3 h-3" />
             </Link>
             <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
@@ -152,7 +152,7 @@ const About = () => {
               className="w-full h-auto rounded-2xl shadow-2xl object-cover"
             />
 
-            <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-lg shadow hover-lift transition-transform duration-200 cursor-default ">
+            <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-2xl shadow hover-lift transition-transform duration-200 cursor-default ">
               <div className="flex items-center gap-3 ">
                 <Award className="w-6 h-6 " />
                 <div>
@@ -215,7 +215,7 @@ const About = () => {
                 <div className="w-16 h-16 rounded-full flex items-center justify-center font-bold tracking-wide">
                   {m.year}
                 </div>
-                <div className="rounded-2xl bg-card p-6 shadow w-full ring-2 ring-accent/ hover-lift transition-transform duration-200 cursor-default">
+                <div className="rounded-full bg-card p-6 shadow w-full ring-2 ring-accent/ hover-lift transition-transform duration-200 cursor-default">
                   <p className="">{m.event}</p>
                 </div>
               </div>
@@ -227,7 +227,7 @@ const About = () => {
       {/* Values */}
       <section className="py-16 bg-muted animate-fade-in-up">
         <div className="container mx-auto px-4">
-          <SectionHeader title="Our Values" subtitle="What guides UzBridge every day." />
+          <SectionHeader title="Our Values" subtitle="What guides Zaytra.ai every day." />
           <div className="grid lg:grid-cols-4 gap-8">
             {values.map((val, i) => (
               <div key={i} className="text-center space-y-4 ">
@@ -251,10 +251,12 @@ const About = () => {
             let&apos;s build something amazing together.
           </p>
           <div className="flex justify-center gap-4 flex-wrap group inline-flex items-center gap-1 cursor-pointer">
-            <Button variant="default" size="lg" className="rounded-2xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
-              Partner With us <ArrowRight className="transition-transform group-hover:translate-x-1 w-4 h-4" />
-            </Button>
-            <Button variant="outline" size="lg" className=" rounded-2xl transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
+            <Link href="/vendor-application">
+              <Button variant="default" size="lg" className="rounded-full transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer">
+                Partner With us <ArrowRight className="transition-transform group-hover:translate-x-1 w-4 h-4" />
+              </Button>
+            </Link>
+            <Button variant="outline" size="lg" className=" rounded-full transition-all duration-200 hover:scale-105 hover:shadow-lg cursor-pointer ring-2 ring-accent/ ">
               Learn More
             </Button>
           </div>

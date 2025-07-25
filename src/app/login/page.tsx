@@ -14,7 +14,7 @@ export default function LoginPage() {
           <div className=" flex items-center justify-center ">
             <GiSuspensionBridge className="size-10" />
           </div>
-          UzBridge.AI
+          Zaytra.ai
         </Link>
         <LoginForm />
       </div>

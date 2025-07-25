@@ -194,12 +194,6 @@ const Navbar = () => {
                 <div className="hidden lg:flex flex-1 justify-center ">
                     <NavigationMenu >
                         <NavigationMenuList>
-                            {/* Home */}
-                            <NavigationMenuItem >
-                                <NavigationMenuLink className="hover:rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
-                                    <Link href="/" className={navigationMenuTriggerStyle()}>Home</Link>
-                                </NavigationMenuLink>
-                            </NavigationMenuItem>
                             {/* Marketplace */}
                             <NavigationMenuItem>
                                 <NavigationMenuLink className="hover:rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
@@ -216,6 +210,12 @@ const Navbar = () => {
                             <NavigationMenuItem>
                                 <NavigationMenuLink className="hover:rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
                                     <Link href="/about" className={navigationMenuTriggerStyle()}>App Builder</Link>
+                                </NavigationMenuLink>
+                            </NavigationMenuItem>
+                            {/* About */}
+                            <NavigationMenuItem >
+                                <NavigationMenuLink className="hover:rounded-full p-2 hover:ring-1 ring-accent/ hover:text-black dark:hover:text-white transition-all duration-200 hover:[text-shadow:0_0_0.5px_currentColor] cursor-pointer" asChild>
+                                    <Link href="/about" className={navigationMenuTriggerStyle()}>About</Link>
                                 </NavigationMenuLink>
                             </NavigationMenuItem>
                             {/* Contact */}

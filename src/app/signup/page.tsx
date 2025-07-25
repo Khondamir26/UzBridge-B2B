@@ -12,7 +12,7 @@ export default function SignUpPage() {
           <div className="flex items-center justify-center">
             <GiSuspensionBridge className="size-10" />
           </div>
-          UzBridge.AI
+          Zaytra.ai
         </Link>
         <SignUpForm />
       </div>
